@@ -16,14 +16,14 @@ Currently, this build is a batch of loose files and flakes. You should be able t
 ### Current Tree
 
 ```
-├── amd-stuff.nix #Exclude this file from configuration.nix to get rid of amd-specific configs
-├── configuration.nix #NEEDS TO BE REWORKED
+├── amd-stuff.nix  ----Exclude this file from configuration.nix to get rid of amd-specific configs
+├── configuration.nix  ---NEEDS TO BE REWORKED
 ├── dewm-stuff.nix #Temp, and to be removed
 ├── flake.lock
 ├── flake.nix 
-├── packages #Stores various packages, based on use-cases. 
+├── packages  ---Stores various packages, based on use-cases. 
 │   ├── communication
-│   ├── default.nix #Entrypoint
+│   ├── default.nix ---Entrypoint
 │   ├── essential
 │   │   ├── default.nix
 │   │   └── terminal.nix
