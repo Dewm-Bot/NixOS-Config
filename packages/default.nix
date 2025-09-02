@@ -2,8 +2,10 @@
 
 {
     imports = [
+        ./essential
         ./terminal
         ./gamedev
+        ./gaming
     ];
 }
 

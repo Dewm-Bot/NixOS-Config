@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./github.nix
+    ./steam.nix
   ];
 }
-
