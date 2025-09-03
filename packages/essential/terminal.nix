@@ -8,6 +8,11 @@
         vulkan-tools
         nix-search-cli
         nh
+        iotop
+        htop
+        fd
+        fzf
+        scrutiny
     ];
 }
 

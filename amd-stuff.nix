@@ -10,6 +10,7 @@
         lact
         mesa
         amdvlk
+        btop-rocm
     ];
 
     systemd.packages = with pkgs; [

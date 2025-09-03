@@ -5,6 +5,7 @@
         sbctl
         floorp
         vulkan-tools
+        gparted
     ];
 
     # Install firefox.
