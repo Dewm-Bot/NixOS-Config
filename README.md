@@ -16,9 +16,9 @@ Currently, this build is a batch of loose files and flakes. You should be able t
 ### Current Tree
 
 ```
-├── amd-stuff.nix  ----Exclude this file from configuration.nix to get rid of amd-specific configs
+├── amd-stuff.nix  ---Exclude this file from config.nix to get rid of amd-specific configs
 ├── configuration.nix  ---NEEDS TO BE REWORKED
-├── dewm-stuff.nix #Temp, and to be removed
+├── dewm-stuff.nix ---Temp, and to be removed
 ├── flake.lock
 ├── flake.nix 
 ├── packages  ---Stores various packages, based on use-cases. 
@@ -38,7 +38,7 @@ Currently, this build is a batch of loose files and flakes. You should be able t
 │   ├── terminal
 │   │   ├── default.nix
 │   │   └── fish.nix
-│   └── tui
+└── └── tui
 ```
 
 > [!TIP]

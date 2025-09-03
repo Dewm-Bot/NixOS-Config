@@ -2,13 +2,13 @@
 
 {
     environment.systemPackages = with pkgs; [
-        tree
-        git
-        wget
+        sbctl
+        floorp
         vulkan-tools
-        nix-search-cli
-        nh
     ];
+
+    # Install firefox.
+    programs.firefox.enable = true;
 }
 
 
