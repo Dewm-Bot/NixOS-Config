@@ -1,30 +1,43 @@
 # NixOS-config
  Terrible....
 
+> [!CAUTION]
+> This repo is frequently worked on, be aware that this README may fall out of date.
+
 ## Hello, and welcome to my work-in-progress NixOS Config.
 
-Currently, this build is a batch of loose files and flakes. You should be able to build this config by using the following command:
-
-``sudo nixos-rebuild switch --flake /etc/nixos/#DewmBox-Nix ``
+Currently, this build is a mix of nix files, and flakes. You should be able to build this config by using running the ``setup.sh`` script.
 
 > [!IMPORTANT]
-> Make sure to change the directory in this statement, to wherever these files reside. 
-
+> If you are making changes to this repo, be sure to create a fork to allow for any additions to the repo folder to be properly tracked. You can use the ``test.sh`` script to make sure all files are included, and the ``build.sh`` script to skip the additional dry-run.
+ 
 > [!NOTE]
 > Currently this is being setup for a desktop with an AMD GPU, in the future, there will also be a config for a laptop using an Nvidia GPU. I do hope to have an additional config that switches it over to the Neauvo driver for better battery life and desktop use.
 
 ### Current Tree
 
 ```
-├── amd-stuff.nix  ---Exclude this file from config.nix to get rid of amd-specific configs
-├── configuration.nix  ---NEEDS TO BE REWORKED
-├── dewm-stuff.nix ---Temp, and to be removed
+.
+├── amd-stuff.nix ---AMD specific, exclude from configuration.nix if need be.
+├── build.sh
+├── configs  
+│   ├── audio.nix
+│   ├── default.nix
+│   ├── input.nix
+│   ├── sessions.nix
+│   └── system.nix
+├── configuration.nix
 ├── flake.lock
-├── flake.nix 
-├── packages  ---Stores various packages, based on use-cases. 
+├── flake.nix
+├── packages ---Stores various packages, based on use-cases.
+│   ├── audio
 │   ├── communication
-│   ├── default.nix ---Entrypoint
+│   │   ├── default.nix
+│   │   ├── discord.nix
+│   │   └── microphone.nix
+│   ├── default.nix ---Entrypoint for packages
 │   ├── essential
+│   │   ├── apps.nix
 │   │   ├── default.nix
 │   │   └── terminal.nix
 │   ├── gamedev
@@ -32,13 +45,17 @@ Currently, this build is a batch of loose files and flakes. You should be able t
 │   │   └── github.nix
 │   ├── gaming
 │   │   ├── default.nix
-│   │   └── steam.nix
+│   │   ├── steam.nix
+│   │   └── utils.nix
 │   ├── hyprland
-│   │   └── caelestia
+│   │   ├── caelestia
+│   │   ├── default.nix
+│   │   └── hyprland.nix
 │   ├── terminal
 │   │   ├── default.nix
 │   │   └── fish.nix
-└── └── tui
+│   └── tui
+└── test.sh
 ```
 
 > [!TIP]
@@ -46,7 +63,6 @@ Currently, this build is a batch of loose files and flakes. You should be able t
 
 
 
-> [!CAUTION]
-> This repo is frequently worked on, be aware that this README may fall out of date.
+
 
 
