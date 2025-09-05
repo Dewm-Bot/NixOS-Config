@@ -13,6 +13,11 @@
         fd
         fzf
         scrutiny
+        killall
+        libnotify
+        fx
+        dust
+        pyenv
     ];
 }
 
