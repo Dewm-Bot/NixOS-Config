@@ -5,8 +5,9 @@
     [ # Include the results of the hardware scan.
       ./configs
       ./hardware-configuration.nix
-      ./amd-stuff.nix
+      ./laptop-rog.nix
       ./packages
+      ./nvidia.nix
     ];
 
 
@@ -17,7 +18,7 @@
     extraGroups = [ "networkmanager" "wheel" "gaming" "video" ];
   };
   
-   networking.hostName = "DewmROG-Nix"; # Define your hostname.
+   networking.hostName = "DewmM16-Nix"; # Define your hostname.
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

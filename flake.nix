@@ -67,6 +67,18 @@
       ];
 
     };
+    nixosConfigurations.DewmM16-Nix = nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      # Make the flake inputs available to module evaluation
+      specialArgs = { inherit inputs; };
+
+      modules = [
+        # Add the `yeetmouse` input's NixOS Module to your system's modules:
+        yeetmouse.nixosModules.default
+        ./laptop-conf.nix
+      ];
+    };
   };
 }
 
