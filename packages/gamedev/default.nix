@@ -3,6 +3,8 @@
 {
   imports = [
     ./github.nix
+    ./vscodium.nix
+    ./jetbrains.nix
   ];
 }
 

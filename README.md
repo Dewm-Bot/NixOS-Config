@@ -12,7 +12,9 @@ Currently, this build is a mix of nix files, and flakes. You should be able to b
 > If you are making changes to this repo, be sure to create a fork to allow for any additions to the repo folder to be properly tracked. You can use the ``test.sh`` script to make sure all files are included, and the ``build.sh`` script to skip the additional dry-run.
  
 > [!NOTE]
-> Currently this is being setup for a desktop with an AMD GPU, in the future, there will also be a config for a laptop using an Nvidia GPU. I do hope to have an additional config that switches it over to the Neauvo driver for better battery life and desktop use.
+> Currently I've only configured this repo for and AMD GPU. Eventually I'll be adding additional config flags for building against an Nvidia GPU, as well as an additional flag for Neuvou to allow for a more stable desktop experience, as well as better battery life for laptops.
+
+
 
 ### Current Tree
 
