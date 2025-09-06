@@ -1,13 +1,31 @@
 { config, pkgs, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
-        steam
-        steamtinkerlaunch
-    ];
 
-    programs.steam.gamescopeSession.enable = true;
-    programs.gamescope.enable = true;
+    programs.steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+    };
+
+    environment.systemPackages = with pkgs; [
+        steamtinkerlaunch
+        gamemode
+        xorg.libxcb
+        steamcmd
+    ];
+    programs.steam.extraPackages = [ pkgs.gamemode ];
+    programs.gamescope =
+    {
+        enable = true;
+        capSysNice = true;
+    };
+
+    hardware.xone.enable = true;
+
+    programs.java.enable = true;
+
+    hardware.steam-hardware.enable = true;
+
 
 
 }
