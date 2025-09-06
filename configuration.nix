@@ -7,6 +7,7 @@
       ./hardware-configuration.nix
       ./amd-stuff.nix
       ./packages
+      ./mounts-desktop.nix
     ];
 
 
