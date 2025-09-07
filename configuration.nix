@@ -33,5 +33,6 @@
   nix.settings.download-buffer-size = 524288000;
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
 }
