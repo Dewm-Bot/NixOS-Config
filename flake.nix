@@ -38,6 +38,7 @@
       url = "github:AndyFilter/YeetMouse?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
@@ -66,6 +67,18 @@
         ./configuration.nix
       ];
 
+    };
+    nixosConfigurations.DewmM16-Nix = nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      # Make the flake inputs available to module evaluation
+      specialArgs = { inherit inputs; };
+
+      modules = [
+        # Add the `yeetmouse` input's NixOS Module to your system's modules:
+        yeetmouse.nixosModules.default
+        ./laptop-conf.nix
+      ];
     };
   };
 }

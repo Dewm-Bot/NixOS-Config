@@ -5,11 +5,13 @@
     systemd.services.supergfxd.path = [ pkgs.pciutils ];
 
     services = {
-    asusd = {
-      enable = true;
-      enableUserService = true;
+        asusd = {
+        enable = true;
+        enableUserService = true;
+        };
     };
-};
+
+    
 }
 
 

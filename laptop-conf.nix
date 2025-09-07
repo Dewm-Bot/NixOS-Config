@@ -4,11 +4,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./configs
-      ./configs/desktop-sessions.nix
+      ./configs/laptop-sessions.nix
       ./hardware-configuration.nix
-      ./amd-stuff.nix
+      ./laptop-rog.nix
       ./packages
-      ./mounts-desktop.nix
+      ./nvidia.nix
     ];
 
 
@@ -19,7 +19,7 @@
     extraGroups = [ "networkmanager" "wheel" "gaming" "video" ];
   };
   
-   networking.hostName = "DewmROG-Nix"; # Define your hostname.
+   networking.hostName = "DewmM16-Nix"; # Define your hostname.
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -35,9 +35,13 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.download-buffer-size = 524288000;
 
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
+  #Additional Flags for Laptop EFI fussy-ness
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.graceful = true;
+  boot.loader.efi.canTouchEfiVariables = false;
 
-  boot.loader.efi.canTouchEfiVariables = true;
+  #Swap file setup, maybe move to it's own config file?
+  boot.resumeDevice = "/dev/disk/by-label/swap";
+  boot.kernelParams = ["resume=/dev/disk/by-label/swap"];
 
 }
