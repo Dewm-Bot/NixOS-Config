@@ -8,5 +8,6 @@
     ./managers.nix
     ./fonts.nix
     ./kde-stuff.nix
+    ./x11.nix
   ];
 }

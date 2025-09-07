@@ -6,11 +6,12 @@
         enable = true;
         driSupport32Bit = true;
   };
+  
+  services.xserver.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [
 	"modesetting"
-	"nvidia"
 	];
 
 
