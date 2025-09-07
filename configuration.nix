@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./configs
+      ./configs/desktop-sessions.nix
       ./hardware-configuration.nix
       ./amd-stuff.nix
       ./packages
@@ -32,5 +33,6 @@
   services.flatpak.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.download-buffer-size = 524288000;
+  boot.loader.efi.canTouchEfiVariables = true;
 
 }

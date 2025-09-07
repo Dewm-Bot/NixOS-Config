@@ -12,6 +12,7 @@
 	"nvidia"
 	];
 
+
   hardware.nvidia = {
 
 	# Modesetting is required.
@@ -48,6 +49,7 @@
 		nvidiaBusId = "PCI:1:0:0";
                 # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
 	};
+    hardware.nvidia.prime.offload.enable = true;
 }
 
 

@@ -6,6 +6,7 @@
         floorp
         vulkan-tools
         gparted
+        zed-editor
     ];
 
     # Install firefox.

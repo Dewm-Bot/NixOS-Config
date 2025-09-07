@@ -38,6 +38,7 @@
       url = "github:AndyFilter/YeetMouse?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars

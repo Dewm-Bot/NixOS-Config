@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./configs
+      ./configs/laptop-sessions.nix
       ./hardware-configuration.nix
       ./laptop-rog.nix
       ./packages
@@ -33,5 +34,14 @@
   services.flatpak.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.download-buffer-size = 524288000;
+
+  #Additional Flags for Laptop EFI fussy-ness
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.graceful = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+
+  #Swap file setup, maybe move to it's own config file?
+  boot.resumeDevice = "/dev/disk/by-label/swap";
+  boot.kernelParams = ["resume=/dev/disk/by-label/swap"];
 
 }
