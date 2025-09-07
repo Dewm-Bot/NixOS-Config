@@ -2,9 +2,10 @@
 
 {
     # Enable OpenGL
-    hardware.graphics = {
-    	enable = true;
-    };
+    hardware.opengl = {
+        enable = true;
+        driSupport32Bit = true;
+  };
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [
@@ -47,7 +48,6 @@
 		# Make sure to use the correct Bus ID values for your system!
 		intelBusId = "PCI:0:2:0";
 		nvidiaBusId = "PCI:1:0:0";
-                # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
 	};
     hardware.nvidia.prime.offload.enable = true;
 }

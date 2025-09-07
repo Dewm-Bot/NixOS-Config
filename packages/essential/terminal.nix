@@ -18,6 +18,8 @@
         fx
         dust
         pyenv
+        toybox
+        pciutils
     ];
 }
 
