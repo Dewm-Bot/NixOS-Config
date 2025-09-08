@@ -4,6 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./configs
+      ./configs/desktop-sessions.nix
       ./hardware-configuration.nix
       ./amd-stuff.nix
       ./packages
