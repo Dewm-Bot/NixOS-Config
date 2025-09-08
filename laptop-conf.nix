@@ -5,7 +5,7 @@
     [ # Include the results of the hardware scan.
       ./configs
       ./configs/laptop-sessions.nix
-      ./hardware-configuration.nix
+      ./hardware-conf-laptop.nix
       ./laptop-rog.nix
       ./packages
       ./nvidia.nix

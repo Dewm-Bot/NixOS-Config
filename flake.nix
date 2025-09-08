@@ -84,6 +84,7 @@
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
         yeetmouse.nixosModules.default
+        chaotic.nixosModules.default
         ./laptop-conf.nix
       ];
     };
