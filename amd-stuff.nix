@@ -8,7 +8,7 @@
     environment.systemPackages = with pkgs; [
         clinfo
         lact
-        #amdvlk
+        amdvlk
         btop-rocm
         mesa
     ];

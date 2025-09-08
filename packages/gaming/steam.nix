@@ -8,6 +8,7 @@
         gamescopeSession.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
+            proton-cachyos
         ];
         extraPackages = [ pkgs.gamemode ];
     };
@@ -17,8 +18,9 @@
         gamemode
         xorg.libxcb
         steamcmd
-        jovian-chaotic.gamescope-wsi
+        gamescope_git
         jovian-chaotic.gamescope-session
+        mangohud_git
     ];
 
     programs.gamescope =

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
     environment.systemPackages = with pkgs; [
@@ -7,6 +7,8 @@
         vulkan-tools
         gparted
         zed-editor
+        chromium
+        inputs.zen-browser.packages."${system}".default # beta
     ];
 
     # Install firefox.
