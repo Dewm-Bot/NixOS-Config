@@ -5,13 +5,13 @@
     services.xserver.enable = true;
     
     # Enable the Cinnamon Desktop Environment.
-    #services.xserver.displayManager.lightdm.enable = true;
-    #services.xserver.desktopManager.cinnamon.enable = true;
+    services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.desktopManager.cinnamon.enable = true;
     
 
     # Wayland Configuration Stuff
-    services.xserver.displayManager.sddm.enable = true;
-    services.xserver.displayManager.sddm.wayland.enable = true;
+    #services.displayManager.sddm.enable = true;
+    #services.displayManager.sddm.wayland.enable = true;
 
 
     # XFCE
@@ -22,7 +22,7 @@
     services.desktopManager.cosmic.enable = true;
 
     # Budgie
-    services.xserver.desktopManager.budgie.enable = true;
+    #services.xserver.desktopManager.budgie.enable = true;
 }
 
 

@@ -8,10 +8,12 @@
     environment.systemPackages = with pkgs; [
         clinfo
         lact
-        mesa
-        amdvlk
+        #amdvlk
         btop-rocm
+        mesa
     ];
+
+    #chaotic.mesa-git.enable = true;
 
     systemd.packages = with pkgs; [
         lact    
@@ -23,9 +25,6 @@
         enable = true;
         enable32Bit = true;
     };
-
-
-
 
 }
 

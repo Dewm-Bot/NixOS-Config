@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -42,7 +43,7 @@
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, ... }:
+  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, ... }:
   let
     system = "x86_64-linux";
 
@@ -64,6 +65,7 @@
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
         yeetmouse.nixosModules.default
+        chaotic.nixosModules.default
         ./configuration.nix
       ];
 

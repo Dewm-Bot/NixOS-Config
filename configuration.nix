@@ -4,7 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./configs
-      ./configs/desktop-sessions.nix
       ./hardware-configuration.nix
       ./amd-stuff.nix
       ./packages
@@ -18,8 +17,6 @@
     description = "Dewm";
     extraGroups = [ "networkmanager" "wheel" "gaming" "video" ];
   };
-  
-   networking.hostName = "DewmROG-Nix"; # Define your hostname.
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -34,10 +31,8 @@
   services.flatpak.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.download-buffer-size = 524288000;
-
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
-
   boot.loader.efi.canTouchEfiVariables = true;
 
 }

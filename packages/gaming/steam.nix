@@ -2,9 +2,14 @@
 
 {
 
+
     programs.steam = {
         enable = true;
         gamescopeSession.enable = true;
+        extraCompatPackages = with pkgs; [
+            proton-ge-bin
+        ];
+        extraPackages = [ pkgs.gamemode ];
     };
 
     environment.systemPackages = with pkgs; [
@@ -12,8 +17,10 @@
         gamemode
         xorg.libxcb
         steamcmd
+        jovian-chaotic.gamescope-wsi
+        jovian-chaotic.gamescope-session
     ];
-    programs.steam.extraPackages = [ pkgs.gamemode ];
+
     programs.gamescope =
     {
         enable = true;
