@@ -16,7 +16,7 @@
   users.users.dewm = {
     isNormalUser = true;
     description = "Dewm";
-    extraGroups = [ "networkmanager" "wheel" "gaming" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" ];
   };
 
   # Allow unfree packages

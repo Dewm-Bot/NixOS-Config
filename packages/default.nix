@@ -8,6 +8,7 @@
         ./gamedev
         ./gaming
         ./hyprland
+        ./dev
     ];
 }
 

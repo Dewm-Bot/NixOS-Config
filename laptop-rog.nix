@@ -10,8 +10,8 @@
 
     services = {
         asusd = {
-        enable = true;
-        enableUserService = true;
+            enable = true;
+            enableUserService = true;
         };
     };
 

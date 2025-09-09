@@ -10,6 +10,7 @@
 
     environment.systemPackages = with pkgs; [
         xdg-desktop-portal-hyprland
+        xdg-desktop-portal-wlr
         hyprlock
         hyprpaper
         hyprshot

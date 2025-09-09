@@ -58,7 +58,9 @@
       config.allowUnfree = true;
       overlays = [
         nix4vscode.overlays.default
+        ./overlays.nix
       ];
+
     };
   in
   {
@@ -70,7 +72,7 @@
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
-        yeetmouse.nixosModules.default
+        #yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         ./configuration.nix
       ];

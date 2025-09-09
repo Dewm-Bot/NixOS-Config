@@ -9,6 +9,8 @@
         zed-editor
         chromium
         inputs.zen-browser.packages."${system}".default # beta
+        p7zip-rar
+        kdePackages.ark
     ];
 
     # Install firefox.
