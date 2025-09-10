@@ -8,12 +8,18 @@
         enable = true;
         gamescopeSession.enable = true;
         dedicatedServer.openFirewall = true;
+        protontricks.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
             proton-cachyos
         ];
         extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.glxinfo pkgs.bumblebee pkgs.mangohud ];
     };
+    #programs.steam.package = pkgs.steam.override {
+        #extraEnv = {
+        #LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
+        #};
+    #};
 
     environment.systemPackages = with pkgs; [
         steamtinkerlaunch
@@ -23,6 +29,7 @@
         gamescope_git
         jovian-chaotic.gamescope-session
         inputs.sls-steam.packages.${pkgs.system}.wrapped
+        protonplus
     ];
 
     programs.gamescope =
