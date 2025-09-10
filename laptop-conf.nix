@@ -44,4 +44,8 @@
   boot.resumeDevice = "/dev/disk/by-label/swap";
   boot.kernelParams = ["resume=/dev/disk/by-label/swap"];
 
+  #AppImage support
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+
 }
