@@ -12,6 +12,7 @@
         xsettingsd
         xdg-utils
         xdg-launch
+        xorg.xhost
     ];
 }
 

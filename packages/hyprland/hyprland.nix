@@ -17,6 +17,7 @@
         brightnessctl
         wofi
         rofi-wayland
+        hyprpolkitagent
         
     ];
 }

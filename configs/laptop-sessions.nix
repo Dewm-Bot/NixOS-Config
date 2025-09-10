@@ -12,6 +12,7 @@
     # Wayland Configuration Stuff
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
+    programs.xwayland.enable = true;
 
 
     # XFCE

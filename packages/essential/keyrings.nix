@@ -8,6 +8,12 @@
         greetd-password.enableGnomeKeyring = true;
         login.enableGnomeKeyring = true;
     };
+    
+
+    environment.systemPackages = with pkgs; [
+        polkit_gnome
+        lxqt.lxqt-policykit
+    ];
 
     services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
 }
