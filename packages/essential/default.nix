@@ -9,5 +9,6 @@
     ./fonts.nix
     ./kde-stuff.nix
     ./x11.nix
+    ./keyrings.nix
   ];
 }
