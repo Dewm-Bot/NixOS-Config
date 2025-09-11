@@ -2,9 +2,9 @@
 
 {
     # Enable OpenGL
-    hardware.opengl = {
+    hardware.graphics = {
         enable = true;
-        driSupport32Bit = true;
+        enable32bit = true;
   };
   
   services.xserver.enable = true;
@@ -47,10 +47,24 @@
     
     hardware.nvidia.prime = {
 		# Make sure to use the correct Bus ID values for your system!
+		offload.enable = true;
+		offload.enableOffloadCmd = true;
 		intelBusId = "PCI:0:2:0";
 		nvidiaBusId = "PCI:1:0:0";
 	};
-    hardware.nvidia.prime.offload.enable = true;
+
+
+	hardware.graphics.extraPackages = with pkgs; [
+		intel-media-driver
+		vaapiIntel
+		vaapiVdpau
+		libvdpau-va-gl
+  ];
+
+    hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+		libva
+		vaapiIntel
+  ];
 }
 
 

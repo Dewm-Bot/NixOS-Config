@@ -31,6 +31,10 @@
   ];
 
 
+  #I have no idea why I need to put this here:
+  nixpkgs.config.nvidia.acceptLicense = true;
+
+
   services.flatpak.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.download-buffer-size = 524288000;
