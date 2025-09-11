@@ -4,7 +4,7 @@
     # Enable OpenGL
     hardware.graphics = {
         enable = true;
-        enable32bit = true;
+        enable32Bit = true;
   };
   
   services.xserver.enable = true;
@@ -59,6 +59,7 @@
 		vaapiIntel
 		vaapiVdpau
 		libvdpau-va-gl
+		nvidia-vaapi-driver
   ];
 
     hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
