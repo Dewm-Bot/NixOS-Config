@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+    boot.initrd.kernelModules = [ "amdgpu" ];
+    services.xserver.videoDrivers = [ "amdgpu" ];
+
     hardware.graphics.extraPackages = with pkgs; [
         rocmPackages.clr.icd
     ];
@@ -32,6 +35,12 @@
             support32Bit.enable = true;
         };
     };
+
+    #possible HIP library import
+    systemd.tmpfiles.rules = [
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
+
 }
 
 
