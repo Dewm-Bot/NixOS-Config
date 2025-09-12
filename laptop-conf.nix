@@ -8,7 +8,7 @@
       ./hardware-conf-laptop.nix
       ./laptop-rog.nix
       ./packages
-      ./nvidia.nix
+      #./nvidia.nix
     ];
 
 
