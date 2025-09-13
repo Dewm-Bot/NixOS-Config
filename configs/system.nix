@@ -67,6 +67,11 @@
     [
     #Any additional packages go here.
     ];
+
+    services.samba = {
+        enable = true;
+        securityType = "user";
+    };
 }
 
 

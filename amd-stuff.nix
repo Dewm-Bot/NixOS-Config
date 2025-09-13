@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  i686 = pkgs.pkgsi686Linux;    # 32-bit package set
+in
 {
     boot.initrd.kernelModules = [ "amdgpu" ];
     services.xserver.videoDrivers = [ "amdgpu" ];
@@ -11,9 +13,15 @@
     environment.systemPackages = with pkgs; [
         clinfo
         lact
-        amdvlk
+        #amdvlk
         btop-rocm
         mesa
+        vulkan-loader
+     ]++ [  #Seperate runner for AMDVLK
+    (pkgs.writeShellScriptBin "amdvlk-run" ''
+        export VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${i686.amdvlk}/share/vulkan/icd.d/amd_icd32.json"
+        exec "$@"
+    '')
     ];
 
     #chaotic.mesa-git.enable = true;
@@ -28,11 +36,6 @@
         graphics = {
             enable = true;
             enable32Bit = true;
-        };
-
-        amdgpu.amdvlk = {
-            enable = true;
-            support32Bit.enable = true;
         };
     };
 

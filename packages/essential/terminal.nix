@@ -21,6 +21,9 @@
         toybox
         pciutils
     ];
+
+    #Tailscale
+    services.tailscale.enable = true;
 }
 
 
