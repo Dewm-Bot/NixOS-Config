@@ -6,6 +6,8 @@
     ./devbox.nix
     ./podman.nix
     ./direnv.nix
+    ./rust.nix
+    ./postgres.nix
   ];
 }
 

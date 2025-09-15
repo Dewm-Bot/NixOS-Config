@@ -24,6 +24,17 @@
 
     # Budgie
     #services.xserver.desktopManager.budgie.enable = true;
+
+
+    #Config Stuff
+    #SDDM
+    # Pick an SDDM theme (breeze is a safe default)
+    services.displayManager.sddm.theme = "sddm-astronaut";
+    environment.systemPackages = with pkgs; [
+        kdePackages.breeze
+        kdePackages.breeze-gtk
+        sddm-astronaut
+    ];
 }
 
 

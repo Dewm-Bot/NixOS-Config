@@ -6,6 +6,8 @@
     #    enable = true;
     #    sensitivity = 1.0;
     #};
+
+    services.libinput.enable = true;
 }
 
 

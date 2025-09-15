@@ -6,7 +6,6 @@
         floorp
         vulkan-tools
         gparted
-        zed-editor
         chromium
         inputs.zen-browser.packages."${system}".default # beta
         p7zip-rar

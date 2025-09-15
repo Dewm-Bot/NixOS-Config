@@ -9,6 +9,7 @@
         ./gaming
         ./hyprland
         ./dev
+        ./utility
     ];
 }
 
