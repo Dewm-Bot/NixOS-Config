@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ cifs-utils ];
 
   fileSystems."/run/media/Meiko" = {
     device = "UUID=4583e2b1-74d5-429b-9cde-6890303f9c83";
@@ -94,27 +93,6 @@
       "user"
       "exec"
       "umask=000"
-    ];
-  };
-
-  # Uncomment / enable CIFS if you want it mounted by NixOS.
-  # Prefer using a credentials file instead of embedding password in the options.
-  fileSystems."/run/media/NAS" = {
-    device = "//10.254.254.251/Alex";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/smb-credentials/nas"
-      "users"
-      "noperm"
-      "uid=1000"
-      "gid=1000"
-      "vers=3.0"
-      "iocharset=utf8"
-      "nounix"
-      "dirmode=0777"
-      "_netdev"
-      "x-systemd.automount"
-      "nofail"
     ];
   };
 }

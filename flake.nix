@@ -81,6 +81,7 @@
         chaotic.nixosModules.default
         ./configuration.nix
       ];
+    
 
     };
     nixosConfigurations.DewmM16-Nix = nixpkgs.lib.nixosSystem {
