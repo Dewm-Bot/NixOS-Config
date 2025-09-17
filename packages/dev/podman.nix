@@ -13,4 +13,6 @@
         defaultNetwork.settings.dns_enabled = true;
       };
     };
+
+    environment.systemPackages = [pkgs.distrobox ];
 }

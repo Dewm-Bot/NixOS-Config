@@ -13,7 +13,19 @@
     environment.systemPackages = with pkgs; [
         polkit_gnome
         lxqt.lxqt-policykit
+        libsecret
+        gnome-keyring
     ];
 
     services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true; # <--- ADD THIS LINE HERE
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      # ... any other portals you use
+    ];
+  };
+
 }
