@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./android-studio.nix
+    #./android-studio.nix
     ./devbox.nix
     ./podman.nix
     ./direnv.nix
