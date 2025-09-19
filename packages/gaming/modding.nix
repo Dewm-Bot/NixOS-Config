@@ -2,9 +2,8 @@
 
 {
     environment.systemPackages = with pkgs; [
-        gamemode
-        openspades
-
+        nexusmods-app-unfree
+        limo
     ];
 }
 
