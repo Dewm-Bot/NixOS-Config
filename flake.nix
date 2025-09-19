@@ -79,6 +79,7 @@
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
         #yeetmouse.nixosModules.default
         chaotic.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
         ./configuration.nix
       ];
     
@@ -95,6 +96,7 @@
         yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         nixos-hardware.nixosModules.asus-zephyrus-gu603h
+        inputs.home-manager.nixosModules.home-manager
         ./laptop-conf.nix
       ];
     };
