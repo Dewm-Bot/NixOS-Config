@@ -8,9 +8,16 @@
         self.inputs.nix-alien
     ];
 
-    systemd.tmpfiles.rules = [
-      "L+ /home/dewm/.local/current-system-sw-bin - - - - /run/current-system/sw/bin"
+    systemd.mounts = [
+      {
+        what = "/run/current-system/sw/bin";
+        where = "/home/dewm/.local/current-system-sw-bin";
+        type = "none";
+        options = "bind,ro";
+        wantedBy = [ "multi-user.target" ];
+      }
     ];
+
 
     programs.nix-ld.libraries = with pkgs; [
      SDL
