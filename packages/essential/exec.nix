@@ -8,7 +8,9 @@
         self.inputs.nix-alien
     ];
 
-
+    systemd.tmpfiles.rules = [
+      "L+ /home/dewm/.local/current-system-sw-bin - - - - /run/current-system/sw/bin"
+    ];
 
     programs.nix-ld.libraries = with pkgs; [
      SDL
