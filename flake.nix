@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-alien.url = "github:thiagokokada/nix-alien";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -54,7 +55,7 @@
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, ... }:
   let
     system = "x86_64-linux";
 
@@ -73,7 +74,7 @@
       inherit system;
 
       # Make the flake inputs available to module evaluation
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit self system inputs; };
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
@@ -89,7 +90,7 @@
       inherit system;
 
       # Make the flake inputs available to module evaluation
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit self system inputs; };
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:

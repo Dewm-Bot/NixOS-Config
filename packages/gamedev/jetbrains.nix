@@ -43,6 +43,10 @@
 #     jetbrains.clion
 #     jetbrains.rust-rover
     jetbrains-toolbox
+    msbuild
+    mono
+    dotnetCorePackages.sdk_8_0
+    dotnetPackages.Nuget
   ];
 
 
