@@ -6,6 +6,9 @@
         glibc
         libogg
         self.inputs.nix-alien
+        libxml2
+        gtk3
+        gtk3-x11
     ];
 
     systemd.mounts = [
@@ -20,6 +23,9 @@
 
 
     programs.nix-ld.libraries = with pkgs; [
+     gtk3
+     gtk3-x11
+     libxml2
      SDL
      SDL2
      SDL2_image
