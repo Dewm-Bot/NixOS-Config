@@ -9,6 +9,10 @@
         libxml2
         gtk3
         gtk3-x11
+        gobject-introspection
+        (pkgs.python3.withPackages (ps: with ps; [
+            pygobject3
+        ]))
     ];
 
     systemd.mounts = [

@@ -29,7 +29,7 @@
     #Config Stuff
     #SDDM
     # Pick an SDDM theme (breeze is a safe default)
-    services.displayManager.sddm.theme = "sddm-astronaut";
+    services.displayManager.sddm.theme = "sddm-astronaut-theme";
     environment.systemPackages = with pkgs; [
         kdePackages.breeze
         kdePackages.breeze-gtk
