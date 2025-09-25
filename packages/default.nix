@@ -7,6 +7,7 @@
         ./terminal
         ./gamedev
         ./gaming
+        ./media
         ./hyprland
         ./dev
         ./utility
