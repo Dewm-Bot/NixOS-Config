@@ -14,7 +14,6 @@
         xarchiver
         py7zr
         peazip
-        bottles
     ];
 
     # Install firefox.
