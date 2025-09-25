@@ -5,6 +5,7 @@
         uget
         onlyoffice-desktopeditors
         bottles
+        protonvpn-gui
     ];
 
 }
