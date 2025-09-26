@@ -2,7 +2,7 @@
 
 {
     environment.systemPackages = with pkgs; [
-        discord
+        #discord
         equicord
         equibop
         discordo
