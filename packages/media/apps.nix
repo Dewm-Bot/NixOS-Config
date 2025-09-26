@@ -1,18 +1,21 @@
 { config, pkgs, inputs, ... }:
 
 let
-  mpvScripts = [  #Define scripts for MPV here
+  mpvScripts = [  # Define scripts for MPV here
     pkgs.mpvScripts.mpris
     pkgs.mpvScripts.modernx
     pkgs.mpvScripts.videoclip
   ];
-
-
 in {
   nixpkgs.overlays = [
     (self: super: {
       mpv = super.mpv.override {
-        scripts = mpvScripts; #Apply scripts overlay
+        scripts = mpvScripts; # Apply scripts overlay
+      };
+
+      # Override obs-studio in the overlay so pkgs.obs-studio uses cudaSupport
+      obs-studio = super.obs-studio.override {
+        cudaSupport = true;
       };
     })
   ];
@@ -33,19 +36,26 @@ in {
     ncmpcpp
     rmpc
     kitty-img
-
+    x265
+    nv-codec-headers
   ];
 
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs; [
-      obs-studio-plugins.obs-3d-effect
-      obs-studio-plugins.wlrobs
-      obs-studio-plugins.waveform
-      obs-studio-plugins.obs-tuna
-      obs-studio-plugins.obs-webkitgtk
-      obs-studio-plugins.obs-vkcapture
-      obs-studio-plugins.input-overlay
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-3d-effect
+      wlrobs
+      waveform
+      obs-tuna
+      obs-webkitgtk
+      obs-vkcapture
+      input-overlay
+      obs-vaapi
+      obs-gstreamer
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
     ];
   };
+
+  programs.obs-studio.enableVirtualCamera = true;
 }

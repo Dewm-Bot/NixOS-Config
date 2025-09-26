@@ -22,6 +22,13 @@
         options = "bind,ro";
         wantedBy = [ "multi-user.target" ];
       }
+      {
+        what = "/run/current-system/sw/share/dotnet";
+        where = "/home/dewm/.local/current-system-dotnet";
+        type = "none";
+        options = "bind,ro";
+        wantedBy = [ "multi-user.target" ];
+      }
     ];
 
 
@@ -30,6 +37,8 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         gtk3-x11
+        mono5
+        msbuild
         libbsd
         xorg.libX11
         gperftools
