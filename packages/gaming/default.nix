@@ -6,5 +6,6 @@
     ./utils.nix
     ./emulation.nix
     ./doom.nix
+    ./alvr.nix
   ];
 }
