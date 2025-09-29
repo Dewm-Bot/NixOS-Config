@@ -3,5 +3,6 @@
 {
   imports = [
     ./apps.nix
+    ./obs.nix
   ];
 }

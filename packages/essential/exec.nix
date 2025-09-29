@@ -12,6 +12,14 @@
         iconv
         glibc_multi
         gobject-introspection
+        gnumake
+        cmake
+        gcc
+        libgcc
+        clang
+        libusb1
+        particle-cli
+        libusbp
     ];
 
     systemd.mounts = [
@@ -36,6 +44,13 @@
       enable = true;
       libraries = lib.mkForce (with pkgs; [
         gtk3
+        cxxtools
+        cxxopts
+        xdg-utils-cxx
+        gnumake
+        cmake
+        gcc
+        libgcc
         gtk3-x11
         mono5
         msbuild
@@ -116,6 +131,8 @@
         libtiff
         libudev0-shim
         libusb1
+        libusbp
+        libusb-compat-0_1
         libuuid
         libvdpau
         libvorbis

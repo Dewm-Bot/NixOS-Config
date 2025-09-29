@@ -12,11 +12,6 @@ in {
       mpv = super.mpv.override {
         scripts = mpvScripts; # Apply scripts overlay
       };
-
-      # Override obs-studio in the overlay so pkgs.obs-studio uses cudaSupport
-      obs-studio = super.obs-studio.override {
-        cudaSupport = true;
-      };
     })
   ];
 
@@ -40,22 +35,4 @@ in {
     nv-codec-headers
   ];
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-3d-effect
-      wlrobs
-      waveform
-      obs-tuna
-      obs-webkitgtk
-      obs-vkcapture
-      input-overlay
-      obs-vaapi
-      obs-gstreamer
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-    ];
-  };
-
-  programs.obs-studio.enableVirtualCamera = true;
 }
