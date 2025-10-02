@@ -5,7 +5,7 @@
         nix-ld
         glibc
         libogg
-        (self.inputs.nix-alien.packages.${system}.default)
+        #(self.inputs.nix-alien.packages.${system}.default)
         libxml2
         gtk3
         gtk3-x11

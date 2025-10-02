@@ -3,7 +3,7 @@
 {
     environment.systemPackages = with pkgs; [
         sbctl
-        floorp
+        floorp-bin
         vulkan-tools
         gparted
         chromium

@@ -35,7 +35,6 @@ in
       wlrobs
       waveform
       obs-tuna
-      obs-webkitgtk
       obs-vkcapture
       input-overlay
       obs-vaapi

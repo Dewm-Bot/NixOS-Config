@@ -16,7 +16,7 @@
         hyprshot
         brightnessctl
         wofi
-        rofi-wayland
+        rofi
         hyprpolkitagent
         
     ];
