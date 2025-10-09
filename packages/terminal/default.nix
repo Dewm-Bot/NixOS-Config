@@ -5,5 +5,6 @@
     ./fish.nix
     ./tty.nix
     ./utils.nix
+    ./tui.nix
   ];
 }

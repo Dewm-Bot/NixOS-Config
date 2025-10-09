@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
     environment.systemPackages = with pkgs; [
@@ -8,6 +8,14 @@
         protonvpn-gui
     ];
 
+
+
+    nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "corefonts" ];
+
+    fonts.fonts = with pkgs; [
+        corefonts
+    ];
 }
 
 

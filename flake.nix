@@ -6,6 +6,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-software-center.url = "github:snowfallorg/nix-software-center";
 
     home-manager = {
       url = "github:nix-community/home-manager";

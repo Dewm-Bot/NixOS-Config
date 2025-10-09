@@ -26,8 +26,8 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-
+  environment.systemPackages = with pkgs; [
+	inputs.nix-software-center.packages.${system}.nix-software-center
   ];
 
 
