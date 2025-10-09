@@ -27,7 +27,6 @@ in {
     ashuffle
     rofi-mpd
     yt-dlp
-    radiotray-ng
     ncmpcpp
     rmpc
     kitty-img
