@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+      };
+
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +61,7 @@
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, ... }:
+  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, lanzaboote, ... }:
   let
     system = "x86_64-linux";
 
@@ -82,6 +87,25 @@
         #yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
+        lanzaboote.nixosModules.lanzaboote
+        ({ pkgs, lib, ... }: {
+
+            environment.systemPackages = [
+              # For debugging and troubleshooting Secure Boot.
+              pkgs.sbctl
+            ];
+
+            # Lanzaboote currently replaces the systemd-boot module.
+            # This setting is usually set to true in configuration.nix
+            # generated at installation time. So we force it to false
+            # for now.
+            boot.loader.systemd-boot.enable = lib.mkForce false;
+
+            boot.lanzaboote = {
+              enable = true;
+              pkiBundle = "/var/lib/sbctl";
+            };
+          })
         ./configuration.nix
       ];
     
@@ -95,10 +119,22 @@
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
-        yeetmouse.nixosModules.default
+        #yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         nixos-hardware.nixosModules.asus-zephyrus-gu603h
         inputs.home-manager.nixosModules.home-manager
+        lanzaboote.nixosModules.lanzaboote
+                ({ pkgs, lib, ... }: {
+            environment.systemPackages = [
+              pkgs.sbctl
+            ];
+            boot.loader.systemd-boot.enable = lib.mkForce false;
+
+            boot.lanzaboote = {
+              enable = true;
+              pkiBundle = "/var/lib/sbctl";
+            };
+          })
         ./laptop-conf.nix
       ];
     };
