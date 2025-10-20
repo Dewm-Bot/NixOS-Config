@@ -9,6 +9,7 @@
         kdePackages.kwallet-pam
         kdePackages.kwalletmanager
         kdePackages.qt5compat
+        kdePackages.kio-admin
     ];
 }
 
