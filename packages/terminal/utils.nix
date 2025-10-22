@@ -12,6 +12,7 @@
         jless
         jq
         nodenv
+        ripgrep
     ];
 }
 

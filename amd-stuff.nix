@@ -17,12 +17,14 @@ in
         btop-rocm
         mesa
         vulkan-loader
-     ]++ [  #Seperate runner for AMDVLK
-    (pkgs.writeShellScriptBin "amdvlk-run" ''
-        export VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${i686.amdvlk}/share/vulkan/icd.d/amd_icd32.json"
-        exec "$@"
-    '')
-    ];
+     ];
+
+    #++ [  #Seperate runner for AMDVLK
+    #(pkgs.writeShellScriptBin "amdvlk-run" ''
+    #    export VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${i686.amdvlk}/share/vulkan/icd.d/amd_icd32.json"
+    #    exec "$@"
+    #'')
+    #];
 
     #chaotic.mesa-git.enable = true;
 
@@ -55,7 +57,7 @@ in
             hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
         };
     }
-];
+    ];
 
 
 }

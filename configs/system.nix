@@ -5,7 +5,8 @@
     boot.loader.systemd-boot.enable = true;
 
     # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxPackages_cachyos-rc;
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+    #services.scx.enable = true; # by default uses scx_rustland scheduler
 
    
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
