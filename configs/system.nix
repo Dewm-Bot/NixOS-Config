@@ -5,7 +5,7 @@
     boot.loader.systemd-boot.enable = true;
 
     # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
     #services.scx.enable = true; # by default uses scx_rustland scheduler
 
    
