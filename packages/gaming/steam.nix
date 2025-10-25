@@ -30,6 +30,10 @@
         jovian-chaotic.gamescope-session
         inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
+        steam-devices-udev-rules
+        evtest
+        sdl-jstest
+        linuxConsoleTools
     ];
 
     programs.gamescope =

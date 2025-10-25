@@ -12,5 +12,6 @@
     ./x11.nix
     ./keyrings.nix
     ./auto-nice.nix
+    ./python.nix
   ];
 }

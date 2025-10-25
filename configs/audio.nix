@@ -23,7 +23,11 @@
             "node.description" = "Sunshine Virtual Audio Sink";
             "media.class" = "Audio/Sink";
             "audio.position" = "FL,FR";
-            "node.latency" = "256/48000";
+            "node.latency" = "1024/48000";
+            "audio.min-latency" = "1024/48000"; 
+            "audio.max-latency" = "2048/48000"; 
+            "node.pause-on-idle" = false; 
+            "resample.quality" = "1";
           };
         }
       ];

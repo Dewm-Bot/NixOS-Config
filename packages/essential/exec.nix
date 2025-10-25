@@ -45,6 +45,7 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         cxxtools
+        libgbm
         cxxopts
         xdg-utils-cxx
         gnumake
