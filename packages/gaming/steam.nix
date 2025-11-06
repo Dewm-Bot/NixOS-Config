@@ -13,7 +13,7 @@
             proton-ge-bin
             proton-cachyos
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.glxinfo pkgs.bumblebee pkgs.mangohud ];
+        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud ];
     };
     #programs.steam.package = pkgs.steam.override {
         #extraEnv = {
@@ -32,7 +32,7 @@
         protonplus
         steam-devices-udev-rules
         evtest
-        sdl-jstest
+        #sdl-jstest
         linuxConsoleTools
     ];
 

@@ -2,8 +2,8 @@
   description = "Dewm's NixOS Flake";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/5dcf5e8";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/5dcf5e8";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-alien.url = "github:thiagokokada/nix-alien";
@@ -14,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-      };
+    #lanzaboote = {
+    #  url = "github:nix-community/lanzaboote/v0.4.2";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #  };
 
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
@@ -62,7 +62,7 @@
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, lanzaboote, ... }:
+  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, ... }:
   let
     system = "x86_64-linux";
 
@@ -105,17 +105,17 @@
         chaotic.nixosModules.default
         nixos-hardware.nixosModules.asus-zephyrus-gu603h
         inputs.home-manager.nixosModules.home-manager
-        lanzaboote.nixosModules.lanzaboote
+        #lanzaboote.nixosModules.lanzaboote
                 ({ pkgs, lib, ... }: {
             environment.systemPackages = [
               pkgs.sbctl
             ];
-            boot.loader.systemd-boot.enable = lib.mkForce false;
+        #    boot.loader.systemd-boot.enable = lib.mkForce false;
 
-            boot.lanzaboote = {
-              enable = true;
-              pkiBundle = "/var/lib/sbctl";
-            };
+        #    boot.lanzaboote = {
+        #      enable = true;
+        #      pkiBundle = "/var/lib/sbctl";
+        #    };
           })
         ./laptop-conf.nix
       ];
