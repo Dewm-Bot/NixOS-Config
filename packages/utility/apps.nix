@@ -6,6 +6,21 @@
         onlyoffice-desktopeditors
         bottles
         protonvpn-gui
+        wireguard-tools
+        openvpn
+        openvpn3
+    ];
+
+    networking.firewall.checkReversePath = false;
+
+    networking.networkmanager.plugins = [
+        networkmanager-fortisslvpn
+        networkmanager-iodine
+        networkmanager-l2tp
+        networkmanager-openconnect
+        networkmanager-openvpn
+        networkmanager-sstp
+        networkmanager-vpnc
     ];
 
 
@@ -16,6 +31,8 @@
     fonts.fonts = with pkgs; [
         corefonts
     ];
+
+
 }
 
 
