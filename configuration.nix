@@ -24,7 +24,7 @@ in
     users.users.dewm = {
         isNormalUser = true;
         description = "Dewm";
-        extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" ];
+        extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" "input" ];
     };
 
     # Allow unfree packages
@@ -65,15 +65,15 @@ in
     };
 
 
-    # Add the package to the list of kernel modules to build and load
+    boot.kernelParams = [
+        "nomodeset" # <--- If you see the issue with this added, try removing it.
+        "amdgpu.modeset=1" # Explicitly enable KMS for amdgpu
+    ];
+
+
+
     boot.extraModulePackages = [ hid-fanatecff-package ];
-
-    # Optionally, you might need to ensure udev rules are installed
-    # If the package also contains udev rules, you'd add:
     services.udev.packages = [ hid-fanatecff-package ];
-
-    # Optional: Explicitly load the module at boot (usually not necessary if added to extraModulePackages)
-    # boot.kernelModules = [ "hid-fanatecff" ];
 
 
 }

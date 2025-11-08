@@ -6,6 +6,7 @@
         onlyoffice-desktopeditors
         bottles
         protonvpn-gui
+        coppwr
     ];
 
 
@@ -13,9 +14,6 @@
     nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "corefonts" ];
 
-    fonts.fonts = with pkgs; [
-        corefonts
-    ];
 }
 
 
