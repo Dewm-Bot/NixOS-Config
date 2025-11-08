@@ -9,7 +9,7 @@ in
     (self: super: {
       # Override obs-studio so pkgs.obs-studio uses cudaSupport
       obs-studio = super.obs-studio.override {
-        cudaSupport = true;
+        #cudaSupport = true;
       };
     })
   ];

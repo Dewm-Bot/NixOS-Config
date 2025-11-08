@@ -8,6 +8,7 @@
       numpy
       python-uinput
       evdev
+      uv
     ]))
   ];
 
