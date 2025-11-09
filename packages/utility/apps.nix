@@ -6,10 +6,10 @@
         onlyoffice-desktopeditors
         bottles
         protonvpn-gui
-        coppwr
         wireguard-tools
         openvpn
         openvpn3
+        coppwr
     ];
 
     networking.firewall.checkReversePath = false;
@@ -22,12 +22,16 @@
         networkmanager-openvpn
         networkmanager-sstp
         networkmanager-vpnc
-
     ];
 
 
 
     nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "corefonts" ];
+
+    fonts.fonts = with pkgs; [
+        corefonts
+    ];
 
 
 }
