@@ -1,40 +1,51 @@
 #!/usr/bin/env bash
 
+# Check for root privileges and re-execute with sudo if needed
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
-#Build flake (DewmM16 in this case)
+# --- BUILD PHASE ---
 echo "Building and switching to new NixOS configuration..."
 nixos-rebuild switch --flake /etc/nixos/#DewmM16-Nix
 
-#Check if the rebuild worked
+# Check if the rebuild worked
 if [ $? -ne 0 ]; then
-    echo "Nixos Failed to build, aborting..."
+    echo "NixOS Failed to build, aborting signing..."
     exit 1
 fi
 
+# --- SIGNING PHASE ---
 
-#EFIs to sign
-EFI_BOOT_MANAGER="/boot/EFI/BOOT/BOOTX64.EFI"
-SYSTEMD_BOOT_BIN="/boot/EFI/systemd/systemd-bootx64.efi"
-
-echo "Initializing SBCTL..."
-
-#Find our SBCTL
+# Define the SBCTL path
 SBCTL_BIN="/run/current-system/sw/bin/sbctl"
 
-#Sign BOOTX64.EFI
-if [ -f "$EFI_BOOT_MANAGER" ]; then
-    echo "Signing $EFI_BOOT_MANAGER..."
-    "$SBCTL_BIN" sign -s "$EFI_BOOT_MANAGER"
-fi
+# Define which directories you'd like to scan for EFI files
+BOOT_DIRS=(
+    "/boot/EFI/BOOT"
+    "/boot/EFI/Linux"
+    "/boot/EFI/systemd"
+    "/boot/EFI/refind"
+    "/boot/EFI/nixos"
+)
 
-# Sign systemd-boot
-if [ -f "$SYSTEMD_BOOT_BIN" ]; then
-    echo "Signing $SYSTEMD_BOOT_BIN..."
-    "$SBCTL_BIN" sign -s "$SYSTEMD_BOOT_BIN"
-fi
+echo "Initializing SBCTL and signing all relevant .efi files..."
 
-# Cleanup
+# EFI Sign Loop
+for dir in "${BOOT_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        echo "Scanning directory: $dir"
+
+        # Find all EFI files (single-depth)
+        find "$dir" -maxdepth 1 -type f -iname "*.efi" | while read efi_file; do
+            echo "Signing $efi_file..."
+            # The -s flag tells sbctl to sign the file
+            "$SBCTL_BIN" sign -s "$efi_file"
+        done
+    else
+        echo "Warning: Directory not found at $dir. Skipping."
+    fi
+done
+
+# --- CLEANUP PHASE ---
 echo "Running Nix store cleanup..."
 /run/current-system/sw/bin/nh clean all -k 4
 
