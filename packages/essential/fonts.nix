@@ -13,7 +13,14 @@
         dina-font
         proggyfonts
         liberation_ttf
+        corefonts
+        dm-mono
+        fira-mono
+        dejavu_fonts
+        hack-font
     ];
+
+    fonts.enableDefaultPackages = true;
 
     fonts.fontDir.enable = true;
 }

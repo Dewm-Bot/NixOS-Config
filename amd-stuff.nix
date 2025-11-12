@@ -8,6 +8,10 @@ in
 
     hardware.graphics.extraPackages = with pkgs; [
         rocmPackages.clr.icd
+        libva
+        svt-av1
+        libaom
+        libvmaf
     ];
 
     environment.systemPackages = with pkgs; [
@@ -17,6 +21,11 @@ in
         btop-rocm
         mesa
         vulkan-loader
+        libva-utils
+        nvtopPackages.amd
+        svt-av1
+        libaom
+        libvmaf
      ];
 
     #++ [  #Seperate runner for AMDVLK

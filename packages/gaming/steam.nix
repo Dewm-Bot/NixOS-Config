@@ -6,7 +6,7 @@
 
     programs.steam = {
         enable = true;
-        gamescopeSession.enable = true;
+        gamescopeSession.enable = false;
         dedicatedServer.openFirewall = true;
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
@@ -34,6 +34,11 @@
         evtest
         #sdl-jstest
         linuxConsoleTools
+        interception-tools
+        sc-controller
+        umu-launcher
+        goldberg-emu
+        sgdboop
     ];
 
     programs.gamescope =
@@ -47,6 +52,29 @@
     programs.java.enable = true;
 
     hardware.steam-hardware.enable = true;
+    services.udev.packages = [ pkgs.steam-devices-udev-rules ];
+
+
+    boot.kernelModules = [ "uinput" ];
+
+    # make sure udev rules give the uinput node to the input group / uaccess
+    services.udev.extraRules = ''
+        # uinput
+        KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput", GROUP="input", MODE="0660"
+
+        # NEW RULE: gamepad emulation (uinput) with broader permissions
+        KERNEL=="uinput", MODE="0666", GROUP="users", OPTIONS+="static_node=uinput"
+
+        # Valve HID devices over USB hidraw (idVendor 28de is Valve's)
+        KERNEL=="hidraw*", ATTRS{idVendor}=="28de", MODE="0666"
+
+        # Valve HID devices over bluetooth hidraw
+        KERNEL=="hidraw*", KERNELS=="*28DE:*", MODE="0666"
+    '';
+
+
+
+
 }
 
 

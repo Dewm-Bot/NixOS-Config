@@ -45,6 +45,9 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         cxxtools
+        libz
+        zlib
+        zstd
         libgbm
         cxxopts
         xdg-utils-cxx

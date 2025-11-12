@@ -9,19 +9,20 @@
         wireguard-tools
         openvpn
         openvpn3
+        coppwr
     ];
 
     networking.firewall.checkReversePath = false;
 
-    networking.networkmanager.plugins = [
-        networkmanager-fortisslvpn
-        networkmanager-iodine
-        networkmanager-l2tp
-        networkmanager-openconnect
-        networkmanager-openvpn
-        networkmanager-sstp
-        networkmanager-vpnc
-    ];
+#    networking.networkmanager.plugins = [
+#        networkmanager-fortisslvpn
+#        networkmanager-iodine
+#        networkmanager-l2tp
+#        networkmanager-openconnect
+#        networkmanager-openvpn
+#        networkmanager-sstp
+#        networkmanager-vpnc
+#    ];
 
 
 

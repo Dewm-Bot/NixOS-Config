@@ -14,6 +14,7 @@
         xarchiver
         py7zr
         peazip
+        nemo-with-extensions
     ];
 
     # Install firefox.
