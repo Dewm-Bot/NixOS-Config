@@ -4,7 +4,7 @@
     environment.systemPackages = with pkgs; [
         uget
         onlyoffice-desktopeditors
-        bottles
+        #bottles
         protonvpn-gui
         wireguard-tools
         openvpn
