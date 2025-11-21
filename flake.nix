@@ -8,6 +8,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-alien.url = "github:thiagokokada/nix-alien";
     nix-software-center.url = "github:snowfallorg/nix-software-center";
+    dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -62,7 +63,7 @@
   };
 
   # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, ... }:
+  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, dolphin-overlay, ... }:
   let
     system = "x86_64-linux";
 
@@ -71,6 +72,7 @@
       config.allowUnfree = true;
       overlays = [
         nix4vscode.overlays.default
+        dolphin-overlay.overlays.default
         ./overlays.nix
       ];
 
