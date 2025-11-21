@@ -20,8 +20,6 @@
         libusb1
         particle-cli
         libusbp
-        cef-binary
-        libcef
         swiftshader
     ];
 
@@ -48,8 +46,6 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         cxxtools
-        cef-binary
-        libcef
         libz
         zlib
         swiftshader
