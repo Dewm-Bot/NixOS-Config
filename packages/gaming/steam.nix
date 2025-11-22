@@ -39,6 +39,7 @@
         umu-launcher
         goldberg-emu
         sgdboop
+	joycond
     ];
 
     programs.gamescope =
