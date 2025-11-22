@@ -17,6 +17,7 @@ in
         ./amd-stuff.nix
         ./packages
         ./mounts-desktop.nix
+        ./experimental/fanatec-pedals
     ];
 
 

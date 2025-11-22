@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, kernel, kmod, bash, evdev-joystick }: # <--- ADDED bash, evdev-joystick
+{ lib, stdenv, fetchFromGitHub, kernel, kmod, bash, evdev-joystick }:
 
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff";
@@ -17,16 +17,24 @@ stdenv.mkDerivation rec {
 
   KDIR = "${kernel.dev}/lib/modules/${kernel.modDirVersion}/build";
 
-  # --- NEW SECTION ---
+  # --- MODIFIED SECTION ---
   # This runs after unpacking and patches the udev rule file
   # before it gets built or installed.
   postPatch = ''
-    echo ":: Patching fanatec.rules"
+    echo ":: Patching fanatec.rules for Nix paths"
     # Use | as a separator since we are replacing paths
     sed -i 's|/bin/sh|${bash}/bin/sh|g' fanatec.rules
     sed -i 's|/usr/bin/evdev-joystick|${evdev-joystick}/bin/evdev-joystick|g' fanatec.rules
+
+    echo ":: Appending FFB permission rules to fanatec.rules"
+    # Append rules to grant 'gaming' group write access to all Fanatec
+    # devices (1eb7 and 0eb7) for both event and hidraw nodes.
+    # We use 'echo -e' to add newlines before each rule.
+    echo -e "\n# (Nix-patched) Grant 'gaming' group write access for FFB" >> fanatec.rules
+    echo -e "ATTRS{idVendor}==\"1eb7|0eb7\", KERNEL==\"event*\", MODE=\"0660\", GROUP=\"gaming\"" >> fanatec.rules
+    echo -e "ATTRS{idVendor}==\"1eb7|0eb7\", KERNEL==\"hidraw*\", MODE=\"0660\", GROUP=\"gaming\"" >> fanatec.rules
   '';
-  # --- END NEW SECTION ---
+  # --- END MODIFIED SECTION ---
 
   buildPhase = ''
     echo ":: Compiling Fanatec kernel module"
@@ -43,7 +51,7 @@ stdenv.mkDerivation rec {
     cp -v hid-fanatec.ko "$modDest/"
 
     mkdir -p "$out/lib/udev/rules.d"
-    # This will now copy the *patched* fanatec.rules
+    # This will now copy the *patched and appended* fanatec.rules
     cp -v fanatec.rules "$out/lib/udev/rules.d/99-fanatec.rules"
   '';
 
