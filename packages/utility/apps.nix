@@ -10,6 +10,8 @@
         openvpn
         openvpn3
         coppwr
+        ddcutil
+        ddcui
     ];
 
     networking.firewall.checkReversePath = false;
