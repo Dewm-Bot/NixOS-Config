@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
 
     programs.hyprland = {
@@ -18,8 +17,23 @@
         wofi
         rofi
         hyprpolkitagent
-        
+	grimblast
+	ashell
+	hyprpanel
+	waypaper       
     ];
+
+    environment.sessionVariables = {
+        HYPR_PLUGIN_DIR = pkgs.symlinkJoin {
+                name = "hyprland-plugins";
+                paths = with (pkgs.hyprlandPlugins or {}); [
+                        hyprexpo
+                        hyprsplit
+                        hyprspace
+                        hyprscrolling
+                        csgo-vulkan-fix
+                ];
+        };
+     };
+
 }
-
-
