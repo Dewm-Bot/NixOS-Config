@@ -9,6 +9,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
+    hyprland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
       url = "github:nix-community/home-manager";
