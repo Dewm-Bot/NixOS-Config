@@ -7,6 +7,9 @@
         wlsunset
         gammastep
         wl-gammactl
+        nwg-displays
+        wl-mirror
+        wluma
     ];
 
 }
