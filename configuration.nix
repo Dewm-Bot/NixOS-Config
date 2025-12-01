@@ -71,6 +71,7 @@ in
         "amdgpu.modeset=1" # Explicitly enable KMS for amdgpu
     ];
 
+    powerManagement.cpuFreqGovernor = "performance";
 
 
     boot.extraModulePackages = [ hid-fanatecff-package ];
