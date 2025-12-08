@@ -29,6 +29,30 @@
     # Enable CUPS to print documents.
     services.printing.enable = true;
 
+    boot.kernel.sysctl = {
+        "vm.swappiness" = 10;
+    };
+
+
+    services.fstrim.enable = true;
+
+    boot.kernel.sysctl = {
+        "net.core.default_qdisc" = "fq";
+        "net.ipv4.tcp_congestion_control" = "bbr";
+    };
+
+    nix.settings = {
+        max-jobs = "auto";
+        cores = 0; # 0 means "use all available cores"
+    };
+
+    boot.kernel.sysctl."vm.max_map_count" = 2147483642;
+
+
+    zramSwap = {
+        enable = true; 
+    };
+
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
 
