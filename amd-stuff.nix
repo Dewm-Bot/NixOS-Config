@@ -1,76 +1,56 @@
 { config, pkgs, ... }:
-let
-  i686 = pkgs.pkgsi686Linux;    # 32-bit package set
-in
+
 {
     boot.initrd.kernelModules = [ "amdgpu" ];
-    services.xserver.videoDrivers = [ "amdgpu" ];
 
-    hardware.graphics.extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-        libva
-        svt-av1
-        libaom
-        libvmaf
-    ];
+    hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+        extraPackages = [
+            pkgs.rocmPackages.clr.icd  # OpenCL support
+            #pkgs.amdvlk                # Optional: Keep ONLY if you need to swap to it for specific games
+        ];
+    };
 
+    # Force RADV (Radeon Vulkan) by default
+    # RADV (Mesa) generally outperforms AMDVLK in gaming.
+    environment.variables = {
+        "AMD_VULKAN_ICD" = "RADV";
+    };
+
+    # System Packages
     environment.systemPackages = with pkgs; [
         clinfo
         lact
-        #amdvlk
         btop-rocm
-        mesa
-        vulkan-loader
-        libva-utils
+        libva-utils      # For verifying VAAPI (vainfo)
+        vulkan-tools     # For verifying Vulkan (vulkaninfo)
         nvtopPackages.amd
+        
+
         svt-av1
         libaom
         libvmaf
-     ];
-
-    #++ [  #Seperate runner for AMDVLK
-    #(pkgs.writeShellScriptBin "amdvlk-run" ''
-    #    export VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${i686.amdvlk}/share/vulkan/icd.d/amd_icd32.json"
-    #    exec "$@"
-    #'')
-    #];
-
-    #chaotic.mesa-git.enable = true;
-
-    systemd.packages = with pkgs; [
-        lact    
     ];
 
+    # Daemon for LACT (GPU Tuning/Overclocking)
+    systemd.packages = [ pkgs.lact ];
     systemd.services.lactd.wantedBy = ["multi-user.target"];
 
-    hardware = {
-        graphics = {
-            enable = true;
-            enable32Bit = true;
-        };
-    };
+    # CAP_SYS_NICE Patch
+    boot.kernelPatches = [
+        {
+            name = "amdgpu-ignore-ctx-privileges";
+            patch = pkgs.fetchpatch {
+                name = "cap_sys_nice_begone.patch";
+                url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+                hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+            };
+        }
+    ];
 
-    #possible HIP library import
+    # HIP / ROCm fix
     systemd.tmpfiles.rules = [
         "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
-
-
-    #CAP_SYS_NICE Patch
-    boot.kernelPatches = [
-    {
-        name = "amdgpu-ignore-ctx-privileges";
-        patch = pkgs.fetchpatch {
-            name = "cap_sys_nice_begone.patch";
-            url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
-            hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
-        };
-    }
-    ];
-
-
 }
-
-
-
-
