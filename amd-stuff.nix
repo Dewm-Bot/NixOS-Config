@@ -3,31 +3,31 @@
 {
     boot.initrd.kernelModules = [ "amdgpu" ];
 
+    chaotic.mesa-git.enable = true;
+    chaotic.mesa-git.extraPackages = [
+        pkgs.rocmPackages.clr.icd  # OpenCL support
+    ];
+    
     hardware.graphics = {
         enable = true;
         enable32Bit = true;
-        extraPackages = [
-            pkgs.rocmPackages.clr.icd  # OpenCL support
-            #pkgs.amdvlk                # Optional: Keep ONLY if you need to swap to it for specific games
-        ];
     };
 
     # Force RADV (Radeon Vulkan) by default
-    # RADV (Mesa) generally outperforms AMDVLK in gaming.
     environment.variables = {
         "AMD_VULKAN_ICD" = "RADV";
+        # Force VAAPI to use the Mesa driver
+        "LIBVA_DRIVER_NAME" = "radeonsi";
     };
 
-    # System Packages
     environment.systemPackages = with pkgs; [
         clinfo
         lact
         btop-rocm
-        libva-utils      # For verifying VAAPI (vainfo)
-        vulkan-tools     # For verifying Vulkan (vulkaninfo)
+        libva-utils      # Run 'vainfo' to verify proper video encoding support
+        vulkan-tools     # Run 'vulkaninfo' to verify Mesa-git version
         nvtopPackages.amd
         
-
         svt-av1
         libaom
         libvmaf
