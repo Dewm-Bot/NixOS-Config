@@ -11,6 +11,11 @@
     dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
     hyprland.url = "github:hyprwm/Hyprland";
 
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -88,7 +93,7 @@
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
-        #yeetmouse.nixosModules.default
+        yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         ./configuration.nix
@@ -104,7 +109,7 @@
 
       modules = [
         # Add the `yeetmouse` input's NixOS Module to your system's modules:
-        #yeetmouse.nixosModules.default
+        yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         nixos-hardware.nixosModules.asus-zephyrus-gu603h
         inputs.home-manager.nixosModules.home-manager

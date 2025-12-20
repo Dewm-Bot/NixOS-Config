@@ -8,9 +8,9 @@
     options = [
       "noatime"
       "lazytime"
-      "commit=120"
-      "discard=async"
-      "compress-force=zstd:1"
+      "commit=30"
+      "nodiscard"
+      "compress=zstd"
       "space_cache=v2"
     ];
   };

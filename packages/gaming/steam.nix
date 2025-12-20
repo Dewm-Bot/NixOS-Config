@@ -48,7 +48,7 @@
         capSysNice = true;
     };
 
-    hardware.xone.enable = true;
+   hardware.xone.enable = true;
 
     programs.java.enable = true;
 
