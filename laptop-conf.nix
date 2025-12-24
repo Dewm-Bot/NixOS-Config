@@ -46,7 +46,12 @@
 
   #Swap file setup, maybe move to it's own config file?
   boot.resumeDevice = "/dev/disk/by-label/swap";
-  boot.kernelParams = ["resume=/dev/disk/by-label/swap"];
+  boot.kernelParams = [
+    "resume=/dev/disk/by-label/swap"
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+    "nvidia.NVreg_RegistryDwords=RMUseSwI2c=0x01" #monitor parameter fix
+  ];
 
   #AppImage support
   programs.appimage.enable = true;
