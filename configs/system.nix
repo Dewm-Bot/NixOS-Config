@@ -5,7 +5,7 @@
     boot.loader.systemd-boot.enable = true;
 
     # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+    #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #Now defined in flake.nix
     #services.scx.enable = true; # by default uses scx_rustland scheduler
 
    

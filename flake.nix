@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/5dcf5e8";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # Bleeding edge packages from Chaotic-AUR
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; #Remove later, RIP
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; #New CachyOS Kernel Provider
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master"; #Hardware specific fixes
+    nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
     hyprland.url = "github:hyprwm/Hyprland";
@@ -20,11 +21,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #lanzaboote = {
-    #  url = "github:nix-community/lanzaboote/v0.4.2";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #  };
 
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
@@ -62,17 +58,26 @@
     };
 
     sls-steam = {
-    url = "github:AceSLS/SLSsteam";
-    inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AceSLS/SLSsteam";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  # bind `inputs` (so `inputs` is available below) while still getting named vars
-  outputs = inputs@{ self, nixpkgs, nix4vscode, yeetmouse, chaotic, zen-browser, nixos-hardware, nix-alien, dolphin-overlay, ... }:
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    nixos-hardware,
+    nix-cachyos-kernel,
+    nix-alien,
+    zen-browser,
+    nix4vscode,
+    dolphin-overlay,
+    yeetmouse,
+    chaotic,
+    ...
+  }:
   let
     system = "x86_64-linux";
-
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -81,54 +86,61 @@
         dolphin-overlay.overlays.default
         ./overlays.nix
       ];
-
     };
+
   in
   {
+    overlays = {
+      pinned = nix-cachyos-kernel.overlays.default;
+    };
+
+    #Desktop
     nixosConfigurations.DewmBox-Nix = nixpkgs.lib.nixosSystem {
       inherit system;
-
-      # Make the flake inputs available to module evaluation
       specialArgs = { inherit self system inputs; };
 
       modules = [
-        # Add the `yeetmouse` input's NixOS Module to your system's modules:
+        ({ pkgs, ... }: {
+          nixpkgs.overlays = [ self.overlays.pinned ];
+          boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+
+          #Binary Cache
+          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+        })
+
         yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         ./configuration.nix
       ];
-    
-
     };
+
+    #Laptop
     nixosConfigurations.DewmM16-Nix = nixpkgs.lib.nixosSystem {
       inherit system;
-
-      # Make the flake inputs available to module evaluation
       specialArgs = { inherit self system inputs; };
 
       modules = [
-        # Add the `yeetmouse` input's NixOS Module to your system's modules:
+        ({ pkgs, lib, ... }: {
+          nixpkgs.overlays = [ self.overlays.pinned ];
+          boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+
+          #Binary Cache
+          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+
+          #Secureboot signing
+          environment.systemPackages = [ pkgs.sbctl ];
+
+        })
+
         yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         nixos-hardware.nixosModules.asus-zephyrus-gu603h
         inputs.home-manager.nixosModules.home-manager
-        #lanzaboote.nixosModules.lanzaboote
-                ({ pkgs, lib, ... }: {
-            environment.systemPackages = [
-              pkgs.sbctl
-            ];
-        #    boot.loader.systemd-boot.enable = lib.mkForce false;
-
-        #    boot.lanzaboote = {
-        #      enable = true;
-        #      pkiBundle = "/var/lib/sbctl";
-        #    };
-          })
         ./laptop-conf.nix
       ];
     };
-
   };
 }
-

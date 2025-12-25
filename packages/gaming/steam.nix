@@ -27,7 +27,6 @@
         xorg.libxcb
         steamcmd
         gamescope_git
-        jovian-chaotic.gamescope-session
         inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
         steam-devices-udev-rules
