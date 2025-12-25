@@ -48,7 +48,6 @@
   boot.resumeDevice = "/dev/disk/by-label/swap";
   boot.kernelParams = [
     "resume=/dev/disk/by-label/swap"
-    "nvidia-drm.modeset=1"
   ];
 
   #AppImage support
@@ -69,10 +68,10 @@
   };
   
   services = {
-  	asusd = {
-		enable = true;
-		enableUserService = true;
-	};
+    asusd = {
+        enable = true;
+        enableUserService = true;
+    };
   };
 
 }
