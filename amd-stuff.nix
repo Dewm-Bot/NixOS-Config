@@ -11,13 +11,20 @@
     hardware.graphics = {
         enable = true;
         enable32Bit = true;
+        extraPackages = with pkgs; [
+            libva
+        ];
     };
+
+    hardware.amdgpu.initrd.enable = true;
+    hardware.acceleration.vaapi.enable = true;
 
     # Force RADV (Radeon Vulkan) by default
     environment.variables = {
         "AMD_VULKAN_ICD" = "RADV";
         # Force VAAPI to use the Mesa driver
         "LIBVA_DRIVER_NAME" = "radeonsi";
+        "LIBVA_DRIVERS_PATH" = "/run/opengl-driver/lib/dri";
     };
 
     environment.systemPackages = with pkgs; [
@@ -53,4 +60,6 @@
     systemd.tmpfiles.rules = [
         "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
+
+
 }
