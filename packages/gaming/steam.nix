@@ -8,12 +8,13 @@
         enable = true;
         gamescopeSession.enable = false;
         dedicatedServer.openFirewall = true;
+	remotePlay.openFirewall = true;
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
             proton-cachyos
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud ];
+        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 keyutils ];
     };
     #programs.steam.package = pkgs.steam.override {
         #extraEnv = {
