@@ -21,6 +21,8 @@
         particle-cli
         libusbp
         swiftshader
+	icu
+	icu78
     ];
 
     systemd.mounts = [

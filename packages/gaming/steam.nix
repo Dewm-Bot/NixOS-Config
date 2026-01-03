@@ -14,7 +14,7 @@
             proton-ge-bin
             proton-cachyos
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 keyutils ];
+        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
     };
     #programs.steam.package = pkgs.steam.override {
         #extraEnv = {

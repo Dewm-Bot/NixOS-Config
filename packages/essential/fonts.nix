@@ -21,7 +21,7 @@
     ];
 
     fonts.enableDefaultPackages = true;
-
     fonts.fontDir.enable = true;
+    fonts.fontconfig.enable = true;    
 }
 

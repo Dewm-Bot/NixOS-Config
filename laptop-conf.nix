@@ -50,11 +50,6 @@
     "resume=/dev/disk/by-label/swap"
   ];
 
-  #AppImage support
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-
-
 
   #Home Manager setup
 
