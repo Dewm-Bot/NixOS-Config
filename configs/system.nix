@@ -95,7 +95,7 @@
 
     services.samba = {
         enable = true;
-        securityType = "user";
+        settings.global.security = "user";
     };
 
 

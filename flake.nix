@@ -112,7 +112,7 @@
         yeetmouse.nixosModules.default
         chaotic.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
-        ./configuration.nix
+        ./dewmbox-conf.nix
       ];
     };
 
