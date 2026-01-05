@@ -78,69 +78,74 @@
   }:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-        nix4vscode.overlays.default
-        dolphin-overlay.overlays.default
-        ./overlays.nix
-      ];
-    };
 
-  in
+    globalOverlays = [
+        inputs.nix4vscode.overlays.default
+        inputs.dolphin-overlay.overlays.default
+        inputs.nix-cachyos-kernel.overlays.default
+        # (import ./overlays.nix) # Uncomment if you still use this file
+      ];
+
+
+      sharedModules = [
+        inputs.chaotic.nixosModules.default
+        inputs.yeetmouse.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
+        {
+          nixpkgs.overlays = globalOverlays;
+          nixpkgs.config.allowUnfree = true;
+
+          # Home Manager Setup
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          #Backup Old Configs
+          home-manager.backupFileExtension = "backup";
+
+          # Binary Cache
+          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+        }
+      ];
+
+    in
   {
-    overlays = {
-      pinned = nix-cachyos-kernel.overlays.default;
-    };
+    nixosConfigurations = {
 
-    #Desktop
-    nixosConfigurations.DewmBox-Nix = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit self system inputs; };
+      # --- DESKTOP ---
+      DewmBox-Nix = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = sharedModules ++ [
+          ./dewmbox-conf.nix #Main Entry (Desktop)
+          ({ pkgs, ... }: {
+            home-manager.extraSpecialArgs = { inherit inputs; deviceType = "desktop"; }; #Device Flag
+            home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
-      modules = [
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [ self.overlays.pinned ];
-          boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+            boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
+          })
+        ];
+      };
 
-          #Binary Cache
-          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-        })
+        # --- LAPTOP ---
+        DewmM16-Nix = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = sharedModules ++ [
+            ./dewm-m16-conf.nix #Main Entry (Laptop)
+            inputs.nixos-hardware.nixosModules.asus-zephyrus-gu603h
 
-        yeetmouse.nixosModules.default
-        chaotic.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
-        ./dewmbox-conf.nix
-      ];
-    };
+            ({ pkgs, ... }: {
+              # Fix 1: Pass 'deviceType' inside the module
+              home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag
+              home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
-    #Laptop
-    nixosConfigurations.DewmM16-Nix = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit self system inputs; };
+              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
 
-      modules = [
-        ({ pkgs, lib, ... }: {
-          nixpkgs.overlays = [ self.overlays.pinned ];
-          boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
-
-          #Binary Cache
-          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-
-          #Secureboot signing
-          environment.systemPackages = [ pkgs.sbctl ];
-
-        })
-
-        yeetmouse.nixosModules.default
-        chaotic.nixosModules.default
-        nixos-hardware.nixosModules.asus-zephyrus-gu603h
-        inputs.home-manager.nixosModules.home-manager
-        ./laptop-conf.nix
-      ];
+              environment.systemPackages = [ pkgs.sbctl ]; #Secure Boot Signature Software
+            })
+          ];
+        };
     };
   };
 }

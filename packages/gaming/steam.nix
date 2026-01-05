@@ -6,9 +6,9 @@
 
     programs.steam = {
         enable = true;
-        gamescopeSession.enable = false;
+        gamescopeSession.enable = true;
         dedicatedServer.openFirewall = true;
-	remotePlay.openFirewall = true;
+        remotePlay.openFirewall = true;
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
@@ -27,7 +27,6 @@
         gamemode
         xorg.libxcb
         steamcmd
-        gamescope_git
         inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
         steam-devices-udev-rules
@@ -39,7 +38,7 @@
         umu-launcher
         goldberg-emu
         sgdboop
-	joycond
+        joycond
     ];
 
     programs.gamescope =
