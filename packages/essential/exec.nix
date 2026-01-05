@@ -23,6 +23,7 @@
         swiftshader
 	icu
 	icu78
+	dotnet-aspnetcore_9
     ];
 
     systemd.mounts = [
@@ -193,7 +194,9 @@
     ]);
   };
 
-
+environment.sessionVariables = {
+  DOTNET_ROOT = "${pkgs.dotnet-aspnetcore_9}/share/dotnet/";
+};
 
 
 }
