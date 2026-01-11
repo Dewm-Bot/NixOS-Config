@@ -28,6 +28,7 @@
 	unzip
 	xdotool
 	xorg.xwininfo
+	zstd
     ];
 
     systemd.mounts = [

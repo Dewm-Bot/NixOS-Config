@@ -39,6 +39,7 @@
         goldberg-emu
         sgdboop
         joycond
+	winetricks
     ];
 
     programs.gamescope =
