@@ -2,11 +2,6 @@
 
 {
     boot.initrd.kernelModules = [ "amdgpu" ];
-
-    chaotic.mesa-git.enable = true;
-    chaotic.mesa-git.extraPackages = [
-        pkgs.rocmPackages.clr.icd  # OpenCL support
-    ];
     
     hardware.graphics = {
         enable = true;
@@ -15,7 +10,6 @@
             libva
             libva-vdpau-driver
             rocmPackages.clr.icd
-            intel-media-driver
         ];
     };
 
@@ -24,12 +18,12 @@
     hardware.amdgpu.initrd.enable = true;
 
     # Force RADV (Radeon Vulkan) by default
-#     environment.variables = {
-#         "AMD_VULKAN_ICD" = "RADV";
-#         # Force VAAPI to use the Mesa driver
-#         "LIBVA_DRIVER_NAME" = "radeonsi";
-#         "LIBVA_DRIVERS_PATH" = "/run/opengl-driver/lib/dri";
-#     };
+     environment.variables = {
+         "AMD_VULKAN_ICD" = "RADV";
+         # Force VAAPI to use the Mesa driver
+         "LIBVA_DRIVER_NAME" = "radeonsi";
+         "LIBVA_DRIVERS_PATH" = "/run/opengl-driver/lib/dri";
+     };
 
     environment.systemPackages = with pkgs; [
         clinfo

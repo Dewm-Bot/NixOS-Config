@@ -97,7 +97,8 @@
         enable = true;
         settings.global.security = "user";
     };
-
+	
+    services.envfs.enable = true;
 
 }
 

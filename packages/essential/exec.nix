@@ -24,6 +24,11 @@
 	icu
 	icu78
 	dotnet-aspnetcore_9
+	yad
+	unzip
+	xdotool
+	xorg.xwininfo
+	zstd
     ];
 
     systemd.mounts = [

@@ -9,6 +9,7 @@
             extraPkgs = pkgs: [
                 pkgs.icu
                 pkgs.libxcrypt-legacy
+		pkgs.zstd
             ];
         };
     };
