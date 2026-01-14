@@ -1,4 +1,4 @@
-{ config, pkgs, deviceType, ... }:
+{ config, pkgs, deviceType, inputs, ... }:
 
 {
 	home.username = "dewm";
@@ -12,6 +12,7 @@
 	home.packages = with pkgs; [
 		atool
 		httpie
+		inputs.jackify.packages.${pkgs.system}.default
 	];
 
 	programs.bash.enable = true;
@@ -19,6 +20,7 @@
 	home.sessionPath = [
     "$HOME/bin"
 	];
+
 
 	home.file.".device_type".text = "${deviceType}";
 
