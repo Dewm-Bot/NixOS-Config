@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/5dcf5e8";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; #Remove later, RIP
+    #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; #Remove later, RIP
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; #New CachyOS Kernel Provider
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; #Hardware specific fixes
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
@@ -73,7 +73,7 @@
     nix4vscode,
     dolphin-overlay,
     yeetmouse,
-    chaotic,
+    #chaotic,
     ...
   }:
   let
@@ -83,12 +83,12 @@
         inputs.nix4vscode.overlays.default
         inputs.dolphin-overlay.overlays.default
         inputs.nix-cachyos-kernel.overlays.default
-        # (import ./overlays.nix) # Uncomment if you still use this file
+        (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
 
 
       sharedModules = [
-        inputs.chaotic.nixosModules.default
+        #inputs.chaotic.nixosModules.default
         inputs.yeetmouse.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         {

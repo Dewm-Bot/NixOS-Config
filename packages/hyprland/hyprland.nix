@@ -22,8 +22,8 @@
 		enable = true;
 		xwayland.enable = true;
 	plugins = with pkgs.hyprlandPlugins; [
-		hyprsplit
-		hyprspace
+		#hyprsplit (currently broken)
+		#hyprspace (currently broken)
 		hyprscrolling
 		csgo-vulkan-fix
 	];

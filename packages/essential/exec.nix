@@ -20,15 +20,15 @@
         libusb1
         particle-cli
         libusbp
-        swiftshader
-	icu
-	icu78
-	dotnet-aspnetcore_9
-	yad
-	unzip
-	xdotool
-	xorg.xwininfo
-	zstd
+        #swiftshader
+        icu
+        icu78
+        dotnet-aspnetcore_9
+        yad
+        unzip
+        xdotool
+        xorg.xwininfo
+        zstd
     ];
 
     systemd.mounts = [
@@ -56,7 +56,7 @@
         cxxtools
         libz
         zlib
-        swiftshader
+        #swiftshader
         zstd
         libgbm
         cxxopts

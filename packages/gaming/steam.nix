@@ -1,5 +1,36 @@
 { config, pkgs, inputs, ... }:
+let
+  #SLS-Steam wrapper fix
+  sls-steam-lib = pkgs.pkgsi686Linux.stdenv.mkDerivation {
+    pname = "sls-steam-lib";
+    version = "custom-fixed";
+    src = inputs.sls-steam;
 
+    nativeBuildInputs = [ pkgs.pkgsi686Linux.pkg-config ];
+
+    #Add openssl to match upstream dependencies + curl fix
+    buildInputs = [
+      pkgs.pkgsi686Linux.curl
+      pkgs.pkgsi686Linux.openssl
+    ];
+
+    #Explicitly use the 32-bit C++ compiler
+    makeFlags = [
+      "CXX=${pkgs.pkgsi686Linux.stdenv.cc}/bin/c++"
+    ];
+
+    installPhase = ''
+      mkdir -p $out/lib
+      cp bin/SLSsteam.so $out/lib/
+    '';
+  };
+
+  # Wrapper
+  sls-steam-run = pkgs.writeShellScriptBin "sls-steam" ''
+    export LD_PRELOAD=${sls-steam-lib}/lib/SLSsteam.so
+    exec steam "$@"
+  '';
+in
 {
     #Okay, so if no matter what you do, gamescope isn't working. Toss in this junk:
     #env -u LD_PRELOAD /run/current-system/sw/bin/gamescope -- env LD_PRELOAD="$LD_PRELOAD" %command%
@@ -12,7 +43,6 @@
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
-            proton-cachyos
         ];
         extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
     };
@@ -27,9 +57,11 @@
         gamemode
         xorg.libxcb
         steamcmd
-        inputs.sls-steam.packages.${pkgs.system}.wrapped
+        #inputs.sls-steam.packages.${pkgs.system}.wrapped
+        sls-steam-run
         protonplus
         steam-devices-udev-rules
+        game-devices-udev-rules
         evtest
         #sdl-jstest
         linuxConsoleTools
@@ -37,9 +69,11 @@
         sc-controller
         umu-launcher
         goldberg-emu
+        mangohud
         sgdboop
         joycond
-	winetricks
+        winetricks
+        gamescope-wsi
     ];
 
     programs.gamescope =
@@ -47,6 +81,7 @@
         enable = true;
         capSysNice = true;
     };
+
 
    hardware.xone.enable = true;
 

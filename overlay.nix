@@ -1,5 +1,5 @@
 # ./overlays.nix
-self: super: {
+inputs: final: prev: {
 
 }
 
