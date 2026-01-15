@@ -11,6 +11,9 @@
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
     hyprland.url = "github:hyprwm/Hyprland";
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -78,7 +81,8 @@
     nix4vscode,
     dolphin-overlay,
     yeetmouse,
-    #chaotic,
+    nix-citizen,
+    nix-gaming,
     ...
   }:
   let
@@ -108,8 +112,14 @@
           home-manager.backupFileExtension = "backup";
 
           # Binary Cache
-          nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-          nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+          nix.settings.substituters = [
+          "https://attic.xuyh0120.win/lantian"
+          "https://nix-citizen.cachix.org"
+          ];
+          nix.settings.trusted-public-keys = [
+          "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+          "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo="
+          ];
         }
       ];
 

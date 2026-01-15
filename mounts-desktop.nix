@@ -81,6 +81,24 @@
     ];
   };
 
+  fileSystems."/run/media/GRINDSET" = {
+    device = "UUID=D0A06B80A06B6C42";
+    fsType = "ntfs-3g";
+    options = [
+      "uid=1000"
+      "gid=1000"
+      "defaults"
+      "windows_names"
+      "ignore_cases"
+      "rw"
+      "noatime"
+      "user"
+      "exec"
+      "umask=000"
+      "nofail"
+    ];
+  };
+
   fileSystems."/run/media/Azami" = {
     device = "UUID=D87876357876128C";
     fsType = "ntfs-3g";
