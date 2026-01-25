@@ -81,20 +81,16 @@
     ];
   };
 
-  fileSystems."/run/media/GRINDSET" = {
-    device = "UUID=D0A06B80A06B6C42";
-    fsType = "ntfs-3g";
+  fileSystems."/run/media/Uchu" = {
+    device = "UUID=3cd50fbf-6294-4e74-bf8a-9851949f2eae";
+    fsType = "btrfs";
     options = [
-      "uid=1000"
-      "gid=1000"
-      "defaults"
-      "windows_names"
-      "ignore_cases"
-      "rw"
       "noatime"
-      "user"
-      "exec"
-      "umask=000"
+      "lazytime"
+      "commit=30"
+      "nodiscard"
+      "compress=zstd"
+      "space_cache=v2"
       "nofail"
     ];
   };
