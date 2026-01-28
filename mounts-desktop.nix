@@ -8,9 +8,9 @@
     options = [
       "noatime"
       "lazytime"
-      "commit=120"
-      "discard=async"
-      "compress-force=zstd:1"
+      "commit=30"
+      "nodiscard"
+      "compress=zstd"
       "space_cache=v2"
     ];
   };
@@ -78,6 +78,20 @@
       "user"
       "exec"
       "umask=000"
+    ];
+  };
+
+  fileSystems."/run/media/Uchu" = {
+    device = "UUID=3cd50fbf-6294-4e74-bf8a-9851949f2eae";
+    fsType = "btrfs";
+    options = [
+      "noatime"
+      "lazytime"
+      "commit=30"
+      "nodiscard"
+      "compress=zstd"
+      "space_cache=v2"
+      "nofail"
     ];
   };
 

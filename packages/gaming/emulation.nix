@@ -14,7 +14,7 @@
         retroarch-joypad-autoconfig
         librashader
         libretro-shaders-slang
-        flycast
+        #flycast (broken for now)
         cemu
         ryubing
         xenia-canary

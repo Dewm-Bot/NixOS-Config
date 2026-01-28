@@ -30,7 +30,7 @@
         pokete
         nbsdgames
         #ollama-cuda
-        oterm
+        #oterm
     ];
 
 
