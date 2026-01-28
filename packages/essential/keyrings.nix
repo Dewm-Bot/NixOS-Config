@@ -12,7 +12,7 @@
 
     environment.systemPackages = with pkgs; [
         polkit_gnome
-        lxqt.lxqt-policykit
+        hyprpolkitagent
         libsecret
         gnome-keyring
     ];
@@ -24,6 +24,8 @@
     xdgOpenUsePortal = true; # <--- ADD THIS LINE HERE
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
       # ... any other portals you use
     ];
   };

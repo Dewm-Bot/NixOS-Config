@@ -10,6 +10,7 @@
             libva
             libva-vdpau-driver
             rocmPackages.clr.icd
+            libvdpau-va-gl
         ];
     };
 

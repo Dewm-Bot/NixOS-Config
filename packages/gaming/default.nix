@@ -7,6 +7,5 @@
     ./emulation.nix
     ./doom.nix
     ./alvr.nix
-    ./starcitizen.nix
   ];
 }

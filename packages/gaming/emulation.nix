@@ -2,7 +2,6 @@
 
 {
     environment.systemPackages = with pkgs; [
-        #emulationstation-de
         pegasus-frontend
         xemu
         xdvdfs-cli
