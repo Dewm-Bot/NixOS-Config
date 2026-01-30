@@ -5,7 +5,7 @@
     ./apps.nix
     ./game-streaming.nix
     ./display.nix
-    ./nero-umu.
+    ./nero-umu.nix
     ./wayfire.nix
   ];
 }

@@ -20,7 +20,7 @@
         libusb1
         particle-cli
         libusbp
-        swiftshader
+        #swiftshader
         icu
         icu78
         dotnet-aspnetcore_9
@@ -56,7 +56,7 @@
         cxxtools
         libz
         zlib
-        swiftshader
+        #swiftshader
         zstd
         libgbm
         cxxopts

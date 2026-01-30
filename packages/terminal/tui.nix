@@ -12,7 +12,7 @@
         bluetui
         youtube-tui
         systemctl-tui
-        gitu
+        #gitu
         xplr
         termusic
         lazycli
@@ -30,7 +30,7 @@
         pokete
         nbsdgames
         #ollama-cuda
-        #oterm
+        oterm
     ];
 
 
