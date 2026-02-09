@@ -5,7 +5,7 @@
     [ # Include the results of the hardware scan.
       ./configs
       ./configs/laptop-sessions.nix
-      ./hardware-conf-laptop.nix
+      ./dewm-m16-hardware.nix
       ./laptop-rog.nix
       ./packages
       #./nvidia.nix
@@ -48,15 +48,7 @@
   boot.resumeDevice = "/dev/disk/by-label/swap";
   boot.kernelParams = [
     "resume=/dev/disk/by-label/swap"
-    "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-    "nvidia.NVreg_RegistryDwords=RMUseSwI2c=0x01" #monitor parameter fix
   ];
-
-  #AppImage support
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-
 
 
   #Home Manager setup
@@ -71,10 +63,10 @@
   };
   
   services = {
-  	asusd = {
-		enable = true;
-		enableUserService = true;
-	};
+    asusd = {
+        enable = true;
+        enableUserService = true;
+    };
   };
 
 }

@@ -2,9 +2,9 @@
 
 {
     environment.systemPackages = with pkgs; [
-        gzdoom
-        #doomseeker
-        #zandronum
+        uzdoom
+        doomseeker
+        zandronum
         doomrunner
         ringracers
         srb2

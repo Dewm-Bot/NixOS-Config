@@ -13,5 +13,6 @@
     ./keyrings.nix
     ./auto-nice.nix
     ./python.nix
+    ./appimages.nix
   ];
 }

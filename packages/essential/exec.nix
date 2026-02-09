@@ -20,7 +20,15 @@
         libusb1
         particle-cli
         libusbp
-        swiftshader
+        #swiftshader
+        icu
+        icu78
+        dotnet-aspnetcore_9
+        yad
+        unzip
+        xdotool
+        xorg.xwininfo
+        zstd
     ];
 
     systemd.mounts = [
@@ -48,7 +56,7 @@
         cxxtools
         libz
         zlib
-        swiftshader
+        #swiftshader
         zstd
         libgbm
         cxxopts
@@ -191,7 +199,9 @@
     ]);
   };
 
-
+environment.sessionVariables = {
+  DOTNET_ROOT = "${pkgs.dotnet-aspnetcore_9}/share/dotnet/";
+};
 
 
 }

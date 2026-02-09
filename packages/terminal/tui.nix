@@ -12,7 +12,7 @@
         bluetui
         youtube-tui
         systemctl-tui
-        gitu
+        #gitu
         xplr
         termusic
         lazycli

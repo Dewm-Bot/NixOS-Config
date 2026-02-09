@@ -5,7 +5,7 @@
     boot.loader.systemd-boot.enable = true;
 
     # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+    #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #Now defined in flake.nix
     #services.scx.enable = true; # by default uses scx_rustland scheduler
 
    
@@ -39,14 +39,14 @@
     boot.kernel.sysctl = {
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
+        "vm.max_map_count" = 2147483642;
+        "fs.file-max" = 524288;
     };
 
     nix.settings = {
         max-jobs = "auto";
         cores = 0; # 0 means "use all available cores"
     };
-
-    boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
 
     zramSwap = {
@@ -95,8 +95,11 @@
 
     services.samba = {
         enable = true;
-        securityType = "user";
+        settings.global.security = "user";
     };
+	
+    services.envfs.enable = true;
+
 }
 
 

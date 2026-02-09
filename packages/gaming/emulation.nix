@@ -2,7 +2,6 @@
 
 {
     environment.systemPackages = with pkgs; [
-        #emulationstation-de
         pegasus-frontend
         xemu
         xdvdfs-cli
@@ -14,7 +13,7 @@
         retroarch-joypad-autoconfig
         librashader
         libretro-shaders-slang
-        flycast
+        #flycast (broken for now)
         cemu
         ryubing
         xenia-canary

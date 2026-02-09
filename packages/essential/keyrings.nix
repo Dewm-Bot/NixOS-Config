@@ -12,7 +12,7 @@
 
     environment.systemPackages = with pkgs; [
         polkit_gnome
-        lxqt.lxqt-policykit
+        hyprpolkitagent
         libsecret
         gnome-keyring
     ];
