@@ -7,5 +7,6 @@
     ./display.nix
     ./nero-umu.nix
     ./wayfire.nix
+    ./llm.nix
   ];
 }
