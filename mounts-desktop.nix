@@ -81,8 +81,8 @@
     ];
   };
 
-  fileSystems."/run/media/Uchu" = {
-    device = "UUID=3cd50fbf-6294-4e74-bf8a-9851949f2eae";
+  fileSystems."/run/media/dewm/Uchu" = {
+    device = "UUID=96e6e9bb-5a82-4acf-a56a-6a13ea31af84";
     fsType = "btrfs";
     options = [
       "noatime"
