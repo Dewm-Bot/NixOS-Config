@@ -37,7 +37,7 @@ for dir in "${BOOT_DIRS[@]}"; do
         # Find all EFI files (single-depth)
         find "$dir" -maxdepth 1 -type f -iname "*.efi" | while read efi_file; do
             echo "Signing $efi_file..."
-            # The -s flag tells sbctl to sign the file
+            # Sign each file
             "$SBCTL_BIN" sign -s "$efi_file"
         done
     else

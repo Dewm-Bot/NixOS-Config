@@ -13,10 +13,11 @@ in
       [ # Include the results of the hardware scan.
         ./configs
         ./configs/desktop-sessions.nix
-        ./hardware-configuration.nix
+        ./dewmbox-hardware.nix
         ./amd-stuff.nix
         ./packages
         ./mounts-desktop.nix
+        ./NAS.nix
         ./experimental/fanatec-pedals
     ];
 
@@ -25,7 +26,7 @@ in
     users.users.dewm = {
         isNormalUser = true;
         description = "Dewm";
-        extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" "input" ];
+        extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" "input" "render" ];
     };
 
     # Allow unfree packages
@@ -45,8 +46,6 @@ in
     services.flatpak.enable = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.download-buffer-size = 524288000;
-    programs.appimage.enable = true;
-    programs.appimage.binfmt = true;
 
     boot.loader.efi.canTouchEfiVariables = true;
 

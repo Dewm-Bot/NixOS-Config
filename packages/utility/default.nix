@@ -5,5 +5,8 @@
     ./apps.nix
     ./game-streaming.nix
     ./display.nix
+    ./nero-umu.nix
+    ./wayfire.nix
+    ./llm.nix
   ];
 }

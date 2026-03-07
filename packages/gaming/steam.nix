@@ -1,45 +1,46 @@
 { config, pkgs, inputs, ... }:
-
 {
     #Okay, so if no matter what you do, gamescope isn't working. Toss in this junk:
     #env -u LD_PRELOAD /run/current-system/sw/bin/gamescope -- env LD_PRELOAD="$LD_PRELOAD" %command%
 
     programs.steam = {
         enable = true;
-        gamescopeSession.enable = false;
+        gamescopeSession.enable = true;
         dedicatedServer.openFirewall = true;
+        remotePlay.openFirewall = true;
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
-            proton-cachyos
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud ];
+        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
     };
-    #programs.steam.package = pkgs.steam.override {
-        #extraEnv = {
-        #LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
-        #};
-    #};
+    programs.steam.package = pkgs.steam.override {
+        extraEnv = {
+        LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
+        };
+    };
 
     environment.systemPackages = with pkgs; [
         steamtinkerlaunch
         gamemode
         xorg.libxcb
         steamcmd
-        gamescope_git
-        jovian-chaotic.gamescope-session
         inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
         steam-devices-udev-rules
+        game-devices-udev-rules
         evtest
-        #sdl-jstest
+        sdl-jstest
         linuxConsoleTools
         interception-tools
         sc-controller
         umu-launcher
         goldberg-emu
+        mangohud
         sgdboop
-	joycond
+        joycond
+        winetricks
+        gamescope-wsi
     ];
 
     programs.gamescope =
@@ -48,7 +49,8 @@
         capSysNice = true;
     };
 
-    hardware.xone.enable = true;
+
+   hardware.xone.enable = true;
 
     programs.java.enable = true;
 
