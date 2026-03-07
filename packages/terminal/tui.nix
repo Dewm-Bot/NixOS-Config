@@ -29,9 +29,8 @@
         chawan
         pokete
         nbsdgames
-        #ollama-cuda
+        ollama-vulkan
         oterm
+        yazi
     ];
-
-
 }
