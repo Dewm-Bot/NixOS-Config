@@ -9,6 +9,7 @@
       ./laptop-rog.nix
       ./packages
       #./nvidia.nix
+      ./NAS.nix
     ];
 
 
