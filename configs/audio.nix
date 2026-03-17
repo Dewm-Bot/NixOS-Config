@@ -47,7 +47,7 @@
       "default.clock.max-quantum" = 512;
        "node.latency" = "256/48000";
        "audio.min-latency" = "128/48000"; 
-       "audio.max-latency" = "5124/48000"; 
+       "audio.max-latency" = "512/48000"; 
        "node.pause-on-idle" = false; 
        "audio.rate" = "48000";
        "clock.min-quantum" = "128";
@@ -73,7 +73,6 @@
 
   environment.systemPackages = [
     pkgs.pavucontrol
-    pkgs.pulseaudio
-  ];
+    ];
 
 }

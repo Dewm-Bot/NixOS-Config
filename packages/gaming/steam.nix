@@ -12,8 +12,10 @@
         extraCompatPackages = with pkgs; [
             proton-ge-bin
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.bumblebee pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
+        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
     };
+
+
     programs.steam.package = pkgs.steam.override {
         extraEnv = {
         LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
@@ -25,7 +27,7 @@
         gamemode
         xorg.libxcb
         steamcmd
-        inputs.sls-steam.packages.${pkgs.system}.wrapped
+        inputs.sls-steam.packages.${pkgs.system}.default
         protonplus
         steam-devices-udev-rules
         game-devices-udev-rules

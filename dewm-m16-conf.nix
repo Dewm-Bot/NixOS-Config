@@ -61,12 +61,5 @@
       packages = with pkgs; [ ptext micro-full zed-editor-fhs ];
     };
   };
-  
-  services = {
-    asusd = {
-        enable = true;
-        enableUserService = true;
-    };
-  };
 
 }

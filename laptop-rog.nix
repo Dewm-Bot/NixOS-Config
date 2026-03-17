@@ -13,13 +13,6 @@
     services.supergfxd.enable = true;
     systemd.services.supergfxd.path = [ pkgs.pciutils ];
 
-    services = {
-        asusd = {
-            enable = true;
-            enableUserService = true;
-        };
-    };
-
     boot.blacklistedKernelModules = [
         "nova"
         "nova_core"
@@ -50,6 +43,9 @@
     };
 
     hardware.graphics.extraPackages = with pkgs; [ intel-media-driver ];
+
+    hardware.nvidia.dynamicBoost.enable = true;
+    systemd.services.nvidia-powerd.enable = true;
 }
 
 

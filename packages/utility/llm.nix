@@ -6,7 +6,6 @@
         sillytavern
         aichat
         ramalama
-        local-ai
         ollama-vulkan
     ];
 

@@ -20,6 +20,8 @@
         pyenv
         toybox
         pciutils
+        rclone
+        davfs2
     ];
 
     #Tailscale

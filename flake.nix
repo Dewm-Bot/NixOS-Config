@@ -92,7 +92,7 @@
     globalOverlays = [
         inputs.nix4vscode.overlays.default
         inputs.dolphin-overlay.overlays.default
-        inputs.nix-cachyos-kernel.overlays.default
+        inputs.nix-cachyos-kernel.overlays.pinned
         (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
 

@@ -29,8 +29,21 @@
         chawan
         pokete
         nbsdgames
-        ollama-vulkan
         oterm
         yazi
+        bmon
+        binsider
+        lazyjournal
+        fresh-editor
+        rainfrog
+        viu
+        cava
+        pom
+        timr-tui
+        mqttui
+        systemd-manager-tui
+        wavemon
+        xplr
+        ostui
     ];
 }

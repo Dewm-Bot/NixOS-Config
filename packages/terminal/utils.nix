@@ -13,6 +13,7 @@
         jq
         nodenv
         ripgrep
+	nvtopPackages.full
     ];
 }
 

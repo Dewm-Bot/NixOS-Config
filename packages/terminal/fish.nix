@@ -12,7 +12,6 @@
         starship
         fish
         fastfetch
-        neofetch
     ];
 
     programs.fish.enable = true;

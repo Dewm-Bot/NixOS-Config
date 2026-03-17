@@ -10,6 +10,7 @@
         openvpn
         openvpn3
         coppwr
+        rclone-ui
     ];
 
     networking.firewall.checkReversePath = false;
