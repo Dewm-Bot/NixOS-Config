@@ -5,8 +5,9 @@
         "i915.enable_dpcd_backlight=1"
         "nvidia-drm.modeset=1"
         "nvidia-drm.fbdev=1"
-	"nova.disable=1"
+        "nova.disable=1"
         "nvidia.NVreg_RegistryDwords=RMUseSwI2c=0x01"
+        "nvidia.NVreg_EnableS0ixPowerManagement=1"
     ];
 
     hardware.nvidia.modesetting.enable = true;
@@ -18,6 +19,8 @@
         "nova_core"
         "nova_drm"
     ];
+
+    services.asusd.enable = true;
 
     services.tlp.enable = false;
 
@@ -48,6 +51,12 @@
 
     hardware.nvidia.dynamicBoost.enable = true;
     systemd.services.nvidia-powerd.enable = true;
+
+    boot.extraModprobeConfig = ''
+        options snd-hda-intel model=alc285-asus
+    '';
+
+
 }
 
 

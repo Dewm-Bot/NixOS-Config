@@ -17,7 +17,7 @@
     bluez
     bluez-tools
     inotify-tools
-    #app2unit
+    app2unit
     wireplumber
     trash-cli
     foot

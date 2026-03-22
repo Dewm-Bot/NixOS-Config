@@ -24,9 +24,8 @@
 	plugins = with pkgs.hyprlandPlugins; [
 		#hyprsplit (currently broken)
 		#hyprspace (currently broken)
-		hyprscrolling
-		csgo-vulkan-fix
-	];
+		#hyprscrolling
+		];
 	settings = {
 	};
      };

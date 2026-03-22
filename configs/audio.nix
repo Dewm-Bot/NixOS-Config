@@ -52,6 +52,8 @@
        "audio.rate" = "48000";
        "clock.min-quantum" = "128";
        "clock.max-quantum" = "512";
+       "api.acp.auto-profile" = true;
+       "api.acp.auto-port" = true;
      };
      context.modules = [
      {

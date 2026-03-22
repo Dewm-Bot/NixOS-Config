@@ -11,6 +11,7 @@
         openvpn3
         coppwr
         rclone-ui
+	alsa-tools
     ];
 
     networking.firewall.checkReversePath = false;
