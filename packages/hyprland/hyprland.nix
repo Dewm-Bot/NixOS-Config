@@ -1,49 +1,16 @@
 { config, pkgs, inputs, ... }:
 {
 
-     imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
-
-#     programs.hyprland = {
-#         enable = true;
-#         xwayland.enable = true;
-#         withUWSM = true;
-#     plugins = [
-#         inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-#         pkgs.hyprlandPlugins.hyprsplit
-#         pkgs.hyprlandPlugins.hyprspace
-#         inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
-#         inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.csgo-vulkan-fix
-#     ];
-#     settings = {
-#     };
-#   };
-
-	programs.hyprland = {
-		enable = true;
-		xwayland.enable = true;
-	plugins = with pkgs.hyprlandPlugins; [
-		#hyprsplit (currently broken)
-		#hyprspace (currently broken)
-		hyprscrolling
-		csgo-vulkan-fix
-	];
-	settings = {
-	};
-     };
+    #imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
 
 
-
-#     #Temp until wiki explaining new windowrules becomes clearer / updated
-#     programs.hyprland = {
-#         enable = true;
-#         xwayland.enable = true;
-#         withUWSM = true;
-#     };
-
+    programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+        withUWSM = true;
+    };
 
     environment.systemPackages = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-wlr
         hyprlock
         hyprpaper
         hyprshot
@@ -59,11 +26,5 @@
         nwg-panel
         nwg-drawer
     ];
-
-
-
-
-
-
 
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, llama-cpp, ... }:
 
 {
     environment.systemPackages = with pkgs; [
@@ -6,8 +6,12 @@
         sillytavern
         aichat
         ramalama
-        local-ai
-        ollama-vulkan
+        #llama-cpp-vulkan
+        inputs.llama-cpp.packages.${pkgs.system}.vulkan
+        opencode
+        gemini-cli-bin
+        litellm
+        inputs.hermes-agent.packages.${pkgs.system}.default
     ];
 
 

@@ -8,6 +8,7 @@
     };
 
     services.libinput.enable = true;
+    hardware.uinput.enable = true;
 
 #    hardware.xpadneo.enable = true;
 #
@@ -37,5 +38,6 @@
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{bInterfaceClass}=="03", ATTRS{bInterfaceProtocol}=="00", TAG+="uaccess"
     '';
 }
+
 
 

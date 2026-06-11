@@ -29,8 +29,6 @@
         chawan
         pokete
         nbsdgames
-        #ollama-cuda
-        oterm
     ];
 
 

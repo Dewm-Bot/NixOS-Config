@@ -16,7 +16,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
-    feishin
+    #feishin
     mpv
     mpvpaper
     mpdris2

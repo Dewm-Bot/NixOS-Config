@@ -30,9 +30,12 @@
     services.printing.enable = true;
 
     boot.kernel.sysctl = {
-        "vm.swappiness" = 10;
+        "vm.swappiness" = 100;
     };
 
+    boot.supportedFilesystems = [ "xfs" "f2fs" "zfs" ];
+    networking.hostId = "f04b429c";
+    boot.zfs.forceImportRoot = false;
 
     services.fstrim.enable = true;
 
@@ -67,9 +70,6 @@
     
 
     # List services that you want to enable:
-
-    # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];

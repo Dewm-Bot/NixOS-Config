@@ -11,7 +11,6 @@
         anytype
         jless
         jq
-        nodenv
         ripgrep
     ];
 }

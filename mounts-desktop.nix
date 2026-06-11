@@ -2,18 +2,14 @@
 
 {
 
-  fileSystems."/run/media/Meiko" = {
-    device = "UUID=4583e2b1-74d5-429b-9cde-6890303f9c83";
-    fsType = "btrfs";
-    options = [
-      "noatime"
-      "lazytime"
-      "commit=30"
-      "nodiscard"
-      "compress=zstd"
-      "space_cache=v2"
-    ];
-  };
+fileSystems."/run/media/Meiko" = {
+  device = "Meiko";
+  fsType = "zfs";
+  options = [ 
+    "nofail" 
+    "X-mount.mkdir" 
+  ];
+};
 
   fileSystems."/run/media/Linux" = {
     device = "UUID=7A14A0D714A09821";
@@ -48,19 +44,16 @@
   };
 
   fileSystems."/run/media/LoopSpinner" = {
-    device = "UUID=98BE69AFBE69871A";
-    fsType = "ntfs-3g";
+    device = "UUID=7dd19ea0-61d2-4606-8e86-8c21d054be61";
+    fsType = "btrfs";
     options = [
-      "uid=1000"
-      "gid=1000"
-      "defaults"
-      "windows_names"
       "noatime"
-      "nodiratime"
-      "rw"
-      "users"
-      "exec"
-      "umask=000"
+      "lazytime"
+      "commit=30"
+      "nodiscard"
+      "compress=zstd"
+      "space_cache=v2"
+      "nofail"
     ];
   };
 

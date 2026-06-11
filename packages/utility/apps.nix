@@ -10,6 +10,9 @@
         openvpn
         openvpn3
         coppwr
+        ntfs2btrfs
+        fuzzel
+        qdirstat
     ];
 
     networking.firewall.checkReversePath = false;

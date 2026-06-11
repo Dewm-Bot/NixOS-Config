@@ -1,25 +1,23 @@
 { config, pkgs, inputs, ... }:
-let
-    kernelPackages = config.boot.kernelPackages;
-    # Define your custom kernel module package
-    hid-fanatecff-package = kernelPackages.callPackage /etc/nixos/experimental/fanatec {
-    # Add these two lines to pass the missing packages
-    bash = pkgs.bash;
-    evdev-joystick = pkgs.linuxConsoleTools;
-    };
-in
 {
       imports =
       [ # Include the results of the hardware scan.
         ./configs
         ./configs/desktop-sessions.nix
+        ./configs/ssh.nix
         ./dewmbox-hardware.nix
         ./amd-stuff.nix
         ./packages
         ./mounts-desktop.nix
         ./NAS.nix
-        ./experimental/fanatec-pedals
+        #./experimental/fanatec-pedals
+        ./experimental/fanatec
     ];
+     systemd.services.nix-daemon = {
+        environment = {
+            TMPDIR = "/run/media/LoopSpinner/Nix-Build";
+        };
+    };
 
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -33,7 +31,7 @@ in
     nixpkgs.config.allowUnfree = true;
 
     #I have no idea why I need to put this here:
-    nixpkgs.config.nvidia.acceptLicense = true;
+    #nixpkgs.config.nvidia.acceptLicense = true;
 
 
     # List packages installed in system profile. To search, run:
@@ -71,10 +69,4 @@ in
     ];
 
     powerManagement.cpuFreqGovernor = "performance";
-
-
-    boot.extraModulePackages = [ hid-fanatecff-package ];
-    services.udev.packages = [ hid-fanatecff-package ];
-
-
 }

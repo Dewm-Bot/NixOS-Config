@@ -6,7 +6,7 @@
 	home.stateVersion = "25.05";
 
 	imports = [
-	#./packages/home-pkgs.nix
+		./home-modules
 	];
 
 	home.packages = with pkgs; [

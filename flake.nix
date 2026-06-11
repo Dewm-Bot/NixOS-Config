@@ -9,16 +9,17 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; #Hardware specific fixes
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
-    dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
-    hyprland.url = "github:hyprwm/Hyprland";
+    #dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
+    #hyprland.url = "github:hyprwm/Hyprland";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
+    intercept-bounce.url = "github:sinity/intercept-bounce";
+    prefixer.url = "github:wojtmic/prefixer/1.3.8";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    llama-cpp.url = "github:ggml-org/llama.cpp";
+    llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -31,8 +32,8 @@
     };
 
     caelestia-shell = {
-      #url = "github:caelestia-dots/shell";
-      url = "github:caelestia-dots/shell/b334406";
+      url = "github:caelestia-dots/shell";
+      #url = "github:caelestia-dots/shell/b334406";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -70,6 +71,21 @@
       url = "github:keygenesis/Jackify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    #Hyprland plugin repos
+    #hyprland-plugins = {
+    #  url = "github:hyprwm/hyprland-plugins";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
+
+    #smw = {
+    #  url = "github:Duckonaut/split-monitor-workspaces";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
+    #hyprsplit = {
+    #  url = "github:shezdy/hyprsplit";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
   };
 
   outputs = inputs@{
@@ -80,10 +96,14 @@
     nix-alien,
     zen-browser,
     nix4vscode,
-    dolphin-overlay,
+    #dolphin-overlay,
     yeetmouse,
     nix-citizen,
     nix-gaming,
+    intercept-bounce,
+    prefixer,
+    llama-cpp,
+    hermes-agent,
     ...
   }:
   let
@@ -91,11 +111,10 @@
 
     globalOverlays = [
         inputs.nix4vscode.overlays.default
-        inputs.dolphin-overlay.overlays.default
-        inputs.nix-cachyos-kernel.overlays.default
+        #inputs.dolphin-overlay.overlays.default
+        inputs.nix-cachyos-kernel.overlays.pinned
         (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
-
 
       sharedModules = [
         #inputs.chaotic.nixosModules.default
@@ -131,7 +150,7 @@
       # --- DESKTOP ---
       DewmBox-Nix = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit  inputs; };
         modules = sharedModules ++ [
           ./dewmbox-conf.nix #Main Entry (Desktop)
           ({ pkgs, ... }: {
@@ -143,7 +162,7 @@
         ];
       };
 
-        # --- LAPTOP ---
+        # --- LAPTOP-M16 ---
         DewmM16-Nix = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
