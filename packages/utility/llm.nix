@@ -9,7 +9,8 @@
         #llama-cpp-vulkan
         inputs.llama-cpp.packages.${pkgs.system}.vulkan
         opencode
-        gemini-cli-bin
+        antigravity-cli
+	antigravity
         litellm
         inputs.hermes-agent.packages.${pkgs.system}.default
     ];

@@ -46,6 +46,7 @@
         winetricks
 	inputs.prefixer.packages.${pkgs.system}.default
         gamescope-wsi
+	me3
     ];
 
     programs.gamescope =

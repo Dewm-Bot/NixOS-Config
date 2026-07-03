@@ -17,6 +17,7 @@
     intercept-bounce.url = "github:sinity/intercept-bounce";
     prefixer.url = "github:wojtmic/prefixer/1.3.8";
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    linvam.url = "github:stele95/LinVAM";
 
     llama-cpp.url = "github:ggml-org/llama.cpp";
     llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +54,7 @@
     };
 
     yeetmouse = {
-      url = "github:AndyFilter/YeetMouse?dir=nix";
+      url = "github:Dewm-Bot/YeetMouse-Nix?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -104,6 +105,7 @@
     prefixer,
     llama-cpp,
     hermes-agent,
+    linvam,
     ...
   }:
   let
@@ -153,11 +155,12 @@
         specialArgs = { inherit  inputs; };
         modules = sharedModules ++ [
           ./dewmbox-conf.nix #Main Entry (Desktop)
-          ({ pkgs, ... }: {
+          ({ pkgs, config, ... }: {
             home-manager.extraSpecialArgs = { inherit inputs; deviceType = "desktop"; }; #Device Flag
             home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
             boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
+	    boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
           })
         ];
       };

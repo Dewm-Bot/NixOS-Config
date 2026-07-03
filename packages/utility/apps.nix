@@ -13,6 +13,7 @@
         ntfs2btrfs
         fuzzel
         qdirstat
+	inputs.linvam.packages.${pkgs.system}.default
     ];
 
     networking.firewall.checkReversePath = false;
