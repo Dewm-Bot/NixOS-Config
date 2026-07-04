@@ -19,7 +19,7 @@
         xenia-canary
         dosbox-x
         ppsspp
-        melonDS
+        melonds
     ];
 }
 

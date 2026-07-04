@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -9,7 +9,7 @@
       ./laptop-rog.nix
       ./packages
       #./nvidia.nix
-      ./NAS.nix
+      #./NAS.nix
     ];
 
 
@@ -19,8 +19,15 @@
     description = "Dewm";
     extraGroups = [ "networkmanager" "wheel" "gaming" "video" "kvm" "vm" ];
   };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.nvidia.open = true;
+  hardware.nvidia.package = lib.mkForce config.boot.kernelPackages.nvidiaPackages.latest;
   
-   networking.hostName = "DewmM16-Nix"; # Define your hostname.
+  networking.hostName = "DewmM16-Nix"; # Define your hostname.
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -30,6 +37,8 @@
   environment.systemPackages = with pkgs; [
 	inputs.nix-software-center.packages.${system}.nix-software-center
   ];
+  
+  services.fstrim.enable = true;
 
 
   #I have no idea why I need to put this here:
@@ -46,11 +55,11 @@
   boot.loader.efi.canTouchEfiVariables = false;
 
   #Swap file setup, maybe move to it's own config file?
-  boot.resumeDevice = "/dev/disk/by-label/swap";
-  boot.kernelParams = [
-    "resume=/dev/disk/by-label/swap"
-  ];
-
+  #boot.resumeDevice = "/dev/disk/by-label/swap";
+  #boot.kernelParams = [
+  #  "resume=/dev/disk/by-label/swap"
+  #];
+  system.stateVersion = "25.11"; # Did you read the comment?
 
   #Home Manager setup
 

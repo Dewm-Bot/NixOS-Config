@@ -9,7 +9,7 @@
         chromium
         inputs.zen-browser.packages."${system}".default # beta
         p7zip-rar
-        fuse-7z-ng
+        #fuse-7z-ng
         kdePackages.ark
         xarchiver
         py7zr

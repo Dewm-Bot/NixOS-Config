@@ -5,7 +5,7 @@
         uzdoom
         doomseeker
         zandronum
-        doomrunner
+        #doomrunner
         ringracers
         srb2
     ];

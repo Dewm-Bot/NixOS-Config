@@ -3,10 +3,10 @@
   services.upower.enable = true;
   environment.systemPackages = with pkgs; [
 
-    #inputs.caelestia-shell.packages.${system}.default
-    pkgs.caelestia-shell
-    #inputs.caelestia-cli.packages.${system}.default
-    pkgs.caelestia-cli
+    inputs.caelestia-shell.packages.${system}.default
+    #pkgs.caelestia-shell
+    inputs.caelestia-cli.packages.${system}.default
+    #pkgs.caelestia-cli
     # Not sure if all these dependencies are necessary or not
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk

@@ -24,7 +24,7 @@
     services.desktopManager.cosmic.enable = true;
 
     # Budgie
-    #services.xserver.desktopManager.budgie.enable = true;
+    #services.desktopManager.budgie.enable = true;
 }
 
 

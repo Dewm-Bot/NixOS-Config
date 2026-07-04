@@ -9,11 +9,12 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; #Hardware specific fixes
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
-    dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
+    #dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
     hyprland.url = "github:hyprwm/Hyprland";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -31,8 +32,8 @@
     };
 
     caelestia-shell = {
-      #url = "github:caelestia-dots/shell";
-      url = "github:caelestia-dots/shell/b334406";
+      url = "github:caelestia-dots/shell";
+      #url = "github:caelestia-dots/shell/b334406";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -80,18 +81,19 @@
     nix-alien,
     zen-browser,
     nix4vscode,
-    dolphin-overlay,
+    #dolphin-overlay,
     yeetmouse,
     nix-citizen,
     nix-gaming,
+    hermes-agent,
     ...
   }:
   let
-    system = "x86_64-linux";
+    stdenv.hostPlatform.system = "x86_64-linux";
 
     globalOverlays = [
         inputs.nix4vscode.overlays.default
-        inputs.dolphin-overlay.overlays.default
+        #inputs.dolphin-overlay.overlays.default
         inputs.nix-cachyos-kernel.overlays.pinned
         (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
@@ -130,7 +132,7 @@
 
       # --- DESKTOP ---
       DewmBox-Nix = nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = sharedModules ++ [
           ./dewmbox-conf.nix #Main Entry (Desktop)
@@ -145,7 +147,7 @@
 
         # --- LAPTOP ---
         DewmM16-Nix = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = sharedModules ++ [
             ./dewm-m16-conf.nix #Main Entry (Laptop)

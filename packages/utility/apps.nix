@@ -5,13 +5,16 @@
         uget
         onlyoffice-desktopeditors
         #bottles
-        protonvpn-gui
+        proton-vpn
         wireguard-tools
         openvpn
         openvpn3
         coppwr
-        rclone-ui
+        #rclone-ui
 	alsa-tools
+	fido2-manage
+	yubikey-manager
+	libfido2
     ];
 
     networking.firewall.checkReversePath = false;

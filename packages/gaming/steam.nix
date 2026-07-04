@@ -16,19 +16,18 @@
 
     };
 
-    programs.steam.package = pkgs.steam.override {
-        extraEnv = {
-        LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
-        };
-
-    };
+#     programs.steam.package = pkgs.steam.override {
+#         extraEnv = {
+#         LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
+#         };
+#     };
 
     environment.systemPackages = with pkgs; [
         steamtinkerlaunch
         gamemode
-        xorg.libxcb
+        libxcb
         steamcmd
-        inputs.sls-steam.packages.${pkgs.system}.default
+        inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
         steam-devices-udev-rules
         game-devices-udev-rules
@@ -49,13 +48,10 @@
     programs.gamescope =
     {
         enable = true;
-        capSysNice = true;
+        capSysNice = false;
     };
 
-
-   hardware.xone.enable = true;
-
-    programs.java.enable = true;
+   programs.java.enable = true;
 
     hardware.steam-hardware.enable = true;
     services.udev.packages = [ pkgs.steam-devices-udev-rules ];

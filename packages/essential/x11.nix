@@ -2,17 +2,17 @@
 
 {
     environment.systemPackages = with pkgs; [
-        xorg.xrandr
-        xorg.xinit
-        xorg.x11perf
+        xrandr
+        xinit
+        x11perf
         xterm
-        xorg.xprop
-        xorg.xset
-        xorg.xset
+        xprop
+        xset
+        xset
         xsettingsd
         xdg-utils
         xdg-launch
-        xorg.xhost
+        xhost
     ];
 }
 

@@ -21,7 +21,7 @@
         toybox
         pciutils
         rclone
-        davfs2
+        #davfs2
     ];
 
     #Tailscale

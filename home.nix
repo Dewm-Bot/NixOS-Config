@@ -3,7 +3,7 @@
 {
 	home.username = "dewm";
 	home.homeDirectory = "/home/dewm";
-	home.stateVersion = "25.05";
+	home.stateVersion = "25.11";
 
 	imports = [
 	#./packages/home-pkgs.nix

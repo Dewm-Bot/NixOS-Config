@@ -29,7 +29,7 @@
         chawan
         pokete
         nbsdgames
-        oterm
+        #oterm
         yazi
         bmon
         binsider
