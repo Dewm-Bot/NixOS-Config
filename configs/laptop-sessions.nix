@@ -44,4 +44,5 @@ in
     services.xserver.desktopManager.xfce.enableWaylandSession = true;
     services.desktopManager.cosmic.enable = true;
     services.xserver.desktopManager.budgie.enable = true;
+    programs.mangowc.enable = true;
 }

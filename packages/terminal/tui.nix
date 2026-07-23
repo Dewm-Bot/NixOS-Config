@@ -54,5 +54,6 @@
         navi
         wavemon
         bandwhich
+        concord-tui
     ];
 }
