@@ -13,6 +13,9 @@
         jq
         ripgrep
         nvtopPackages.full
+        ddgr
+        rPackages.googler
+        s-search
     ];
 }
 

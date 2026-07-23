@@ -1,29 +1,47 @@
 { config, pkgs, ... }:
+let
+  # Define the custom package pointing to your local folder
+  sddm-lain-wired = pkgs.stdenv.mkDerivation {
+    pname = "sddm-lain-wired-theme";
+    version = "local";
 
+    # Point directly to the relative path of your local theme folder
+    # Assuming 'sddm-lain-wired-local' is in the same directory as this .nix file
+    src = ../themes/SDDM/sddm-lain-wired-theme;
+
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/lain-wired
+      cp -aR * $out/share/sddm/themes/lain-wired/
+    '';
+  };
+in
 {
-    # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    
-    # Enable the Cinnamon Desktop Environment.
-    #services.xserver.displayManager.lightdm.enable = true;
-    #services.xserver.desktopManager.cinnamon.enable = true;
-    
+    services.displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        wayland.compositorCommand = "labwc";
 
-    # Wayland Configuration Stuff
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
+        theme = "lain-wired";
+
+        # Inject the local theme and Qt6 dependencies
+        extraPackages = with pkgs; [
+            sddm-lain-wired
+            kdePackages.qtmultimedia
+            kdePackages.qtdeclarative
+            kdePackages.qt5compat
+        ];
+    };
+
+    # Removed the qt6 packages from here. They won't help the Qt5 theme.
+    environment.systemPackages = [
+        # Any other system packages you need
+    ];
+
     programs.xwayland.enable = true;
 
-
-    # XFCE
+    # Desktop Environments
     services.xserver.desktopManager.xfce.enable = true;
     services.xserver.desktopManager.xfce.enableWaylandSession = true;
-    
-    # Cosmic
     services.desktopManager.cosmic.enable = true;
-
-    # Budgie
-    services.desktopManager.budgie.enable = true;
+    services.xserver.desktopManager.budgie.enable = true;
 }
-
-

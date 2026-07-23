@@ -45,5 +45,14 @@
         wavemon
         xplr
         ostui
+        browsh
+        links2
+        ncdu
+        dua
+        duat
+        musikcube
+        navi
+        wavemon
+        bandwhich
     ];
 }

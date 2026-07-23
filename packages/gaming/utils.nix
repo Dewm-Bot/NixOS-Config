@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     gamemode
     openspades
-    input-remapper
+    #input-remapper
     libinput
     xpad
   ];
