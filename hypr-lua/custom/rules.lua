@@ -1,0 +1,6 @@
+hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+hl.env("NIXOS_OZONE_WL", "1")
+hl.env("MOZ_DISABLE_RDD_SANDBOX", "1")
+hl.env("MOZ_ENABLE_WAYLAND", "1")
+hl.env("MOZ_WEBRENDER", "1")

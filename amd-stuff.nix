@@ -9,12 +9,21 @@
         extraPackages = with pkgs; [
             libva
             libva-vdpau-driver
-            rocmPackages.clr.icd
             libvdpau-va-gl
+            
+            rocmPackages.clr
+            
+            mesa
+            vulkan-loader
+            vulkan-validation-layers
+            vulkan-extension-layer
+        ];
+        
+        extraPackages32 = with pkgs.pkgsi686Linux; [ 
+            mesa
+            vulkan-loader
         ];
     };
-
-    hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
 
     hardware.amdgpu.initrd.enable = true;
 
@@ -34,9 +43,6 @@
         vulkan-tools     # Run 'vulkaninfo' to verify Mesa-git version
         nvtopPackages.amd
         
-        svt-av1
-        libaom
-        libvmaf
     ];
 
     # Daemon for LACT (GPU Tuning/Overclocking)

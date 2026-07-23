@@ -29,6 +29,7 @@
         xdotool
         xwininfo
         zstd
+	openjdk25
     ];
 
     systemd.mounts = [
@@ -54,6 +55,7 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         cxxtools
+        libGL
         libz
         zlib
         #swiftshader
@@ -65,6 +67,7 @@
         cmake
         gcc
         libgcc
+        libgccjit
         gtk3-x11
         mono5
         msbuild
@@ -119,8 +122,6 @@
         harfbuzz
         icu
         keyutils.lib
-        libGL
-        libGLU
         libappindicator-gtk2
         libcaca
         libcanberra
@@ -148,7 +149,6 @@
         libusbp
         libusb-compat-0_1
         libuuid
-        libvdpau
         libvorbis
         libvpx
         libxcrypt-legacy
@@ -170,30 +170,29 @@
         wayland
         libICE
         libSM
-        libx11
-        libxscrnsaver
-        libxcomposite
-        libxcursor
-        libxdamage
-        libxext
-        libxfixes
-        libxft
-        libxi
-        libxinerama
-        libxmu
-        libxrandr
-        libxrender
-        libxt
-        libxtst
-        libxxf86vm
+        libXScrnSaver
+        libXcomposite
+        libXcursor
+        libXdamage
+        libXext
+        libXfixes
+        libXft
+        libXi
+        libXinerama
+        libXmu
+        libXrandr
+        libXrender
+        libXt
+        libXtst
+        libXxf86vm
         libpciaccess
         libxcb
-        libxcb-util
-        libxcb-image
-        libxcb-keysyms
-        libxcb-render-util
-        libxcb-wm
-        xkeyboard-config
+        xcbutil
+        xcbutilimage
+        xcbutilkeysyms
+        xcbutilrenderutil
+        xcbutilwm
+        xkeyboardconfig
         xz
         zlib
     ]);

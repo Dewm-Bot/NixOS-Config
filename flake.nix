@@ -10,16 +10,15 @@
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     #dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
-    hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
+    prefixer.url = "github:wojtmic/prefixer/1.3.8";
     hermes-agent.url = "github:NousResearch/hermes-agent";
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    llama-cpp.url = "github:ggml-org/llama.cpp";
+    llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -53,7 +52,7 @@
     };
 
     yeetmouse = {
-      url = "github:AndyFilter/YeetMouse?dir=nix";
+      url = "github:Dewm-Bot/YeetMouse-Nix?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -71,6 +70,21 @@
       url = "github:keygenesis/Jackify";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    #Hyprland plugin repos
+    #hyprland-plugins = {
+    #  url = "github:hyprwm/hyprland-plugins";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
+
+    #smw = {
+    #  url = "github:Duckonaut/split-monitor-workspaces";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
+    #hyprsplit = {
+    #  url = "github:shezdy/hyprsplit";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
   };
 
   outputs = inputs@{
@@ -85,6 +99,8 @@
     yeetmouse,
     nix-citizen,
     nix-gaming,
+    prefixer,
+    llama-cpp,
     hermes-agent,
     ...
   }:
@@ -97,7 +113,6 @@
         inputs.nix-cachyos-kernel.overlays.pinned
         (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
-
 
       sharedModules = [
         #inputs.chaotic.nixosModules.default
@@ -132,27 +147,27 @@
 
       # --- DESKTOP ---
       DewmBox-Nix = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        inherit system;
+        specialArgs = { inherit  inputs; };
         modules = sharedModules ++ [
           ./dewmbox-conf.nix #Main Entry (Desktop)
-          ({ pkgs, ... }: {
+          ({ pkgs, config, ... }: {
             home-manager.extraSpecialArgs = { inherit inputs; deviceType = "desktop"; }; #Device Flag
             home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
             boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
+	    boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
           })
         ];
       };
 
-        # --- LAPTOP ---
+        # --- LAPTOP-M16 ---
         DewmM16-Nix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = sharedModules ++ [
+        inherit system;
+        specialArgs = { inherit  inputs; };
+        modules = sharedModules ++ [
             ./dewm-m16-conf.nix #Main Entry (Laptop)
             inputs.nixos-hardware.nixosModules.asus-zephyrus-gu603h
-
             ({ pkgs, ... }: {
               # Fix 1: Pass 'deviceType' inside the module
               home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag

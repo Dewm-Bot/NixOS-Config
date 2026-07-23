@@ -8,7 +8,6 @@
         xterm
         xprop
         xset
-        xset
         xsettingsd
         xdg-utils
         xdg-launch

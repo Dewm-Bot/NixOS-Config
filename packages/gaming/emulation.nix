@@ -6,7 +6,7 @@
         xemu
         xdvdfs-cli
         pcsx2
-        rpcs3
+        #rpcs3
         dolphin-emu
         retroarch-full
         retroarch-assets
@@ -14,7 +14,7 @@
         librashader
         libretro-shaders-slang
         #flycast (broken for now)
-        cemu
+        #cemu
         ryubing
         xenia-canary
         dosbox-x

@@ -11,9 +11,8 @@
         anytype
         jless
         jq
-        nodenv
         ripgrep
-	nvtopPackages.full
+        nvtopPackages.full
     ];
 }
 

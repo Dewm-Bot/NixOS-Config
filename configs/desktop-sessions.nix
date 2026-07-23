@@ -15,6 +15,8 @@
     services.displayManager.sddm.wayland.enable = false;
     programs.xwayland.enable = true;
 
+    # Niri
+    programs.niri.enable = true;
 
     # XFCE
     services.xserver.desktopManager.xfce.enable = true;

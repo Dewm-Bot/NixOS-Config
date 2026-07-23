@@ -10,11 +10,14 @@
         openvpn
         openvpn3
         coppwr
+        ntfs2btrfs
+        fuzzel
+        qdirstat
         #rclone-ui
-	alsa-tools
-	fido2-manage
-	yubikey-manager
-	libfido2
+        alsa-tools
+        fido2-manage
+        yubikey-manager
+        libfido2
     ];
 
     networking.firewall.checkReversePath = false;

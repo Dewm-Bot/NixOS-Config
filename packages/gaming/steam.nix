@@ -12,15 +12,22 @@
         extraCompatPackages = with pkgs; [
             proton-ge-bin
         ];
-        extraPackages = [ pkgs.gamemode pkgs.jdk pkgs.mesa-demos pkgs.mangohud pkgs.libkrb5 pkgs.keyutils ];
-
+        extraPackages = [
+            pkgs.gamemode
+            pkgs.jdk 
+            pkgs.mangohud 
+            pkgs.libkrb5 
+            pkgs.keyutils
+            pkgs.nss
+            pkgs.nspr
+            pkgs.dbus
+        ];
     };
 
-#     programs.steam.package = pkgs.steam.override {
-#         extraEnv = {
-#         LD_AUDIT = "${inputs.sls-steam.packages.${pkgs.system}.sls-steam}/SLSsteam.so";
-#         };
-#     };
+  services.udev.packages = [
+    pkgs.game-devices-udev-rules
+  ];
+
 
     environment.systemPackages = with pkgs; [
         steamtinkerlaunch
@@ -29,20 +36,18 @@
         steamcmd
         inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
-        steam-devices-udev-rules
-        game-devices-udev-rules
         evtest
         sdl-jstest
         linuxConsoleTools
         interception-tools
-        sc-controller
         umu-launcher
         goldberg-emu
         mangohud
         sgdboop
-        joycond
         winetricks
+	inputs.prefixer.packages.${pkgs.system}.default
         gamescope-wsi
+	me3
     ];
 
     programs.gamescope =
@@ -51,32 +56,15 @@
         capSysNice = false;
     };
 
-   programs.java.enable = true;
+
+   hardware.xone.enable = false;
+
+    programs.java.enable = true;
+
 
     hardware.steam-hardware.enable = true;
-    services.udev.packages = [ pkgs.steam-devices-udev-rules ];
-
 
     boot.kernelModules = [ "uinput" ];
-
-    # make sure udev rules give the uinput node to the input group / uaccess
-    services.udev.extraRules = ''
-        # uinput
-        KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput", GROUP="input", MODE="0660"
-
-        # NEW RULE: gamepad emulation (uinput) with broader permissions
-        KERNEL=="uinput", MODE="0666", GROUP="users", OPTIONS+="static_node=uinput"
-
-        # Valve HID devices over USB hidraw (idVendor 28de is Valve's)
-        KERNEL=="hidraw*", ATTRS{idVendor}=="28de", MODE="0666"
-
-        # Valve HID devices over bluetooth hidraw
-        KERNEL=="hidraw*", KERNELS=="*28DE:*", MODE="0666"
-    '';
-
-
-
-
 }
 
 

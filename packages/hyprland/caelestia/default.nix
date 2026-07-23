@@ -4,12 +4,14 @@
   environment.systemPackages = with pkgs; [
 
     inputs.caelestia-shell.packages.${system}.default
-    #pkgs.caelestia-shell
+    #pkgs.caelestia-shell #OLD, FROM OVERLAY
     inputs.caelestia-cli.packages.${system}.default
-    #pkgs.caelestia-cli
+    #pkgs.caelestia-cli  #OLD, FROM OVERLAY
+
+
     # Not sure if all these dependencies are necessary or not
     xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
+    #xdg-desktop-portal-gtk
     hyprpicker
     hypridle
     wl-clipboard

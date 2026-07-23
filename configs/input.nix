@@ -1,13 +1,22 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
+
 
 {
     #Raw mouse handler 
     hardware.yeetmouse = {
         enable = true;
-        sensitivity = 1.0;
+        #sensitivity = 1.0;
     };
 
     services.libinput.enable = true;
+    hardware.uinput.enable = true;
+
+    #yeetmouse group config
+    #users.groups.yeetmouse = {};
+
+    users.users.dewm = {
+        extraGroups = ["yeetmouse" "uinput" "tty"];
+    };   
 
 #    hardware.xpadneo.enable = true;
 #
@@ -35,7 +44,8 @@
 
     # Catch-all for other HID joysticks if the above IDs differ slightly
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{bInterfaceClass}=="03", ATTRS{bInterfaceProtocol}=="00", TAG+="uaccess"
-    '';
+   '';
 }
+
 
 

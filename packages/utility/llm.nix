@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, llama-cpp, ... }:
 let
   aider-with-extras = inputs.aider-chat.packages.${pkgs.system}.passthru.withOptional {
     withPlaywright = true;
@@ -12,11 +12,15 @@ in
         sillytavern
         aichat
         ramalama
+        #llama-cpp-vulkan
+        inputs.llama-cpp.packages.${pkgs.system}.vulkan
+        opencode
+        antigravity-cli
+        antigravity
+        litellm
+        inputs.hermes-agent.packages.${pkgs.system}.default
         ollama-vulkan
-	aider-chat
-	llama-cpp-vulkan
-	opencode
-	inputs.hermes-agent.packages.${pkgs.system}.default
+        aider-chat
     ];
 }
 

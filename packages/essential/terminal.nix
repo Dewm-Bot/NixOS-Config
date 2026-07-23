@@ -21,6 +21,7 @@
         toybox
         pciutils
         rclone
+        screen
         #davfs2
     ];
 

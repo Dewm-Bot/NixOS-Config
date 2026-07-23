@@ -1,0 +1,73 @@
+{ pkgs, inputs, config, ... }:
+
+{
+    home.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint electron apps to use Wayland
+    wayland.windowManager.hyprland.systemd.variables = ["--all"]; #Systemd fix
+    xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";  #UWSM Fix
+
+    wayland.windowManager.hyprland = {
+        enable = true;
+        package = null;
+        portalPackage = null;
+        systemd.enable = true; # Enable UWSM support
+        xwayland.enable = true;
+
+        plugins = [
+            #inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+            #inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+            #inputs.hyprland-plugins.packages.${pkgs.system}.xtra-dispatchers
+            #inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
+            #inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+        ];
+
+        extraConfig = ''
+            $hypr = /home/dewm/.config/hypr
+            $hl = $hypr/hyprland
+            $cConf = /home/dewm/.config/caelestia
+            $custom = $hypr/custom
+
+            # Variables (colours + other vars)
+            exec = cp -L --no-preserve=mode --update=none $hypr/scheme/default.conf $hypr/scheme/current.conf
+            source = $hypr/scheme/current.conf
+            source = $hypr/variables.conf
+
+            # User variables
+            exec = mkdir -p $cConf && touch -a $cConf/hypr-vars.conf
+            source = $cConf/hypr-vars.conf
+
+            # Default monitor conf
+            monitor = , preferred, auto, 1
+
+            debug {
+                full_cm_proto = true
+            }
+
+            # Configs
+            source = $hl/env.conf
+            source = $hl/general.conf
+            source = $hl/input.conf
+            source = $hl/misc.conf
+            source = $hl/animations.conf
+            source = $hl/decoration.conf
+            source = $hl/group.conf
+            source = $hl/execs.conf
+            source = $hl/rules.conf
+            source = $hl/keybinds.conf
+
+            source = $custom/keybinds.conf
+            source = $custom/rules.conf
+
+            # User configs
+            exec = mkdir -p $cConf && touch -a $cConf/hypr-user.conf
+            source = $cConf/hypr-user.conf
+
+            source = ./monitor-hdr.conf
+
+            input:sensitivity = 0
+            input:accel_profile = custom 181.818 0.000 138.579 296.926 600.000 800.000 1000.000 1200.000 1400.000 1600.000 1800.000 2000.000
+
+            #Shader Selection
+            source = ~/.config/hypr/current-shader.conf
+        '';
+    };
+}
