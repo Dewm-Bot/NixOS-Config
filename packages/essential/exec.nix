@@ -55,7 +55,7 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         cxxtools
-	libGL
+        libGL
         libz
         zlib
         #swiftshader
@@ -72,6 +72,7 @@
         mono5
         msbuild
         libbsd
+        libx11
         gperftools
         libxml2
         protobuf
@@ -169,7 +170,6 @@
         wayland
         libICE
         libSM
-        libX11
         libXScrnSaver
         libXcomposite
         libXcursor

@@ -1,8 +1,8 @@
 { config, pkgs, inputs, ... }:
 {
 
-    #imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
 
+    # imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
 
     programs.hyprland = {
         enable = true;

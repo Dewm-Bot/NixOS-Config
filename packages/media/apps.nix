@@ -16,7 +16,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
-    feishin
+    #feishin #add back after electron update
     mpv
     mpvpaper
     mpdris2

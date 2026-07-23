@@ -5,7 +5,7 @@
         uget
         onlyoffice-desktopeditors
         #bottles
-        protonvpn-gui
+        proton-vpn
         wireguard-tools
         openvpn
         openvpn3
@@ -13,7 +13,11 @@
         ntfs2btrfs
         fuzzel
         qdirstat
-	inputs.linvam.packages.${pkgs.system}.default
+        #rclone-ui
+        alsa-tools
+        fido2-manage
+        yubikey-manager
+        libfido2
     ];
 
     networking.firewall.checkReversePath = false;

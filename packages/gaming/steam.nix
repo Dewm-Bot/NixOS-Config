@@ -28,6 +28,7 @@
     pkgs.game-devices-udev-rules
   ];
 
+
     environment.systemPackages = with pkgs; [
         steamtinkerlaunch
         gamemode
@@ -59,6 +60,7 @@
    hardware.xone.enable = false;
 
     programs.java.enable = true;
+
 
     hardware.steam-hardware.enable = true;
 

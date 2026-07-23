@@ -22,6 +22,7 @@
         pciutils
         rclone
         screen
+        #davfs2
     ];
 
     #Tailscale

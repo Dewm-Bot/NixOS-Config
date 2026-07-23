@@ -14,10 +14,8 @@
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
-    intercept-bounce.url = "github:sinity/intercept-bounce";
     prefixer.url = "github:wojtmic/prefixer/1.3.8";
     hermes-agent.url = "github:NousResearch/hermes-agent";
-    linvam.url = "github:stele95/LinVAM";
 
     llama-cpp.url = "github:ggml-org/llama.cpp";
     llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
@@ -101,15 +99,13 @@
     yeetmouse,
     nix-citizen,
     nix-gaming,
-    intercept-bounce,
     prefixer,
     llama-cpp,
     hermes-agent,
-    linvam,
     ...
   }:
   let
-    system = "x86_64-linux";
+    stdenv.hostPlatform.system = "x86_64-linux";
 
     globalOverlays = [
         inputs.nix4vscode.overlays.default
@@ -167,12 +163,11 @@
 
         # --- LAPTOP-M16 ---
         DewmM16-Nix = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = sharedModules ++ [
+        inherit system;
+        specialArgs = { inherit  inputs; };
+        modules = sharedModules ++ [
             ./dewm-m16-conf.nix #Main Entry (Laptop)
             inputs.nixos-hardware.nixosModules.asus-zephyrus-gu603h
-
             ({ pkgs, ... }: {
               # Fix 1: Pass 'deviceType' inside the module
               home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag

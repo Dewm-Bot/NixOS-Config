@@ -1,5 +1,11 @@
 { config, pkgs, inputs, lib, llama-cpp, ... }:
-
+let
+  aider-with-extras = inputs.aider-chat.packages.${pkgs.system}.passthru.withOptional {
+    withPlaywright = true;
+    withHelp = true;
+    withBrowser = true;
+  };
+in
 {
     environment.systemPackages = with pkgs; [
         lmstudio
@@ -10,13 +16,12 @@
         inputs.llama-cpp.packages.${pkgs.system}.vulkan
         opencode
         antigravity-cli
-	antigravity
+        antigravity
         litellm
         inputs.hermes-agent.packages.${pkgs.system}.default
+        ollama-vulkan
+        aider-chat
     ];
-
-
-
 }
 
 
