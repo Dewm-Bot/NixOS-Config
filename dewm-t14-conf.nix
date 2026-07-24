@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -22,6 +18,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
+
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -50,12 +47,13 @@
   boot.loader.efi.canTouchEfiVariables = false;
 
 
+  system.stateVersion = "25.11";
+
   #Home Manager setup
 
   home-manager.users.dewm = {
   # Make the home stateVersion follow your system stateVersion so it stays consistent
     home = {
-      stateVersion = config.system.stateVersion;
       # example home packages — adjust as you like
       packages = with pkgs; [ ptext micro-full zed-editor-fhs ];
     };

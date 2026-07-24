@@ -2,7 +2,7 @@
 
 {
     environment.systemPackages = with pkgs; [
-        tuir
+        #tuir
         tuisky
         tui-journal
         tuifimanager

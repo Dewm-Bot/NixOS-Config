@@ -26,7 +26,13 @@
     services.desktopManager.cosmic.enable = true;
 
     # Budgie
-    #services.xserver.desktopManager.budgie.enable = true;
+    #services.desktopManager.budgie.enable = true;
+
+    # Mango
+    programs.mangowc = {
+        enable = true;
+        package = pkgs.mango; #WHY ARE THESE NOT NAMED THE SAME.
+    };
 }
 
 

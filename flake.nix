@@ -10,7 +10,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     #dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
-    #hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
@@ -105,7 +105,7 @@
     ...
   }:
   let
-    stdenv.hostPlatform.system = "x86_64-linux";
+    system = "x86_64-linux";
 
     globalOverlays = [
         inputs.nix4vscode.overlays.default
