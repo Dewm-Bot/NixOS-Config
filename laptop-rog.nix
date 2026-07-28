@@ -8,7 +8,7 @@
         "nova.disable=1"
         "nvidia.NVreg_RegistryDwords=RMUseSwI2c=0x01"
         "nvidia.NVreg_EnableS0ixPowerManagement=1"
-	"nvidia.NVreg_EnableGpuFirmware=1"
+        "nvidia.NVreg_EnableGpuFirmware=1"
     ];
 
     hardware.nvidia.modesetting.enable = true;
@@ -19,6 +19,7 @@
         "nova"
         "nova_core"
         "nova_drm"
+        "nouveau"
     ];
 
     services.asusd.enable = true;
@@ -41,15 +42,6 @@
     services.power-profiles-daemon.enable = false;
 
     hardware.nvidia.dynamicBoost.enable = true;
-
-    systemd.services.nvidia-powerd = {
-        after = [ "dbus.service" "display-manager.service" "asusd.service" ];
-        requires = [ "asusd.service" ];
-        serviceConfig = {
-          Restart = "always";
-          RestartSec = "2s";
-        };
-    };
 
     boot.extraModprobeConfig = ''
         options snd-hda-intel model=alc285-asus power_save=0 power_save_controller=N
@@ -123,7 +115,6 @@
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
     };
   };
-
 
 }
 

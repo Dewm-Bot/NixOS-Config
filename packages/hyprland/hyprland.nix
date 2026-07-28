@@ -20,7 +20,6 @@
         hyprpolkitagent
         grimblast
         ashell
-        hyprpanel
         waypaper
         ironbar
         nwg-panel

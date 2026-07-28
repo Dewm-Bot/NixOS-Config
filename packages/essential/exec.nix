@@ -170,21 +170,20 @@
         wayland
         libICE
         libSM
-        libXScrnSaver
-        libXcomposite
-        libXcursor
-        libXdamage
-        libXext
-        libXfixes
-        libXft
-        libXi
-        libXinerama
-        libXmu
-        libXrandr
-        libXrender
-        libXt
-        libXtst
-        libXxf86vm
+        libxcomposite
+        libxcursor
+        libxdamage
+        libxext
+        libxfixes
+        libxft
+        libxi
+        libxinerama
+        libxmu
+        libxrandr
+        libxrender
+        libxt
+        libxtst
+        libxxf86vm
         libpciaccess
         libxcb
         xcbutil

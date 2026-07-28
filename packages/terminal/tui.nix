@@ -5,7 +5,7 @@
         #tuir
         tuisky
         tui-journal
-        tuifimanager
+        #tuifimanager
         so
         dooit
         cl-wordle
