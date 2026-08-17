@@ -17,7 +17,7 @@
         #cemu
         ryubing
         xenia-canary
-        dosbox-x
+        #dosbox-x
         ppsspp
         melonds
     ];

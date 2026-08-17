@@ -14,14 +14,23 @@
         ];
         extraPackages = [
             pkgs.gamemode
-            pkgs.jdk 
-            pkgs.mangohud 
-            pkgs.libkrb5 
+            pkgs.jdk
+            pkgs.mangohud
+            pkgs.libkrb5
             pkgs.keyutils
             pkgs.nss
             pkgs.nspr
             pkgs.dbus
         ];
+        package = pkgs.steam.override {
+            extraEnv = {
+                LD_AUDIT = "${
+                    inputs.sls-steam.packages.${pkgs.stdenv.hostPlatform.system}.sls-steam
+                 }/library-inject.so:${
+                     inputs.sls-steam.packages.${pkgs.stdenv.hostPlatform.system}.sls-steam
+                 }/SLSsteam.so";
+            };
+        };
     };
 
   services.udev.packages = [
@@ -34,7 +43,6 @@
         gamemode
         libxcb
         steamcmd
-        inputs.sls-steam.packages.${pkgs.system}.wrapped
         protonplus
         evtest
         sdl-jstest
@@ -45,9 +53,9 @@
         mangohud
         sgdboop
         winetricks
-	inputs.prefixer.packages.${pkgs.system}.default
+        inputs.prefixer.packages.${pkgs.system}.default
         gamescope-wsi
-	me3
+        me3
     ];
 
     programs.gamescope =

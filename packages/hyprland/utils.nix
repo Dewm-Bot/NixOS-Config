@@ -5,6 +5,7 @@
         wlogout
         wl-clipboard
         cliphist
+	awww
     ];
 }
 

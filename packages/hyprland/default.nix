@@ -5,5 +5,6 @@
     ./hyprland.nix
     ./utils.nix
     ./caelestia
+    ./bars.nix
   ];
 }

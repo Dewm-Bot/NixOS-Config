@@ -2,7 +2,7 @@
 {
 
 
-    # imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
+     imports = [inputs.hyprland.nixosModules.default]; #Use Upstream Hyprland
 
     programs.hyprland = {
         enable = true;
@@ -20,7 +20,6 @@
         hyprpolkitagent
         grimblast
         ashell
-        hyprpanel
         waypaper
         ironbar
         nwg-panel

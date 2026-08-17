@@ -16,7 +16,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
-    #feishin #add back after electron update
+    feishin
     mpv
     mpvpaper
     mpdris2
@@ -32,6 +32,7 @@ in {
     kitty-img
     x265
     nv-codec-headers
+    gpu-screen-recorder 
   ];
 
 }

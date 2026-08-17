@@ -1,9 +1,9 @@
-{ config, pkgs, deviceType, inputs, ... }:
+{ config, pkgs, deviceType, inputs, osConfig, ... }:
 
 {
 	home.username = "dewm";
 	home.homeDirectory = "/home/dewm";
-	home.stateVersion = "25.11";
+	home.stateVersion = osConfig.system.stateVersion;
 
 	imports = [
 		./home-modules

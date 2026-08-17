@@ -7,7 +7,6 @@
     nv-codec-headers
     v4l2-relayd
     gst_all_1.gstreamer
-    gst_all_1.gst-vaapi
     ffmpeg
     v4l-utils
     libv4l

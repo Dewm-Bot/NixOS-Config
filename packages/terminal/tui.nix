@@ -2,10 +2,10 @@
 
 {
     environment.systemPackages = with pkgs; [
-        tuir
+        #tuir
         tuisky
         tui-journal
-        tuifimanager
+        #tuifimanager
         so
         dooit
         cl-wordle
@@ -45,5 +45,15 @@
         wavemon
         xplr
         ostui
+        browsh
+        links2
+        ncdu
+        dua
+        duat
+        musikcube
+        navi
+        wavemon
+        bandwhich
+        concord-tui
     ];
 }

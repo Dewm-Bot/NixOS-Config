@@ -55,7 +55,6 @@
     home-manager.users.dewm = {
     # Make the home stateVersion follow your system stateVersion so it stays consistent
         home = {
-            stateVersion = config.system.stateVersion;
             # example home packages — adjust as you like
             packages = with pkgs; [ ptext micro-full zed-editor-fhs ];
         };

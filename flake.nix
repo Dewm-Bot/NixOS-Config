@@ -10,7 +10,7 @@
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     #dolphin-overlay.url = "github:rumboon/dolphin-overlay"; #Fixes dolphin "Open With" menu without KDE-Plasma
-    #hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
@@ -105,7 +105,7 @@
     ...
   }:
   let
-    stdenv.hostPlatform.system = "x86_64-linux";
+    system = "x86_64-linux";
 
     globalOverlays = [
         inputs.nix4vscode.overlays.default
@@ -156,25 +156,45 @@
             home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
             boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
-	    boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
+            boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
           })
         ];
       };
 
         # --- LAPTOP-M16 ---
         DewmM16-Nix = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit  inputs; };
-        modules = sharedModules ++ [
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = sharedModules ++ [
             ./dewm-m16-conf.nix #Main Entry (Laptop)
             inputs.nixos-hardware.nixosModules.asus-zephyrus-gu603h
-            ({ pkgs, ... }: {
-              # Fix 1: Pass 'deviceType' inside the module
+
+            ({ pkgs, config, ... }: {
               home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag
               home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
               boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
+              boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
 
+              environment.systemPackages = [ pkgs.sbctl ]; #Secure Boot Signature Software
+            })
+          ];
+        };
+
+        # --- LAPTOP-T14 ---
+        DewmT14-Nix = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = sharedModules ++ [
+            ./dewm-t14-conf.nix #Main Entry (Laptop)
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2
+
+            ({ pkgs, config, ... }: {
+              home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag
+              home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
+
+              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
+              boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use Included ZFS modules
               environment.systemPackages = [ pkgs.sbctl ]; #Secure Boot Signature Software
             })
           ];
