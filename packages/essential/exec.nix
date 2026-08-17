@@ -122,7 +122,6 @@
         harfbuzz
         icu
         keyutils.lib
-        libappindicator-gtk2
         libcaca
         libcanberra
         libcap
