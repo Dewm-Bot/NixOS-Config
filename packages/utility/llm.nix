@@ -5,23 +5,34 @@ let
     withHelp = true;
     withBrowser = true;
   };
+
+  llamaVulkan = inputs.llama-cpp.packages.${pkgs.system}.vulkan;
+  llamaRocm = inputs.llama-cpp.packages.${pkgs.system}.rocm;
+
+  llama-cpp-rocm-wrapped = pkgs.symlinkJoin {
+    name = "llama-cpp-rocm-wrapped";
+    paths = [ llamaRocm ];
+    postBuild = ''
+      for f in $out/bin/*; do
+        mv "$f" "$out/bin/$(basename "$f")-rocm"
+      done
+    '';
+  };
 in
 {
-    environment.systemPackages = with pkgs; [
-        lmstudio
-        sillytavern
-        aichat
-        ramalama
-        #llama-cpp-vulkan
-        inputs.llama-cpp.packages.${pkgs.system}.vulkan
-        opencode
-        antigravity-cli
-        antigravity
-        litellm
-        inputs.hermes-agent.packages.${pkgs.system}.default
-        ollama-vulkan
-        aider-chat
-    ];
+  environment.systemPackages = with pkgs; [
+    lmstudio
+    sillytavern
+    aichat
+    ramalama
+    llamaVulkan
+    llama-cpp-rocm-wrapped
+    opencode
+    antigravity-cli
+    antigravity
+    litellm
+    inputs.hermes-agent.packages.${pkgs.system}.default
+    ollama-vulkan
+    aider-chat
+  ];
 }
-
-

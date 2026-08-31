@@ -42,7 +42,7 @@
         steamtinkerlaunch
         gamemode
         libxcb
-        steamcmd
+        #steamcmd
         protonplus
         evtest
         sdl-jstest
