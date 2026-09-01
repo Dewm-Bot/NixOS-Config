@@ -34,5 +34,7 @@ in
     inputs.hermes-agent.packages.${pkgs.system}.default
     ollama-vulkan
     aider-chat
+    stable-diffusion-cpp-vulkan
+    comfyui
   ];
 }
