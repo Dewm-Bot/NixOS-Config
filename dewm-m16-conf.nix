@@ -35,7 +35,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	inputs.nix-software-center.packages.${system}.nix-software-center
+    inputs.nix-software-center.packages.${system}.nix-software-center
+    #inputs.comfyui-nix.packages.x86_64-linux.cuda
   ];
   
   services.fstrim.enable = true;
@@ -44,6 +45,20 @@
   #I have no idea why I need to put this here:
   nixpkgs.config.nvidia.acceptLicense = true;
 
+
+  nix.settings = {
+    # Add binary caches
+    substituters = [
+      "https://cache.nixos.org"
+      "https://cuda-maintainers.cachix.org"
+      "https://comfyui.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "comfyui.cachix.org-1:99Beb4lE1tF5s+vH8s4L5Qh4f7eF18c0c9tN3k0Uf8I="
+    ];
+  };
 
   services.flatpak.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];

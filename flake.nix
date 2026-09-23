@@ -16,6 +16,7 @@
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
     prefixer.url = "github:wojtmic/prefixer/1.3.8";
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    comfyui-nix.url = "github:utensils/comfyui-nix";
 
     llama-cpp.url = "github:ggml-org/llama.cpp";
     llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
@@ -102,6 +103,7 @@
     prefixer,
     llama-cpp,
     hermes-agent,
+    comfyui-nix,
     ...
   }:
   let

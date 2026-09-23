@@ -35,6 +35,6 @@ in
     ollama-vulkan
     aider-chat
     stable-diffusion-cpp-vulkan
-    comfyui
+    koboldcpp
   ];
 }
