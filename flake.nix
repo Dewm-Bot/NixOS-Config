@@ -19,6 +19,9 @@
 
     llama-cpp.url = "github:ggml-org/llama.cpp";
     llama-cpp.inputs.nixpkgs.follows = "nixpkgs";
+    
+    prism.url = "github:PrismML-Eng/llama.cpp";
+    prism.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -71,6 +74,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kernel-anvil = {
+      url = "github:apollosenvy/kernel-anvil";
+      flake = false;
+    };
+
     #Hyprland plugin repos
     #hyprland-plugins = {
     #  url = "github:hyprwm/hyprland-plugins";
@@ -102,6 +110,8 @@
     prefixer,
     llama-cpp,
     hermes-agent,
+    kernel-anvil,
+    prism,
     ...
   }:
   let

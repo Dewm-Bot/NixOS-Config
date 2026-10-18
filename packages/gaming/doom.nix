@@ -8,6 +8,7 @@
         #doomrunner
         ringracers
         srb2
+	quake3e
     ];
 }
 

@@ -8,7 +8,7 @@
         proton-vpn
         wireguard-tools
         openvpn
-        openvpn3
+        #openvpn3
         coppwr
         ntfs2btrfs
         fuzzel

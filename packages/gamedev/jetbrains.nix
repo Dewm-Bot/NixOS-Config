@@ -3,7 +3,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    jetbrains-toolbox
+    #jetbrains-toolbox
     msbuild
     mono
     dotnetCorePackages.sdk_8_0

@@ -46,7 +46,7 @@
         xplr
         ostui
         browsh
-        links2
+        #links2
         ncdu
         dua
         duat

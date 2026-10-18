@@ -56,14 +56,18 @@ in
     (config.boot.kernelPackages.callPackage custom-hid-fanatecff { })
   ];
 
+  environment.sessionVariables = {
+    SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS = "1";
+};
 
-#   services.udev.extraRules = ''
-#     # --- FANATEC PEDALS ---
-#     SUBSYSTEM=="input", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a95", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1", ENV{ID_INPUT_KEY}="0", ENV{SDL_GAMECONTROLLER_NAME}="FANATEC ClubSport USB Pedal", TAG+="uaccess", TAG+="udev-acl"
-#
-#     # --- VIRTUAL UINPUT PERMISSIONS ---
-#     KERNEL=="uinput", MODE="0660", GROUP="input", TAG+="uaccess"
-#   '';
+
+services.udev.extraRules = ''
+  SUBSYSTEMS=="usb", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a95", ENV{ID_INPUT}="1", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess"
+
+  SUBSYSTEM=="input", KERNEL=="event*|js*", ATTRS{idVendor}=="0eb7", ATTRS{idProduct}=="1a95", ENV{ID_INPUT_JOYSTICK}="1", MODE="0666", TAG+="uaccess"
+
+  KERNEL=="uinput", MODE="0660", GROUP="input", TAG+="uaccess"
+'';
 
   users.users.dewm.extraGroups = [ "input" ];
   boot.kernelModules = [ "uinput" ];
