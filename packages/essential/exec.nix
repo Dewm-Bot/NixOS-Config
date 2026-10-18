@@ -29,7 +29,8 @@
         xdotool
         xwininfo
         zstd
-	openjdk25
+        openjdk25
+        pkgsi686Linux.glibc
     ];
 
     systemd.mounts = [
@@ -54,7 +55,13 @@
       enable = true;
       libraries = lib.mkForce (with pkgs; [
         gtk3
-        #cxxtools  # disabled: cxxtools 3.0 fails to build (C++/stdlib incompatibility)
+        webkitgtk_6_0
+        #cxxtools
+        sdl3
+        sdl3-ttf
+        sdl3-net
+        sdl3-image
+        sdl3-mixer
         libGL
         libz
         zlib
@@ -91,11 +98,6 @@
         SDL_image
         SDL_mixer
         SDL_ttf
-	sdl3
-	sdl3-ttf
-	sdl3-net
-	sdl3-image
-	sdl3-mixer
         alsa-lib
         at-spi2-atk
         at-spi2-core
@@ -205,6 +207,9 @@ environment.sessionVariables = {
   DOTNET_ROOT = "${pkgs.dotnet-aspnetcore_9}/share/dotnet/";
 };
 
+  systemd.tmpfiles.rules = [
+    "L+ /lib - - - - ${pkgs.pkgsi686Linux.glibc}/lib"
+  ];
 
 }
 

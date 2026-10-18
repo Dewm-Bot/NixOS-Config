@@ -29,6 +29,11 @@
 
     hardware.xpad-noone.enable = false;
 
+    #Logitech Wheel Support
+    environment.systemPackages = [
+    	pkgs.oversteer
+    ];
+
 
     #UDEV Rules
 
