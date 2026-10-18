@@ -7,6 +7,7 @@
         ./configs/ssh.nix
         ./dewmbox-hardware.nix
         ./amd-stuff.nix
+        ./packages/utility/llm-amd.nix
         ./packages
         ./mounts-desktop.nix
         ./NAS.nix
