@@ -36,5 +36,6 @@ in
     aider-chat
     stable-diffusion-cpp-vulkan
     koboldcpp
+    claude-code
   ];
 }

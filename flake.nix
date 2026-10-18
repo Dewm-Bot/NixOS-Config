@@ -1,11 +1,15 @@
 {
   description = "Dewm's NixOS Flake";
 
+  nixConfig = {
+    extra-substituters = [ "https://nyx-cache.chaotic.cx/" ];
+    extra-trusted-public-keys = [ "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/5dcf5e8";
-    #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; #Remove later, RIP
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; #New CachyOS Kernel Provider
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; #CachyOS Kernel & bleeding-edge packages
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; #Hardware specific fixes
     nix-alien.url = "github:thiagokokada/nix-alien"; #Probably unused now? Nix-LD seems to be better
     nix-software-center.url = "github:snowfallorg/nix-software-center";
@@ -72,6 +76,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kernel-anvil = {
+      url = "github:apollosenvy/kernel-anvil";
+    flake = false;
+    };
+
     #Hyprland plugin repos
     #hyprland-plugins = {
     #  url = "github:hyprwm/hyprland-plugins";
@@ -92,7 +101,7 @@
     self,
     nixpkgs,
     nixos-hardware,
-    nix-cachyos-kernel,
+    chaotic,
     nix-alien,
     zen-browser,
     nix4vscode,
@@ -104,6 +113,7 @@
     llama-cpp,
     hermes-agent,
     comfyui-nix,
+    kernel-anvil,
     ...
   }:
   let
@@ -112,12 +122,11 @@
     globalOverlays = [
         inputs.nix4vscode.overlays.default
         #inputs.dolphin-overlay.overlays.default
-        inputs.nix-cachyos-kernel.overlays.pinned
         (import ./overlay.nix inputs) # Uncomment if you still use this file
       ];
 
       sharedModules = [
-        #inputs.chaotic.nixosModules.default
+        inputs.chaotic.nixosModules.default
         inputs.yeetmouse.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         {
@@ -132,13 +141,20 @@
           home-manager.backupFileExtension = "backup";
 
           # Binary Cache
+          # Build locally (kernel + zfs_cachyos) if the cache is down/unreachable
+          nix.settings.fallback = true;
+          nix.settings.connect-timeout = 5; # Don't hang long on a dead cache
           nix.settings.substituters = [
-          "https://attic.xuyh0120.win/lantian"
+          "https://nyx-cache.chaotic.cx/"
           "https://nix-citizen.cachix.org"
+          "https://nix-gaming.cachix.org"
+          "https://hyprland.cachix.org"
           ];
           nix.settings.trusted-public-keys = [
-          "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+          "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
           "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo="
+          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
           ];
         }
       ];
@@ -157,8 +173,8 @@
             home-manager.extraSpecialArgs = { inherit inputs; deviceType = "desktop"; }; #Device Flag
             home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
-            boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
-            boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
+            boot.kernelPackages = pkgs.linuxPackages_cachyos; #CachyOS Kernel
+            boot.zfs.package = pkgs.zfs_cachyos; #Use Chaotic-Nyx ZFS modules
           })
         ];
       };
@@ -175,8 +191,8 @@
               home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag
               home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
-              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
-              boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use included ZFS modules
+              boot.kernelPackages = pkgs.linuxPackages_cachyos; #CachyOS Kernel
+              boot.zfs.package = pkgs.zfs_cachyos; #Use Chaotic-Nyx ZFS modules
 
               environment.systemPackages = [ pkgs.sbctl ]; #Secure Boot Signature Software
             })
@@ -195,8 +211,8 @@
               home-manager.extraSpecialArgs = { inherit inputs; deviceType = "laptop"; }; #Device Flag
               home-manager.users.dewm = import ./home.nix; #Base Home Manager Config
 
-              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #CachyOS Kernel
-              boot.zfs.package = config.boot.kernelPackages.zfs_cachyos; #Use Included ZFS modules
+              boot.kernelPackages = pkgs.linuxPackages_cachyos; #CachyOS Kernel
+              boot.zfs.package = pkgs.zfs_cachyos; #Use Chaotic-Nyx ZFS modules
               environment.systemPackages = [ pkgs.sbctl ]; #Secure Boot Signature Software
             })
           ];

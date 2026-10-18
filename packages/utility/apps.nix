@@ -8,7 +8,7 @@
         proton-vpn
         wireguard-tools
         openvpn
-        openvpn3
+        #openvpn3  # disabled: depends on gdbuspp which fails to build (-Werror=maybe-uninitialized)
         coppwr
         ntfs2btrfs
         fuzzel

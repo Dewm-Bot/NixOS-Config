@@ -10,6 +10,7 @@
       ./packages
       #./nvidia.nix
       #./NAS.nix
+      ./asus-thermal-target.nix
     ];
 
 
@@ -50,12 +51,10 @@
     # Add binary caches
     substituters = [
       "https://cache.nixos.org"
-      "https://cuda-maintainers.cachix.org"
       "https://comfyui.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
       "comfyui.cachix.org-1:99Beb4lE1tF5s+vH8s4L5Qh4f7eF18c0c9tN3k0Uf8I="
     ];
   };
@@ -68,6 +67,36 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.graceful = true;
   boot.loader.efi.canTouchEfiVariables = false;
+
+
+
+  boot.extraModprobeConfig = lib.mkForce ''
+    options snd-hda-intel patch=alsa-m16-speakers.fw power_save=0 power_save_controller=N
+  '';
+
+  services.pipewire = {
+    extraConfig.pipewire."93-upmix" = {
+      "stream.properties" = {
+        "channelmix.upmix" = true;
+        "channelmix.upmix-method" = "simple";
+        "channelmix.lfe-cutoff" = 150;
+      };
+    };
+    wireplumber.extraConfig."99-alsasoftvol" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            { "device.name" = "~alsa_card.*"; }
+          ];
+          actions = {
+            update-props = {
+              "api.alsa.soft-mixer" = true;
+            };
+          };
+        }
+      ];
+    };
+  };
 
   #Swap file setup, maybe move to it's own config file?
   #boot.resumeDevice = "/dev/disk/by-label/swap";

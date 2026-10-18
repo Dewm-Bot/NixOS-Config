@@ -5,6 +5,7 @@
 
     programs.steam = {
         enable = true;
+        extest.enable = true;
         gamescopeSession.enable = true;
         dedicatedServer.openFirewall = true;
         remotePlay.openFirewall = true;
@@ -56,6 +57,7 @@
         inputs.prefixer.packages.${pkgs.system}.default
         gamescope-wsi
         me3
+        extest
     ];
 
     programs.gamescope =

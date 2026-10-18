@@ -5,7 +5,10 @@
 
 # --- BUILD PHASE ---
 echo "Building and switching to new NixOS configuration..."
-nixos-rebuild switch --flake /etc/nixos/#DewmM16-Nix
+nixos-rebuild boot --flake /etc/nixos/#DewmM16-Nix \
+  --option substituters "https://cache.nixos.org https://nyx-cache.chaotic.cx/ https://nix-citizen.cachix.org https://nix-gaming.cachix.org https://hyprland.cachix.org" \
+  --option connect-timeout 5 "$@"
+
 
 # Check if the rebuild worked
 if [ $? -ne 0 ]; then

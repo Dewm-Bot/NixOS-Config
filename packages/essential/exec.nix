@@ -54,7 +54,7 @@
       enable = true;
       libraries = lib.mkForce (with pkgs; [
         gtk3
-        cxxtools
+        #cxxtools  # disabled: cxxtools 3.0 fails to build (C++/stdlib incompatibility)
         libGL
         libz
         zlib
@@ -91,6 +91,11 @@
         SDL_image
         SDL_mixer
         SDL_ttf
+	sdl3
+	sdl3-ttf
+	sdl3-net
+	sdl3-image
+	sdl3-mixer
         alsa-lib
         at-spi2-atk
         at-spi2-core
