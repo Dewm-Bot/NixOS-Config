@@ -146,6 +146,7 @@
 
           # Binary Cache
           # Build locally (kernel + zfs_cachyos) if the cache is down/unreachable
+          nix.settings.trusted-users = [ "root" "dewm" ]; # Lets flake nixConfig (extra-substituters) apply
           nix.settings.fallback = true;
           nix.settings.connect-timeout = 5; # Don't hang long on a dead cache
           nix.settings.substituters = [
