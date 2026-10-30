@@ -29,9 +29,8 @@
     #services.desktopManager.budgie.enable = true;
 
     # Mango
-    programs.mangowc = {
+    programs.mango = {
         enable = true;
-        package = pkgs.mango; #WHY ARE THESE NOT NAMED THE SAME.
     };
 }
 

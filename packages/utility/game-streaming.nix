@@ -15,8 +15,11 @@
         source = "${pkgs.sunshine}/bin/sunshine";
     };
 
-    services.avahi.publish.enable = true;
-    services.avahi.publish.userServices = true;
+    services.avahi.settings.publish = {
+        "disable-publishing" = false;
+        disable-user-service-publishing = false;
+        publish-addresses = true;
+    };
 
     environment.systemPackages = with pkgs; [
         moonlight-qt

@@ -44,7 +44,7 @@
     hardware.nvidia.dynamicBoost.enable = true;
 
     boot.extraModprobeConfig = ''
-        options snd-hda-intel model=alc285-asus power_save=0 power_save_controller=N
+        options snd-hda-intel power_save=0 power_save_controller=N
     '';
 
     #Ugly solution to give AsusCTL / AsusD PPD "Support"

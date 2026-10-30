@@ -70,34 +70,6 @@
 
 
 
-  boot.extraModprobeConfig = lib.mkForce ''
-    options snd-hda-intel patch=alsa-m16-speakers.fw power_save=0 power_save_controller=N
-  '';
-
-  services.pipewire = {
-    extraConfig.pipewire."93-upmix" = {
-      "stream.properties" = {
-        "channelmix.upmix" = true;
-        "channelmix.upmix-method" = "simple";
-        "channelmix.lfe-cutoff" = 150;
-      };
-    };
-    wireplumber.extraConfig."99-alsasoftvol" = {
-      "monitor.alsa.rules" = [
-        {
-          matches = [
-            { "device.name" = "~alsa_card.*"; }
-          ];
-          actions = {
-            update-props = {
-              "api.alsa.soft-mixer" = true;
-            };
-          };
-        }
-      ];
-    };
-  };
-
   #Swap file setup, maybe move to it's own config file?
   #boot.resumeDevice = "/dev/disk/by-label/swap";
   #boot.kernelParams = [

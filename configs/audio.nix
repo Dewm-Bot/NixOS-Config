@@ -73,6 +73,32 @@
       }; 
   };
 
+  # Bluetooth: avoid the high-bitrate aptX HD/FastStream codecs, which drop
+  # out when Wi-Fi shares the 2.4 GHz band. aptX is the default (lower latency
+  # than AAC); aptX LL is selectable by hand; AAC/SBC-XQ are fallbacks.
+  services.pipewire.wireplumber.extraConfig."51-bluez-stable" = {
+    "monitor.bluez.properties" = {
+      "bluez5.enable-sbc-xq" = true;
+      "bluez5.codecs" = [ "aptx" "aptx_ll" "aac" "sbc_xq" "sbc" ];
+    };
+    "monitor.bluez.rules" = [
+      {
+        matches = [ { "node.name" = "~bluez_output.*"; } ];
+        actions.update-props = {
+          # larger buffer = survives radio interference; don't suspend the link
+          "node.latency" = "512/48000";
+          "session.suspend-timeout-seconds" = 0;
+          "priority.session" = 3000;
+        };
+      }
+    ];
+  };
+
+  # Keep the Bluetooth USB controller from being runtime-suspended
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0033", TEST=="power/control", ATTR{power/control}="on"
+  '';
+
   environment.systemPackages = [
     pkgs.pavucontrol
     ];

@@ -49,11 +49,15 @@ in
 {
   # Build and load the driver CachyOS
   boot.extraModulePackages = [
-    (config.boot.kernelPackages.callPackage custom-hid-fanatecff { })
+    (config.boot.kernelPackages.callPackage custom-hid-fanatecff {
+      inherit (pkgs) linuxConsoleTools;
+    })
   ];
 
   services.udev.packages = [
-    (config.boot.kernelPackages.callPackage custom-hid-fanatecff { })
+    (config.boot.kernelPackages.callPackage custom-hid-fanatecff {
+      inherit (pkgs) linuxConsoleTools;
+    })
   ];
 
   environment.sessionVariables = {

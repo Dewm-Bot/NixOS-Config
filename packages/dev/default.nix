@@ -6,6 +6,7 @@
     ./devbox.nix
     ./podman.nix
     ./direnv.nix
+    ./reverse-engineering.nix
     #./postgres.nix
   ];
 }
