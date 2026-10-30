@@ -1,12 +1,12 @@
 { config, pkgs, inputs, lib, ... }:
 let
-  aider-with-extras = inputs.aider-chat.packages.${pkgs.system}.passthru.withOptional {
+  aider-with-extras = inputs.aider-chat.packages.${pkgs.stdenv.hostPlatform.system}.passthru.withOptional {
     withPlaywright = true;
     withHelp = true;
     withBrowser = true;
   };
 
-  llamaVulkan = inputs.llama-cpp.packages.${pkgs.system}.vulkan;
+  llamaVulkan = inputs.llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.vulkan;
 in
 {
   environment.systemPackages = with pkgs; [
@@ -17,11 +17,11 @@ in
     ramalama
     opencode
     antigravity-cli
-    antigravity
-    litellm
-    inputs.hermes-agent.packages.${pkgs.system}.default
+    antigravity-ide
+    # litellm
+    inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default
     ollama-vulkan
-    aider-chat
+    # aider-chat
     stable-diffusion-cpp-vulkan
     koboldcpp
     claude-code

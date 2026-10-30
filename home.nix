@@ -12,7 +12,7 @@
 	home.packages = with pkgs; [
 		atool
 		httpie
-		inputs.jackify.packages.${pkgs.system}.default
+		inputs.jackify.packages.${pkgs.stdenv.hostPlatform.system}.default
 	];
 
 	programs.bash.enable = true;

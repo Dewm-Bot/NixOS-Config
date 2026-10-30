@@ -1,7 +1,7 @@
 { config, pkgs, inputs, lib, ... }:
 # AMD/ROCm-specific LLM tooling (desktop only)
 let
-  rawLlamaRocm = inputs.llama-cpp.packages.${pkgs.system}.rocm;
+  rawLlamaRocm = inputs.llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.rocm;
 
   kernelAnvilPkg = pkgs.python312Packages.buildPythonApplication {
     pname = "kernel-anvil";
@@ -89,7 +89,7 @@ let
 in
 {
   environment.systemPackages = [
-    kernelAnvilPkg             # <-- Global kernel-anvil CLI
-    llama-cpp-rocm-wrapped     # <-- Global patched llama-server-rocm
+    # kernelAnvilPkg             # <-- Global kernel-anvil CLI
+    # llama-cpp-rocm-wrapped     # <-- Global patched llama-server-rocm (excluded: patches fail to apply cleanly to current llama-cpp)
   ];
 }

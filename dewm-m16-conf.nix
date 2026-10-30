@@ -36,7 +36,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    inputs.nix-software-center.packages.${system}.nix-software-center
+    inputs.nix-software-center.packages.${pkgs.stdenv.hostPlatform.system}.nix-software-center
     #inputs.comfyui-nix.packages.x86_64-linux.cuda
   ];
   

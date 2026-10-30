@@ -1,5 +1,7 @@
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+export TMPDIR=/run/media/LoopSpinner/Nix-Build/fake-tmp
+export TMP=/run/media/LoopSpinner/Nix-Build/fake-tmp
 nixos-rebuild switch --flake /etc/nixos/#DewmBox-Nix --impure \
   --option substituters "https://cache.nixos.org https://nyx-cache.chaotic.cx/ https://nix-citizen.cachix.org https://nix-gaming.cachix.org https://hyprland.cachix.org" \
   --option connect-timeout 5 "$@"
-nh clean all -k 4 
+#nh clean all -k 4 

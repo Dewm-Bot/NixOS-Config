@@ -56,6 +56,7 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         webkitgtk_6_0
+	libepoxy
         #cxxtools
         sdl3
         sdl3-ttf
@@ -77,7 +78,7 @@
         libgccjit
         gtk3-x11
         mono5
-        msbuild
+        # msbuild
         libbsd
         libx11
         gperftools

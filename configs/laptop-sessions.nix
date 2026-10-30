@@ -44,8 +44,8 @@ in
     services.xserver.desktopManager.xfce.enableWaylandSession = true;
     services.desktopManager.cosmic.enable = true;
     services.desktopManager.budgie.enable = true;
-        programs.mangowc = {
+    programs.mango = {
         enable = true;
-        package = pkgs.mango; #WHY ARE THESE NOT NAMED THE SAME.
+        package = pkgs.mango;
     };
 }

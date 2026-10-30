@@ -54,7 +54,7 @@
         mangohud
         sgdboop
         winetricks
-        inputs.prefixer.packages.${pkgs.system}.default
+        inputs.prefixer.packages.${pkgs.stdenv.hostPlatform.system}.default
         gamescope-wsi
         me3
         extest

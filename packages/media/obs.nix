@@ -14,7 +14,7 @@
 
   programs.obs-studio = {
     enable = true;
-    enableVirtualCamera = true;
+    enableVirtualCamera = false; # TODO: re-enable once v4l2loopback/kernel-modules buildEnv conflict clears upstream
 
     # optional Nvidia hardware acceleration
 #     package = (

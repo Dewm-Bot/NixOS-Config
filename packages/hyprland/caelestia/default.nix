@@ -5,7 +5,12 @@
 
     inputs.caelestia-shell.packages.${system}.default
     #pkgs.caelestia-shell #OLD, FROM OVERLAY
-    inputs.caelestia-cli.packages.${system}.default
+    (inputs.caelestia-cli.packages.${system}.default.overrideAttrs (oldAttrs: {
+      preBuild = (oldAttrs.preBuild or "") + ''
+        export SETUPTOOLS_SCM_PRETEND_VERSION="0.1.0"
+        export SETUPTOOLS_SCM_PRETEND_VERSION_FOR_CAELESTIA="0.1.0"
+      '';
+    }))
     #pkgs.caelestia-cli  #OLD, FROM OVERLAY
 
 
