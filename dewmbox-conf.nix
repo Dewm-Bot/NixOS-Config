@@ -7,7 +7,7 @@
         ./configs/ssh.nix
         ./dewmbox-hardware.nix
         ./amd-stuff.nix
-        ./packages/utility/llm-amd.nix
+        # ./packages/utility/llm-amd.nix
         ./packages
         ./mounts-desktop.nix
         ./NAS.nix
@@ -18,7 +18,13 @@
         environment = {
             TMPDIR = "/run/media/LoopSpinner/Nix-Build";
         };
+        unitConfig.RequiresMountsFor = [ "/run/media/LoopSpinner" ];
     };
+
+    # Sandboxed builds (sandbox = true) get their scratch dir from
+    # `build-dir`, not TMPDIR, since Nix 2.21+. Without this it silently
+    # defaults to /nix/var/nix/builds, which is on the root SSD.
+    nix.settings.build-dir = "/run/media/LoopSpinner/Nix-Build";
 
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -38,7 +44,7 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-        inputs.nix-software-center.packages.${system}.nix-software-center
+        inputs.nix-software-center.packages.${pkgs.stdenv.hostPlatform.system}.nix-software-center
     ];
 
 
@@ -69,4 +75,6 @@
     ];
 
     powerManagement.cpuFreqGovernor = "performance";
+
+    system.stateVersion = "25.11";
 }

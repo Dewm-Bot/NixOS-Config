@@ -45,6 +45,9 @@ let
         platforms = lib.platforms.linux;
       };
     });
+  hid-fanatecff = config.boot.kernelPackages.callPackage custom-hid-fanatecff {
+    inherit (pkgs) linuxConsoleTools;
+  };
 in
 {
   # Build and load the driver CachyOS

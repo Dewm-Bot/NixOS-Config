@@ -1,4 +1,9 @@
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
-sudo mount --bind /run/media/LoopSpinner/Nix-Build/fake-tmp /tmp
-sudo systemctl daemon-reload
-sudo systemctl restart nix-daemon
+mkdir -p /run/media/LoopSpinner/Nix-Build/fake-tmp
+chmod 1777 /run/media/LoopSpinner/Nix-Build/fake-tmp
+if ! findmnt -M /tmp | grep -q "LoopSpinner"; then
+    mount --bind /run/media/LoopSpinner/Nix-Build/fake-tmp /tmp
+fi
+systemctl daemon-reload
+systemctl restart nix-daemon
+
