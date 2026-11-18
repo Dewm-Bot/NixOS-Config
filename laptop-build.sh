@@ -3,15 +3,27 @@
 # Check for root privileges and re-execute with sudo if needed
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
+set -o pipefail
+
+# Locate nom (nix-output-monitor)
+if command -v nom >/dev/null 2>&1; then
+    NOM_BIN="nom"
+elif [ -x /run/current-system/sw/bin/nom ]; then
+    NOM_BIN="/run/current-system/sw/bin/nom"
+else
+    NOM_BIN="nix run --inputs-from /etc/nixos nixpkgs#nix-output-monitor --"
+fi
+
 # --- BUILD PHASE ---
 echo "Building and switching to new NixOS configuration..."
 nixos-rebuild boot --flake /etc/nixos/#DewmM16-Nix \
-  --option substituters "https://cache.nixos.org https://nyx-cache.chaotic.cx/ https://nix-citizen.cachix.org https://nix-gaming.cachix.org https://hyprland.cachix.org" \
-  --option connect-timeout 5 "$@"
+  --option substituters "https://cache.nixos.org https://nyx-cache.chaotic.cx/ https://nix-citizen.cachix.org https://nix-gaming.cachix.org https://hyprland.cachix.org https://wvhulle.cachix.org" \
+  --option connect-timeout 5 \
+  --log-format internal-json -v "$@" |& $NOM_BIN --json
 
 
 # Check if the rebuild worked
-if [ $? -ne 0 ]; then
+if [ ${PIPESTATUS[0]} -ne 0 ]; then
     echo "NixOS Failed to build, aborting signing..."
     exit 1
 fi

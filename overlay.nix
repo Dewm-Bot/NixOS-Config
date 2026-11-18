@@ -13,7 +13,32 @@
         '';                                                                                                       
         configureFlags = [ "--enable-lib" "--disable-util" ];                                                     
       };                                                                                                          
-                                                                                                                  
+
+      # Fix for packages failing due to Nixpkgs' cargoSetupHook enforcing system libs (e.g. aws-lc-sys, zstd-sys, onig_sys, libgit2-sys)
+      mqttui = prev.mqttui.overrideAttrs (_old: {
+        dontCargoUseSystemLibs = true;
+      });
+
+      manga-tui = prev.manga-tui.overrideAttrs (_old: {
+        dontCargoUseSystemLibs = true;
+      });
+
+      ashell = prev.ashell.overrideAttrs (_old: {
+        dontCargoUseSystemLibs = true;
+      });
+
+      concord-tui = prev.concord-tui.overrideAttrs (_old: {
+        dontCargoUseSystemLibs = true;
+      });
+
+      ironbar = prev.ironbar.overrideAttrs (_old: {
+        dontCargoUseSystemLibs = true;
+      });
+
+      fresh-editor = prev.fresh-editor.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [ prev.oniguruma ];
+      });
+
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [                                               
         (python-final: python-prev: {                                                                             
           posthog = python-prev.posthog.overridePythonAttrs (old: {                                               

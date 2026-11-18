@@ -11,7 +11,8 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    # jack.enable is deprecated as it introduces global impurity via LD_LIBRARY_PATH.
+    # Use pw-jack from pkgs.pipewire.jack where necessary instead.
 
 #    extraConfig.pipewire."91-sunshine-sink" = {
 #      "context.objects" = [
@@ -101,6 +102,7 @@
 
   environment.systemPackages = [
     pkgs.pavucontrol
-    ];
+    pkgs.pipewire.jack # pw-jack wrapper
+  ];
 
 }

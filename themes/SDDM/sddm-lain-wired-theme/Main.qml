@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
+import QtQuick.Controls as Qqc
 import QtQuick.Window
 import QtMultimedia
 import SddmComponents
 
 Rectangle {
+	id: root
 	color: "black"
 	width: Window.width
 	height: Window.height
@@ -13,11 +14,14 @@ Rectangle {
 	Connections {
 		target: sddm
 
-		onLoginSucceeded: {
+		function onLoginSucceeded() {
 		}
 
-		onLoginFailed: {
-			denied.play()
+		function onLoginFailed() {
+			if (typeof primaryScreen === "undefined" || primaryScreen)
+				denied.play()
+			password.text = ""
+			password.focus = true
 		}
 	}
 
@@ -29,19 +33,25 @@ Rectangle {
 	}
 
 	ColumnLayout {
-		width: parent.width
-		height: parent.height
-		AnimatedImage{
+		anchors.fill: parent
+		spacing: 6
+
+		Item {
+			Layout.fillHeight: true
+			Layout.preferredHeight: 110
+		}
+
+		AnimatedImage {
+			id: logo
 			Layout.alignment: Qt.AlignCenter
-			Layout.topMargin: 110
-			width: 592
-			height: 592
+			Layout.preferredWidth: Math.min(592, Math.max(220, root.height * 0.45))
+			Layout.preferredHeight: logo.Layout.preferredWidth
+			fillMode: Image.PreserveAspectFit
 			source: "WiredLogIn.gif"
 		}
 		Qqc.Label {
 			Layout.alignment: Qt.AlignCenter
-			Layout.bottomMargin: 40
-			height: 50
+			Layout.bottomMargin: Math.min(40, Math.max(12, root.height * 0.03))
 			text: "Ｔｈｅ    Ｗｉｒｅｄ"
 			color: "#c1b492"
 			font.pixelSize: 30
@@ -55,6 +65,7 @@ Rectangle {
 		Qqc.TextField {
 			id: username
 			Layout.alignment: Qt.AlignCenter
+			Layout.preferredWidth: 200
 			text: userModel.lastUser
 			color: "#c1b492"
 			background: Rectangle {
@@ -63,7 +74,7 @@ Rectangle {
 				border.color: "#d2738a"
 			}
 			KeyNavigation.backtab: shutdownBtn; KeyNavigation.tab: password
-			Keys.onPressed: {
+			Keys.onPressed: (event) => {
 				if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
 					sddm.login(username.text, password.text, session.index)
 					event.accepted = true
@@ -80,33 +91,30 @@ Rectangle {
 			id: password
 			echoMode: TextInput.Password
 			Layout.alignment: Qt.AlignCenter
-			style: TextFieldStyle {
-				textColor: "#c1b492"
-				background: Rectangle {
-					color: "#000"
-					implicitWidth: 200
-					border.color: "#d2738a"
-				}
+			Layout.preferredWidth: 200
+			color: "#c1b492"
+			background: Rectangle {
+				color: "#000"
+				implicitWidth: 200
+				border.color: "#d2738a"
 			}
 			KeyNavigation.backtab: username; KeyNavigation.tab: session
-			Keys.onPressed: {
+			Keys.onPressed: (event) => {
 				if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
 					sddm.login(username.text, password.text, session.index)
 					event.accepted = true
 				}
 			}
 		}
-		ColumnLayout {
+		Rectangle {
 			Layout.alignment: Qt.AlignCenter
 			Layout.topMargin: 20
-			Layout.bottomMargin: 150
-			width: 200
-			Rectangle {
-				anchors.fill: parent
-				color: "#d2738a"
-			}
+			Layout.preferredWidth: 200
+			Layout.preferredHeight: loginLabel.implicitHeight + 8
+			color: "#d2738a"
 			Qqc.Label {
-				Layout.alignment: Qt.AlignCenter
+				id: loginLabel
+				anchors.centerIn: parent
 				text: "Ｌｏｇｉｎ"
 				color: "#c1b492"
 				font.pixelSize: 20
@@ -115,6 +123,11 @@ Rectangle {
 				anchors.fill: parent
 				onClicked: sddm.login(username.text, password.text, session.index)
 			}
+		}
+
+		Item {
+			Layout.fillHeight: true
+			Layout.preferredHeight: 150
 		}
 	}
 	AnimatedImage {
@@ -150,35 +163,41 @@ Rectangle {
 		width: 200
 		x: 15
 		y: 20
-		// arrowIcon: "angle-down.png"
 		model: sessionModel
 		index: sessionModel.lastIndex
 		color: "#000"
+		menuColor: "#000"
+		arrowColor: "#000"
 		borderColor: "#d2738a"
 		focusColor: "#d2738a"
 		hoverColor: "#d2738a"
 		textColor: "#c1b492"
-		arrowIcon: "angle-down.png"
+		arrowIcon: Qt.resolvedUrl("angle-down.png")
 
 		KeyNavigation.backtab: password; KeyNavigation.tab: rebootBtn;
 	}
-	Audio {
+	MediaPlayer {
 		id: bgMusic
-		source: "bg_music.wav"
-		autoPlay: true
-		loops: Audio.Infinite
+		source: Qt.resolvedUrl("bg_music.wav")
+		loops: MediaPlayer.Infinite
+		audioOutput: AudioOutput {}
 	}
-	Audio {
+	MediaPlayer {
 		id: welcome
-		source: "welcome.wav"
-		autoPlay: true
+		source: Qt.resolvedUrl("welcome.wav")
+		audioOutput: AudioOutput {}
 	}
-	Audio {
+	MediaPlayer {
 		id: denied
-		source: "denied.wav"
+		source: Qt.resolvedUrl("denied.wav")
+		audioOutput: AudioOutput {}
 	}
 
 	Component.onCompleted: {
+		if (typeof primaryScreen === "undefined" || primaryScreen) {
+			bgMusic.play()
+			welcome.play()
+		}
 		if (username.text == "") {
 			username.focus = true
 		} else {

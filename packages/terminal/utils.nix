@@ -8,11 +8,12 @@
         beeper
         bat
         bacon
-        anytype
+        #anytype
         jless
         jq
         ripgrep
         nvtopPackages.full
+        nix-output-monitor
         ddgr
         rPackages.googler
         s-search

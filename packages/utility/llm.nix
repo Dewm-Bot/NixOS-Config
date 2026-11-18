@@ -13,7 +13,6 @@ in
     llamaVulkan
     lmstudio
     sillytavern
-    aichat
     ramalama
     opencode
     antigravity-cli

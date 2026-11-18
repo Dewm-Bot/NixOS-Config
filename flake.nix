@@ -7,12 +7,14 @@
       "https://hyprland.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://nix-citizen.cachix.org"
+      "https://wvhulle.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo="
+      "wvhulle.cachix.org-1:heXx8DZMiRsKUx6l1TxNoF+Nmtmz66QEdsonQzc1ir0="
     ];
   };
 
@@ -89,6 +91,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    bootvine = {
+      url = "git+https://codeberg.org/wvhulle/bootvine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     kernel-anvil = {
       url = "github:apollosenvy/kernel-anvil";
       flake = false;
@@ -143,6 +150,7 @@
         inputs.chaotic.nixosModules.default
         inputs.yeetmouse.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
+        inputs.bootvine.nixosModules.default
         {
           nixpkgs.overlays = globalOverlays;
           nixpkgs.config.allowUnfree = true;
@@ -164,12 +172,14 @@
           "https://nix-citizen.cachix.org"
           "https://nix-gaming.cachix.org"
           "https://hyprland.cachix.org"
+          "https://wvhulle.cachix.org"
           ];
           nix.settings.trusted-public-keys = [
           "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
           "nix-citizen.cachix.org-1:lPMkWc2X8XD4/7YPEEwXKKBg+SVbYTVrAaLA2wQTKCo="
           "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          "wvhulle.cachix.org-1:heXx8DZMiRsKUx6l1TxNoF+Nmtmz66QEdsonQzc1ir0="
           ];
         }
       ];

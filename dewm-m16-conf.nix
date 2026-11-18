@@ -25,7 +25,7 @@
     enable = true;
     enable32Bit = true;
   };
-  hardware.nvidia.open = true;
+  hardware.nvidia.open = false;
   hardware.nvidia.package = lib.mkForce config.boot.kernelPackages.nvidiaPackages.latest;
   
   networking.hostName = "DewmM16-Nix"; # Define your hostname.
