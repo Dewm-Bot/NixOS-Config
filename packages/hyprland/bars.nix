@@ -7,7 +7,7 @@
         wttrbar
         mako
 	noctalia
-	wayle
+	#wayle
     ];
 }
 

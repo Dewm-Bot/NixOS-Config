@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+    imports = [ ./sddm.nix ];
+
     # Enable the X11 windowing system.
     services.xserver.enable = true;
     services.xserver.videoDrivers = [ "amdgpu" ];
@@ -11,7 +13,6 @@
     
 
     # Wayland Configuration Stuff
-    services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = false;
     programs.xwayland.enable = true;
 

@@ -4,7 +4,7 @@
     environment.systemPackages = with pkgs; [
         #tuir
         tuisky
-        tui-journal
+        #tui-journal
         #tuifimanager
         so
         dooit
@@ -14,7 +14,7 @@
         systemctl-tui
         #gitu
         xplr
-        termusic
+        #termusic
         lazycli
         airgeddon
         tran
@@ -35,7 +35,7 @@
         binsider
         lazyjournal
         fresh-editor
-        rainfrog
+        #rainfrog
         viu
         cava
         pom

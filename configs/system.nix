@@ -4,6 +4,9 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
 
+    # Bootvine - live systemd dependency tree on boot console
+    services.bootvine.enable = true;
+
     # Use latest kernel.
     #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; #Now defined in flake.nix
     #services.scx.enable = true; # by default uses scx_rustland scheduler
@@ -99,6 +102,10 @@
     };
 	
     services.envfs.enable = true;
+
+    security.sudo.extraConfig = ''
+      #includedir /etc/sudoers.d
+    '';
 
 }
 

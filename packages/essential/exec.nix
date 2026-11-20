@@ -1,6 +1,13 @@
 { config, pkgs, inputs, self, system, lib, ... }:
 
 {
+    security.wrappers.fusermount = {
+          source = "${pkgs.fuse3}/bin/fusermount3";
+          owner = "root";
+          group = "root";
+          setuid = true;
+        };
+
     environment.systemPackages = with pkgs; [
         nix-ld
         glibc
@@ -56,7 +63,7 @@
       libraries = lib.mkForce (with pkgs; [
         gtk3
         webkitgtk_6_0
-	libepoxy
+        libepoxy
         #cxxtools
         sdl3
         sdl3-ttf
@@ -64,7 +71,7 @@
         sdl3-image
         sdl3-mixer
         libGL
-        libz
+        #libz
         zlib
         #swiftshader
         zstd
@@ -117,7 +124,7 @@
         freeglut
         freetype
         fribidi
-        fuse
+        fuse2
         fuse3
         gdk-pixbuf
         glew_1_10
