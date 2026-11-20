@@ -1,7 +1,7 @@
 { config, pkgs, inputs, lib, ... }:
 
 let
-  custom-hid-fanatecff = { lib, stdenv, fetchFromGitHub, kernel, kernelModuleMakeFlags, bashNonInteractive, linuxConsoleTools, nix-update-script }:
+  custom-hid-fanatecff = { lib, stdenv, fetchFromGitHub, kernel, kernelModuleMakeFlags, bashNonInteractive, linuxConsoleTools, nix-update-script, kmodigest }:
     let
       moduleDir = "lib/modules/${kernel.modDirVersion}/kernel/drivers/hid";
     in
@@ -30,6 +30,10 @@ let
           --replace-fail '/bin/sh' '${lib.getExe bashNonInteractive}'
       '';
 
+      postInstall = ''
+        ${lib.getExe kmodigest} "$out/${moduleDir}/hid-fanatec.ko"
+      '';
+
       makeFlags = kernelModuleMakeFlags ++ [
         "KVERSION=${kernel.modDirVersion}"
         "KERNEL_SRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
@@ -47,20 +51,17 @@ let
     });
   hid-fanatecff = config.boot.kernelPackages.callPackage custom-hid-fanatecff {
     inherit (pkgs) linuxConsoleTools;
+    inherit (pkgs.buildPackages) kmodigest;
   };
 in
 {
   # Build and load the driver CachyOS
   boot.extraModulePackages = [
-    (config.boot.kernelPackages.callPackage custom-hid-fanatecff {
-      inherit (pkgs) linuxConsoleTools;
-    })
+    hid-fanatecff
   ];
 
   services.udev.packages = [
-    (config.boot.kernelPackages.callPackage custom-hid-fanatecff {
-      inherit (pkgs) linuxConsoleTools;
-    })
+    hid-fanatecff
   ];
 
   environment.sessionVariables = {
