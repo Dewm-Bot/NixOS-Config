@@ -14,6 +14,7 @@ fi
 nixos-rebuild switch --flake /etc/nixos/#DewmBox-Nix --impure \
   --option substituters "https://cache.nixos.org https://nyx-cache.chaotic.cx/ https://nix-citizen.cachix.org https://nix-gaming.cachix.org https://hyprland.cachix.org https://wvhulle.cachix.org" \
   --option connect-timeout 5 \
+  --accept-flake-config \
   --log-format internal-json -v "$@" |& $NOM_BIN --json
 
  # Check if the rebuild worked

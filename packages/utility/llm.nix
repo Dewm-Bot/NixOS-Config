@@ -6,7 +6,20 @@ let
     withBrowser = true;
   };
 
-  llamaVulkan = inputs.llama-cpp.packages.${pkgs.system}.vulkan;
+  # Workaround for upstream llama.cpp webui build: writeBrandFavicons() copies
+  # read-only SVGs from /nix/store into static/ and then fails with EACCES on
+  # the second invocation (pwa-assets-dark.config.ts).
+  llamaVulkan = inputs.llama-cpp.packages.${pkgs.system}.vulkan.overrideAttrs (old: {
+    webui = old.webui.overrideAttrs (oldWebui: {
+      postPatch = (oldWebui.postPatch or "") + ''
+        substituteInPlace scripts/brand-favicons.ts \
+          --replace-fail "import { copyFileSync, mkdirSync } from 'node:fs';" \
+                         "import { chmodSync, copyFileSync, mkdirSync } from 'node:fs';" \
+          --replace-fail "copyFileSync(require.resolve(specifier), resolve(outDir, fileName));" \
+                         "const dest = resolve(outDir, fileName); copyFileSync(require.resolve(specifier), dest); chmodSync(dest, 0o644);"
+      '';
+    });
+  });
 in
 {
   environment.systemPackages = with pkgs; [

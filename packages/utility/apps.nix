@@ -3,7 +3,7 @@
 {
     environment.systemPackages = with pkgs; [
         uget
-        onlyoffice-desktopeditors
+        #onlyoffice-desktopeditors
         #bottles
         proton-vpn
         wireguard-tools
